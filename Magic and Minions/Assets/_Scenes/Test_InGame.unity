@@ -180,7 +180,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Life Drain
 --- !u!222 &18713273
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -283,6 +283,11 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114907462608508630, guid: 14b5f11045a77da48b9f13391197e0f3,
+        type: 2}
+      propertyPath: m_Text
+      value: Un-life Blast
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 14b5f11045a77da48b9f13391197e0f3, type: 2}
@@ -627,7 +632,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Swarm
 --- !u!222 &858040998
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -913,7 +918,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Summon Skeleton
 --- !u!222 &1178901675
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1017,6 +1022,51 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114795023253177562, guid: e224b0792cf242f4aa26aff08ec50125,
+        type: 2}
+      propertyPath: m_Text
+      value: Move
+      objectReference: {fileID: 0}
+    - target: {fileID: 114611826354861844, guid: e224b0792cf242f4aa26aff08ec50125,
+        type: 2}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114611826354861844, guid: e224b0792cf242f4aa26aff08ec50125,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114611826354861844, guid: e224b0792cf242f4aa26aff08ec50125,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114611826354861844, guid: e224b0792cf242f4aa26aff08ec50125,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114611826354861844, guid: e224b0792cf242f4aa26aff08ec50125,
+        type: 2}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114643260291156792, guid: e224b0792cf242f4aa26aff08ec50125,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114643260291156792, guid: e224b0792cf242f4aa26aff08ec50125,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114611826354861844, guid: e224b0792cf242f4aa26aff08ec50125,
+        type: 2}
+      propertyPath: m_FillCenter
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e224b0792cf242f4aa26aff08ec50125, type: 2}
   m_IsPrefabParent: 0
@@ -1092,7 +1142,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Summon Wraith
 --- !u!222 &1441438343
 CanvasRenderer:
   m_ObjectHideFlags: 0
