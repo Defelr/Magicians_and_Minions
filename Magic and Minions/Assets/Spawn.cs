@@ -8,6 +8,8 @@ public class Spawn : MonoBehaviour {
 	void Start () {
         Player1.transform.localScale = new Vector3(15F, 15F, 15F);
         Instantiate(Player1, transform.position, transform.rotation);
+        Collider col = GetComponent<Collider>();
+        col.isTrigger = true;
     }
 	
 	// Update is called once per frame

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MouseDetect : MonoBehaviour {
     bool onClick = false;
-    public GameObject grid_B;
+    GameObject grid_B;
 	// Use this for initialization
 	void Start () {
 		
@@ -17,10 +17,26 @@ public class MouseDetect : MonoBehaviour {
     private void OnMouseDown()
     {
         grid_B = GameObject.Find("Grid_Board");
-      /*  foreach(GameObject child in grid_B)
+        foreach(Transform child in grid_B.transform)
         {
-            if()
-        }*/
+            Collider col = child.GetComponent<Collider>();
+            if (col.isTrigger)
+            {
+                OnTriggerStay(col);
+            }
+        }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        List<GameObject> locations = DDOL.instance.Movement(GameObject.Find("Grid_Board"), other.gameObject);
+        foreach(GameObject c in locations)
+        {
+            Debug.Log(c.gameObject.name);
+            c.transform.localPosition -= transform.up * 2;
+            Renderer R = c.GetComponent<Renderer>();
+            R.enabled = true;
+        }
+
     }
 
 }
