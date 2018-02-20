@@ -8,6 +8,7 @@ public class DDOL : MonoBehaviour {
     public int turn = 0;
     //Grid size
     int x = 8; //n == x board is n X n length
+    public List<GameObject> loc;
     public void Start()
     {
         
@@ -37,6 +38,10 @@ public class DDOL : MonoBehaviour {
             }
         }
         return locations;
+    }
+    public List<List<GameObject>> PossibleSpacesPublic(GameObject p)
+    {
+        return PossibleSpaces(p);
     }
     public List<GameObject> Movement(GameObject p, GameObject child)
     {
@@ -68,6 +73,7 @@ public class DDOL : MonoBehaviour {
             n_row++;
             n_col = col - range;
         }
+        loc = spaces;
         return spaces;
     }
     private int Row(List<List<GameObject>> l, GameObject c)
