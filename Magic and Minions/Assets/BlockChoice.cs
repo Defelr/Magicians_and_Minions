@@ -17,6 +17,7 @@ public class BlockChoice : MonoBehaviour {
         Collider C = GetComponent<Collider>();
         if (R.enabled)
         {
+            Debug.Log("You can move Here!");
             C.isTrigger = true;
             DDOL.instance.MoveCharacter(transform);
         }
