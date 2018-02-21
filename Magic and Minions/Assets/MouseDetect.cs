@@ -16,6 +16,7 @@ public class MouseDetect : MonoBehaviour {
     public void Clicked()
     {
         Debug.Log("Start");
+        Collider colp = GetComponent<Collider>();
         GameObject grid_B = GameObject.Find("Grid_Board");
         //if (!onClick)
         //{
@@ -23,10 +24,10 @@ public class MouseDetect : MonoBehaviour {
             foreach (Transform child in grid_B.transform)
             {
                 Collider col = child.GetComponent<Collider>();
-                if (col.isTrigger)
+                if (col.isTrigger /*&& !colp.isTrigger*/) //Uncomment so that people can only move once. When turn ends, all triggers should go back to false
                 {
 
-                    DDOL.instance.Movement(child.gameObject);
+                    DDOL.instance.Movement(child.gameObject, gameObject);
                     foreach (GameObject c in DDOL.instance.spaces)
                     {
                         // Debug.Log(c.gameObject.name);
@@ -36,6 +37,7 @@ public class MouseDetect : MonoBehaviour {
                     DDOL.instance.currentObject = gameObject;
                     Debug.Log(name);
                 }
+                DDOL.instance.option = "move";
             }
         //}
         //else
