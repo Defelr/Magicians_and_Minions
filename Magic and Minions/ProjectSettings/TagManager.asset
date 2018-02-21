@@ -8,6 +8,8 @@ TagManager:
   - Minion
   - Minion_C
   - Necro_C
+  - Wraith
+  - Skeleton
   layers:
   - Default
   - TransparentFX

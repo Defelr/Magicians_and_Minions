@@ -6,6 +6,8 @@ public class Switch_Canvas : MonoBehaviour {
 
     public GameObject necroCanvas;
     public GameObject minionCanvas;
+    public GameObject wraithImage;
+    public GameObject skelImage;
 
 	// Use this for initialization
 	void Start () {
@@ -26,16 +28,31 @@ public class Switch_Canvas : MonoBehaviour {
                 {
                     minionCanvas.SetActive(false);
                     necroCanvas.SetActive (true);
-                } else if (hitInfo.transform.gameObject.tag == "Minion")
+                    wraithImage.SetActive(false);
+                    skelImage.SetActive(false);
+
+                } 
+                if (hitInfo.transform.gameObject.tag == "Wraith")
                 {
                     necroCanvas.SetActive(false);
                     minionCanvas.SetActive(true);
-                } else
-                {
-                    //minionCanvas.SetActive(false);
-                    //necroCanvas.SetActive(false);
+                    skelImage.SetActive(false);
+                   wraithImage.SetActive(true);
                 }
+                else if (hitInfo.transform.gameObject.tag == "Skeleton")
+                {
+                    necroCanvas.SetActive(false);
+                    minionCanvas.SetActive(true);
+                    wraithImage.SetActive(false);
+                    skelImage.SetActive(true);
+                }
+           } else
+           {
+                minionCanvas.SetActive(false);
+                necroCanvas.SetActive(false);
+                skelImage.SetActive(false);
+                wraithImage.SetActive(false);
             }
-        }
-	}
+       }
+    }
 }

@@ -45,7 +45,7 @@ public class DDOL : MonoBehaviour {
     {
         foreach (GameObject c in spaces)
         {
-            // Debug.Log(c.gameObject.name);
+            //Debug.Log(c.gameObject.name + "is in the list");
             Renderer R = c.GetComponent<Renderer>();
             R.enabled = false;
         }
@@ -81,8 +81,8 @@ public class DDOL : MonoBehaviour {
         currentObjectL = locations[row][col];
         currentObject = player;
 
-        Debug.Log(row);
-        Debug.Log(col);
+        //Debug.Log(row);
+        //Debug.Log(col);
         int n_row = row - range; // 1 == range of ability or movement this is just a test value ATM
         int n_col = col - range;
         int o_range = 3 + (2 * (range - 1));
@@ -105,7 +105,7 @@ public class DDOL : MonoBehaviour {
         }
         foreach(GameObject c in spaces)
         {
-            Debug.Log(c.name);
+            //Debug.Log(c.name);
         }
         return spaces;
     }
