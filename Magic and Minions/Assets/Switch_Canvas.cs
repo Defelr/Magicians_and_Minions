@@ -32,8 +32,8 @@ public class Switch_Canvas : MonoBehaviour {
                     minionCanvas.SetActive(true);
                 } else
                 {
-                    minionCanvas.SetActive(false);
-                    necroCanvas.SetActive(false);
+                    //minionCanvas.SetActive(false);
+                    //necroCanvas.SetActive(false);
                 }
             }
         }

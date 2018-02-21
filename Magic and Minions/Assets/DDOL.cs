@@ -60,7 +60,7 @@ public class DDOL : MonoBehaviour {
         return locations;
     }
     //MOVEMENT
-    public List<GameObject> Movement(GameObject p, GameObject child)
+    public List<GameObject> Movement(GameObject child)
     {
         spaces = new List<GameObject>();
  
@@ -108,6 +108,7 @@ public class DDOL : MonoBehaviour {
         {
             timeLerped += Time.deltaTime;
             currentObject.transform.position = Vector3.MoveTowards(startPos.position, new Vector3(new_p.transform.position.x, new_p.transform.position.y + 2, new_p.transform.position.z), timeLerped);
+
         }
         Collider col = currentObjectL.GetComponent<Collider>();
         col.isTrigger = false;

@@ -13,19 +13,20 @@ public class MouseDetect : MonoBehaviour {
 	void Update () {
 
 	}
-    private void OnMouseDown()
+    public void Clicked()
     {
+        Debug.Log("Start");
         GameObject grid_B = GameObject.Find("Grid_Board");
-        if (!onClick)
-        {
-            onClick = true;
+        //if (!onClick)
+        //{
+            //onClick = true;
             foreach (Transform child in grid_B.transform)
             {
                 Collider col = child.GetComponent<Collider>();
                 if (col.isTrigger)
                 {
 
-                    DDOL.instance.Movement(GameObject.Find("Grid_Board"), child.gameObject);
+                    DDOL.instance.Movement(child.gameObject);
                     foreach (GameObject c in DDOL.instance.spaces)
                     {
                         // Debug.Log(c.gameObject.name);
@@ -33,15 +34,16 @@ public class MouseDetect : MonoBehaviour {
                         R.enabled = true;
                     }
                     DDOL.instance.currentObject = gameObject;
+                    Debug.Log(name);
                 }
             }
-        }
-        else
-        {
-            if(DDOL.instance.currentObject == null)
-            { 
-                onClick = false;
-            }
-        }
+        //}
+        //else
+        //{
+            //if(DDOL.instance.currentObject == null)
+            //{ 
+                //onClick = false;
+            //}
+        //}
     }
 }
