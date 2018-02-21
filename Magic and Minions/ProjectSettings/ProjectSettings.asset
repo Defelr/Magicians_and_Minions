@@ -639,9 +639,9 @@ PlayerSettings:
     UNet: 1
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
-  cloudProjectId: f09a5e73-3c01-49cf-90ff-3a4fd3cf23f9
+  cloudProjectId: a4bd02a7-4a9a-43d1-8c89-ce8b1a8c0ffa
   projectName: Magic and Minions
-  organizationId: matthew-carlson
+  organizationId: robert-defelice
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
