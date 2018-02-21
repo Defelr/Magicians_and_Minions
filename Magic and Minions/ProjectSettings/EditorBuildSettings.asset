@@ -5,9 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/preload.unity
     guid: 98a937e967f86ec48a77ded3275bbfb4
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/Test_InGame.unity
     guid: 6a41bcac7d8a9a84da229ef3e4007c6a
+  - enabled: 1
+    path: Assets/_Scenes/Sprint1.unity
+    guid: bce43d642e0a65a43a45de89e95ff601
