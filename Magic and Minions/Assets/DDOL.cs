@@ -16,6 +16,12 @@ public class DDOL : MonoBehaviour {
     public GameObject currentObject; //The player whose action is being taken
     public GameObject currentObjectL;//The location of that player
     public GameObject currentTarget;
+
+    //FOR SUMMONING
+    public GameObject summon;
+
+    public string option;
+
     public void Start()
     {
         locations = PossibleSpaces(GameObject.Find("Grid_Board"));
@@ -64,7 +70,7 @@ public class DDOL : MonoBehaviour {
         return locations;
     }
     //MOVEMENT
-    public List<GameObject> Movement(GameObject child)
+    public List<GameObject> Movement(GameObject child, GameObject player)
     {
         spaces = new List<GameObject>();
  
@@ -73,6 +79,7 @@ public class DDOL : MonoBehaviour {
         int col = Col(locations, child);
 
         currentObjectL = locations[row][col];
+        currentObject = player;
 
         Debug.Log(row);
         Debug.Log(col);
@@ -102,6 +109,14 @@ public class DDOL : MonoBehaviour {
         }
         return spaces;
     }
+    public void SummonPawn(Transform new_p)
+    {
+        summon.transform.localScale = new Vector3(10F, 10F, 10F);
+        Vector3 x = new Vector3(new_p.transform.position.x, new_p.transform.position.y, new_p.transform.position.z);
+        Instantiate(summon, x, new_p.transform.rotation);
+        Collider new_p_c = new_p.GetComponent<Collider>();
+        new_p_c.isTrigger = true;
+    }
     public void MoveCharacter(Transform new_p)
     {
         //Find the collider of the intial position and set it to false
@@ -116,9 +131,15 @@ public class DDOL : MonoBehaviour {
         }
         source.PlayOneShot(moveSound, 0.7F);
         Collider col = currentObjectL.GetComponent<Collider>();
+        Collider colp = currentObject.GetComponent<Collider>();
+        colp.isTrigger = true;
         col.isTrigger = false;
         currentObject = null;
         spaces.Clear();
+    }
+    public void SetSummon(GameObject s)
+    {
+        summon = s;
     }
     private int Row(List<List<GameObject>> l, GameObject c)
     {
