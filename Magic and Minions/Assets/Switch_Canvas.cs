@@ -48,10 +48,10 @@ public class Switch_Canvas : MonoBehaviour {
                 }
            } else
            {
-                minionCanvas.SetActive(false);
-                necroCanvas.SetActive(false);
-                skelImage.SetActive(false);
-                wraithImage.SetActive(false);
+                //minionCanvas.SetActive(false);
+               // necroCanvas.SetActive(false);
+                //skelImage.SetActive(false);
+                //wraithImage.SetActive(false);
             }
        }
     }
