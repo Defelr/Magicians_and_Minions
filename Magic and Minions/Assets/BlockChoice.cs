@@ -17,8 +17,15 @@ public class BlockChoice : MonoBehaviour {
         Collider C = GetComponent<Collider>();
         if (R.enabled)
         {
+            if(DDOL.instance.option == "summon")
+            {
+                DDOL.instance.SummonPawn(transform);
+            }
+            else
+            {
+                DDOL.instance.MoveCharacter(transform);
+            }
             C.isTrigger = true;
-            DDOL.instance.MoveCharacter(transform);
         }
     }
 }
