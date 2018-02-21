@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class DDOL : MonoBehaviour {
 
+    public AudioClip moveSound;
+    private AudioSource source;
+
     public static DDOL instance = null;
     public int turn = 0;
     //Grid size
@@ -19,6 +22,7 @@ public class DDOL : MonoBehaviour {
     }
     public void Awake()
     {
+        source = GetComponent<AudioSource>();
         if (instance == null)
             instance = this;
         else if (instance != this)
@@ -110,6 +114,7 @@ public class DDOL : MonoBehaviour {
             currentObject.transform.position = Vector3.MoveTowards(startPos.position, new Vector3(new_p.transform.position.x, new_p.transform.position.y - 0.33f, new_p.transform.position.z), timeLerped);
 
         }
+        source.PlayOneShot(moveSound, 0.7F);
         Collider col = currentObjectL.GetComponent<Collider>();
         col.isTrigger = false;
         currentObject = null;
