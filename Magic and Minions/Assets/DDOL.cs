@@ -8,10 +8,14 @@ public class DDOL : MonoBehaviour {
     public int turn = 0;
     //Grid size
     int x = 8; //n == x board is n X n length
-    public List<GameObject> loc;
+    public List<List<GameObject>> locations;
+    public List<GameObject> spaces;
+    public GameObject currentObject; //The player whose action is being taken
+    public GameObject currentObjectL;//The location of that player
+    public GameObject currentTarget;
     public void Start()
     {
-        
+        locations = PossibleSpaces(GameObject.Find("Grid_Board"));
     }
     public void Awake()
     {
@@ -20,7 +24,23 @@ public class DDOL : MonoBehaviour {
         else if (instance != this)
             DontDestroyOnLoad(gameObject);
     }
-    private List<List<GameObject>> PossibleSpaces(GameObject p)
+    public void MouseDown()
+    {
+        if(currentObject != null)
+        {
+            ClearSpaces();
+        }
+    }
+    public void ClearSpaces()
+    {
+        foreach (GameObject c in spaces)
+        {
+            // Debug.Log(c.gameObject.name);
+            Renderer R = c.GetComponent<Renderer>();
+            R.enabled = false;
+        }
+    }
+    public List<List<GameObject>> PossibleSpaces(GameObject p)
     {
         Transform[] children = p.GetComponentsInChildren<Transform>();
         List<List<GameObject>> locations = new List<List<GameObject>>();
@@ -39,20 +59,19 @@ public class DDOL : MonoBehaviour {
         }
         return locations;
     }
-    public List<List<GameObject>> PossibleSpacesPublic(GameObject p)
-    {
-        return PossibleSpaces(p);
-    }
+    //MOVEMENT
     public List<GameObject> Movement(GameObject p, GameObject child)
     {
-        List<List<GameObject>> locations = PossibleSpaces(p);
-        List<GameObject> spaces = new List<GameObject>();
-        int current = 0;
-        int.TryParse(child.name, out current);
-
+        spaces = new List<GameObject>();
+ 
         int range = 1;
         int row = Row(locations, child);
         int col = Col(locations, child);
+
+        currentObjectL = locations[row][col];
+
+        Debug.Log(row);
+        Debug.Log(col);
         int n_row = row - range; // 1 == range of ability or movement this is just a test value ATM
         int n_col = col - range;
         int o_range = 3 + (2 * (range - 1));
@@ -73,8 +92,27 @@ public class DDOL : MonoBehaviour {
             n_row++;
             n_col = col - range;
         }
-        loc = spaces;
+        foreach(GameObject c in spaces)
+        {
+            Debug.Log(c.name);
+        }
         return spaces;
+    }
+    public void MoveCharacter(Transform new_p)
+    {
+        //Find the collider of the intial position and set it to false
+        float timeLerped = 0.0f;
+        Transform startPos = currentObject.transform;
+        ClearSpaces();
+        while (timeLerped < 1.0)
+        {
+            timeLerped += Time.deltaTime;
+            currentObject.transform.position = Vector3.MoveTowards(startPos.position, new Vector3(new_p.transform.position.x, new_p.transform.position.y + 2, new_p.transform.position.z), timeLerped);
+        }
+        Collider col = currentObjectL.GetComponent<Collider>();
+        col.isTrigger = false;
+        currentObject = null;
+        spaces.Clear();
     }
     private int Row(List<List<GameObject>> l, GameObject c)
     {
