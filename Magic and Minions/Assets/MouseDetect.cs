@@ -13,8 +13,9 @@ public class MouseDetect : MonoBehaviour {
 	void Update () {
 
 	}
-    public void Clicked()
+    public void On_Clicked()
     {
+            
         Debug.Log("Start");
         Collider colp = GetComponent<Collider>();
         GameObject grid_B = GameObject.Find("Grid_Board");

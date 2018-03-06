@@ -10,21 +10,50 @@ public class DDOL : MonoBehaviour {
     public static DDOL instance = null;
     public int turn = 0;
     //Grid size
-    int x = 8; //n == x board is n X n length
+    public int x = 8; //n == x board is n X n length
+    public struct Coordinates
+    {
+        public int x, y;
+        public GameObject G, location;
+
+        public Coordinates(int x1, int y2, GameObject G1, GameObject L1)
+        {
+            x = x1;
+            y = y2;
+            G = G1;
+            location = L1;
+        }
+
+    }
+    public List<List<Coordinates>> Coords; 
     public List<List<GameObject>> locations;
     public List<GameObject> spaces;
     public GameObject currentObject; //The player whose action is being taken
     public GameObject currentObjectL;//The location of that player
     public GameObject currentTarget;
+    Coordinates Coord;
 
     //FOR SUMMONING
     public GameObject summon;
 
-    public string option;
+    public string option = "";
 
     public void Start()
     {
         locations = PossibleSpaces(GameObject.Find("Grid_Board"));
+        Coords = new List<List<Coordinates>>();
+        for (int i = 0; i < x; i++)
+        {
+            Coords.Add(new List<Coordinates>());
+        }
+        for (int i = 0; i < x; i++)
+        {
+            for(int j =0; j < x; j++)
+            {
+                Coord = new Coordinates(i, j, null, locations[i][j]);
+                Coords[i].Add(Coord);
+            }
+        }
     }
     public void Awake()
     {
@@ -116,6 +145,7 @@ public class DDOL : MonoBehaviour {
         Instantiate(summon, x, new_p.transform.rotation);
         Collider new_p_c = new_p.GetComponent<Collider>();
         new_p_c.isTrigger = true;
+        ClearSpaces();
     }
     public void MoveCharacter(Transform new_p)
     {

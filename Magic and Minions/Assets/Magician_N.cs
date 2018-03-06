@@ -28,7 +28,7 @@ public class Magician_N : MonoBehaviour {
             if (col.isTrigger /*&& !colp.isTrigger*/) //Uncomment so that people can only move once. When turn ends, all triggers should go back to false
             {
 
-                DDOL.instance.Movement(child.gameObject, gameObject);
+                List<GameObject> spaces = DDOL.instance.Movement(child.gameObject, gameObject);
                 DDOL.instance.SetSummon(Skeleton);
                 foreach (GameObject c in DDOL.instance.spaces)
                 {
