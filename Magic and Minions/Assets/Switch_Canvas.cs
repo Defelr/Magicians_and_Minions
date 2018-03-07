@@ -48,7 +48,7 @@ public class Switch_Canvas : MonoBehaviour {
                         }
                     }
                 }
-                if (hitInfo.transform.gameObject.tag == "Necro" && ((temp_x == temp_y) && temp_x != -1))
+                if (hitInfo.transform.gameObject.tag == "Necro")
                 {
                     minionCanvas.SetActive(false);
                     necroCanvas.SetActive (true);
@@ -59,21 +59,21 @@ public class Switch_Canvas : MonoBehaviour {
 
 
                 } 
-                if (hitInfo.transform.gameObject.tag == "Wraith")
+                if (hitInfo.transform.gameObject.tag == "Wraith" && DDOL.instance.currentObject.tag == "Wraith" )
                 {
                     necroCanvas.SetActive(false);
                     minionCanvas.SetActive(true);
                     skelImage.SetActive(false);
                    wraithImage.SetActive(true);
                 }
-                else if (hitInfo.transform.gameObject.tag == "Skeleton")
+                else if (hitInfo.transform.gameObject.tag == "Skeleton" && DDOL.instance.currentObject.tag == "Skeleton")
                 {
                     necroCanvas.SetActive(false);
                     minionCanvas.SetActive(true);
                     wraithImage.SetActive(false);
                     skelImage.SetActive(true);
                 }
-           } 
+            }
        }
     }
 }

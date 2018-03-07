@@ -34,6 +34,9 @@ public class DDOL : MonoBehaviour
     private AudioSource source;
 
     public Camera currentCamera;
+    public Camera First;
+    public Camera Second;
+
 
     public static DDOL instance = null;
     public int turn = 1;
@@ -60,6 +63,24 @@ public class DDOL : MonoBehaviour
     public GameObject summon;
 
     public string option = "";
+
+    public void End_Turn()
+    {
+        if (turn % 2 == 0)
+        {
+            Second.enabled = true;
+            First.enabled = false;
+            currentCamera = Second;
+        }
+        else
+        {
+            Second.enabled = false;
+            First.enabled = true;
+            currentCamera = First;
+        }
+        DDOL.instance.turn++;
+
+    }
 
     public void Start()
     {

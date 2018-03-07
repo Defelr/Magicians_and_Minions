@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -565,8 +565,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a03821c4f37b02c4ca1e79650419c876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  First: {fileID: 1063266303}
-  Second: {fileID: 1440543114}
 --- !u!224 &724498058 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224746334826761950, guid: 4804eeeeadbfe7849bcdad8dea6d7f6b,
@@ -1024,7 +1022,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1063266300}
-  m_LocalRotation: {x: 0.44153515, y: -0, z: -0, w: 0.8972439}
+  m_LocalRotation: {x: 0.44153517, y: -0, z: -0, w: 0.897244}
   m_LocalPosition: {x: -9.5, y: 18.1, z: -14.73}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -2472,7 +2470,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 685602779}
+      - m_Target: {fileID: 1623350522}
         m_MethodName: End_Turn
         m_Mode: 1
         m_Arguments:
@@ -2859,6 +2857,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSound: {fileID: 8300000, guid: ffc8518eb0420d640a1640e76b99e033, type: 3}
   currentCamera: {fileID: 1063266303}
+  First: {fileID: 1063266303}
+  Second: {fileID: 1440543114}
   turn: 0
   player: 0
   x: 8
