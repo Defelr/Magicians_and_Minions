@@ -1,8 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+public struct Coordinates
+{
+    public int ID, status;// 0 == empty, 1 == occupied, there might be more
+    public GameObject G, location;
 
-public class DDOL : MonoBehaviour {
+    public Coordinates(int ID1, int S, GameObject G1, GameObject L1)
+    {
+        ID = ID1;
+        status = S;
+        G = G1;
+        location = L1;
+    }
+}
+
+public class DDOL : MonoBehaviour
+{
 
     public AudioClip moveSound;
     private AudioSource source;
@@ -11,27 +25,17 @@ public class DDOL : MonoBehaviour {
     public int turn = 0;
     //Grid size
     public int x = 8; //n == x board is n X n length
-    public struct Coordinates
-    {
-        public int x, y;
-        public GameObject G, location;
-
-        public Coordinates(int x1, int y2, GameObject G1, GameObject L1)
-        {
-            x = x1;
-            y = y2;
-            G = G1;
-            location = L1;
-        }
-
-    }
-    public List<List<Coordinates>> Coords; 
+    public List<List<Coordinates>> Coords;
     public List<List<GameObject>> locations;
     public List<GameObject> spaces;
     public GameObject currentObject; //The player whose action is being taken
-    public GameObject currentObjectL;//The location of that player
-    public GameObject currentTarget;
+    private GameObject currentObjectL;//The location of that player
+    private GameObject currentTarget;
     Coordinates Coord;
+
+    public GameObject StartingC;
+
+
 
     //FOR SUMMONING
     public GameObject summon;
@@ -40,6 +44,8 @@ public class DDOL : MonoBehaviour {
 
     public void Start()
     {
+        currentObject = null;
+        ClearSpaces();
         locations = PossibleSpaces(GameObject.Find("Grid_Board"));
         Coords = new List<List<Coordinates>>();
         for (int i = 0; i < x; i++)
@@ -48,12 +54,16 @@ public class DDOL : MonoBehaviour {
         }
         for (int i = 0; i < x; i++)
         {
-            for(int j =0; j < x; j++)
+            for (int j = 0; j < x; j++)
             {
-                Coord = new Coordinates(i, j, null, locations[i][j]);
+                Coord = new Coordinates(-1, 0, null, locations[i][j]);
                 Coords[i].Add(Coord);
             }
         }
+        StartingC.transform.localScale = new Vector3(1F, 1F, 1F);
+        GameObject new_p = Coords[0][0].location;
+        Vector3 vx = new Vector3(new_p.transform.position.x, 5.5F, new_p.transform.position.z);
+        Instantiate(StartingC, vx, new_p.transform.rotation);
     }
     public void Awake()
     {
@@ -63,9 +73,17 @@ public class DDOL : MonoBehaviour {
         else if (instance != this)
             DontDestroyOnLoad(gameObject);
     }
+    public Coordinates SetObject(int ID, int Status, GameObject CO, GameObject COL)
+    {
+
+        currentObject = CO;
+        currentObjectL = COL;
+        Coord = new Coordinates(ID, Status, CO, COL);
+        return Coord;
+    }
     public void MouseDown()
     {
-        if(currentObject != null)
+        if (currentObject != null)
         {
             ClearSpaces();
         }
@@ -79,73 +97,100 @@ public class DDOL : MonoBehaviour {
             R.enabled = false;
         }
     }
+    public void ShowSpaces()
+    {
+        foreach (GameObject c in spaces)
+        {
+            Renderer R = c.GetComponent<Renderer>();
+            R.enabled = true;
+        }
+    }
     public List<List<GameObject>> PossibleSpaces(GameObject p)
     {
         Transform[] children = p.GetComponentsInChildren<Transform>();
-        List<List<GameObject>> locations = new List<List<GameObject>>();
+        List<List<GameObject>> l = new List<List<GameObject>>();
         for (int i = 0; i < x; i++)
         {
-            locations.Add(new List<GameObject>());
+            l.Add(new List<GameObject>());
         }
         int k = 1;
         for (int i = 0; i < x; i++)
         {
             for (int j = 0; j < x; j++)
             {
-                locations[i].Add(children[k].gameObject);
+                l[i].Add(children[k].gameObject);
                 k++;
             }
         }
-        return locations;
+        return l;
     }
     //MOVEMENT
-    public List<GameObject> Movement(GameObject child, GameObject player)
+    public List<GameObject> SpaceLocation(int r, int ID)
+    {
+        for (int i = 0; i < x; i++)
+        {
+            for (int j = 0; j < x; j++)
+            {
+                if (Coords[i][j].ID == ID)
+                {
+                    return Spaces(i, j, r);
+                }
+            }
+        }
+        return null;
+    }
+    private List<GameObject> Spaces(int r, int y, int t)
     {
         spaces = new List<GameObject>();
- 
-        int range = 1;
-        int row = Row(locations, child);
-        int col = Col(locations, child);
-
-        currentObjectL = locations[row][col];
-        currentObject = player;
-
-        //Debug.Log(row);
-        //Debug.Log(col);
-        int n_row = row - range; // 1 == range of ability or movement this is just a test value ATM
-        int n_col = col - range;
-        int o_range = 3 + (2 * (range - 1));
-        //Testing 1 position movement
-
-        for(int i = 0; i < o_range; i++)
+        int n_row = r - t;
+        int n_col = y - t;
+        int o_range = 3 + (2 * (t - 1));
+        for (int i = 0; i < o_range; i++)
         {
-            for(int j = 0; j < o_range; j++)
+            for (int j = 0; j < o_range; j++)
             {
-                if ((n_row >= 0 && n_row < 8) && (n_col >= 0 && n_col < 8))
+                if ((n_row >= 0 && n_row < x) && (n_col >= 0 && n_col < x))
                 {
-                    Collider coll = locations[n_row][n_col].GetComponent<Collider>();
-                    if (!coll.isTrigger)
-                        spaces.Add(locations[n_row][n_col]);
+                    if (Coords[n_row][n_col].status == 0)
+                    {
+                        Debug.Log(Coords[n_row][n_col].location);
+                        spaces.Add(Coords[n_row][n_col].location);
+                    }
                 }
                 n_col++;
             }
             n_row++;
-            n_col = col - range;
+            n_col = y - t;
         }
-        foreach(GameObject c in spaces)
-        {
-            //Debug.Log(c.name);
-        }
+        Debug.Log("HI" + spaces.Count);
         return spaces;
     }
     public void SummonPawn(Transform new_p)
     {
+        Vector3 vx;
+        if (summon.gameObject.name == "wraith")
+        {
+            vx = new Vector3(new_p.transform.position.x, 6.48F, new_p.transform.position.z);
+        }
+        else
+        {
+            vx = new Vector3(new_p.transform.position.x, new_p.transform.position.y, new_p.transform.position.z);
+        }
         summon.transform.localScale = new Vector3(10F, 10F, 10F);
-        Vector3 x = new Vector3(new_p.transform.position.x, new_p.transform.position.y, new_p.transform.position.z);
-        Instantiate(summon, x, new_p.transform.rotation);
-        Collider new_p_c = new_p.GetComponent<Collider>();
-        new_p_c.isTrigger = true;
+
+        Instantiate(summon, vx, new_p.transform.rotation);
+        for (int i = 0; i < x; i++)
+        {
+            for (int j = 0; j < x; j++)
+            {
+                if (Coords[i][j].location == new_p.gameObject)
+                {
+                    Coords[i][j] = new Coordinates(summon.GetInstanceID(), 1, summon, Coords[i][j].location);
+                }
+            }
+        }
         ClearSpaces();
+        return;
     }
     public void MoveCharacter(Transform new_p)
     {
@@ -156,47 +201,27 @@ public class DDOL : MonoBehaviour {
         while (timeLerped < 1.0)
         {
             timeLerped += Time.deltaTime;
-            currentObject.transform.position = Vector3.MoveTowards(startPos.position, new Vector3(new_p.transform.position.x, new_p.transform.position.y - 0.33f, new_p.transform.position.z), timeLerped);
-
+            currentObject.transform.position = Vector3.MoveTowards(startPos.position, new Vector3(new_p.transform.position.x, currentObject.transform.position.y, new_p.transform.position.z), timeLerped);
+        }
+        for (int i = 0; i < x; i++)
+        {
+            for (int j = 0; j < x; j++)
+            {
+                if (Coords[i][j].ID == currentObject.GetInstanceID())
+                {
+                    Coords[i][j] = new Coordinates(-1, 0, null, Coords[i][j].location);
+                }
+                if (Coords[i][j].location == new_p.gameObject)
+                {
+                    Coords[i][j] = new Coordinates(currentObject.GetInstanceID(), 1, currentObject, Coords[i][j].location);
+                }
+            }
         }
         source.PlayOneShot(moveSound, 0.7F);
         Collider col = currentObjectL.GetComponent<Collider>();
         Collider colp = currentObject.GetComponent<Collider>();
         colp.isTrigger = true;
         col.isTrigger = false;
-        currentObject = null;
         spaces.Clear();
-    }
-    public void SetSummon(GameObject s)
-    {
-        summon = s;
-    }
-    private int Row(List<List<GameObject>> l, GameObject c)
-    {
-       for(int i = 0; i < x; i++)
-        {
-            for(int j = 0; j < x; j++)
-            {
-                if(l[i][j].name == c.name)
-                {
-                    return i;
-                }
-            }
-        }
-        return -1;
-    }
-    private int Col(List<List<GameObject>> l, GameObject c)
-    {
-        for (int i = 0; i < x; i++)
-        {
-            for (int j = 0; j < x; j++)
-            {
-                if (l[i][j].name == c.name)
-                {
-                    return j;
-                }
-            }
-        }
-        return -1;
     }
 }
