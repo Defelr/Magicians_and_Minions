@@ -29,7 +29,6 @@ public class Magician_N : MonoBehaviour
         DDOL.instance.option = "summon";
         Debug.Log("Start");
         DDOL.instance.summon = Skeleton;
-        Debug.Log(DDOL.instance.summon);
         Summon();
 
     }

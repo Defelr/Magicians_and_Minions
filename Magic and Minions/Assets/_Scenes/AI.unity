@@ -375,6 +375,10 @@ Prefab:
       value: 
       objectReference: {fileID: 1327452014245898, guid: 2b4ff1d4da10fd44996a40a0b4ab3393,
         type: 2}
+    - target: {fileID: 1706474921116710, guid: e00d9e101f3804849ada826e6890b61a, type: 2}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e00d9e101f3804849ada826e6890b61a, type: 2}
   m_IsPrefabParent: 0
@@ -725,16 +729,20 @@ Prefab:
     - target: {fileID: 114368224706202906, guid: 11dfb18ed9862a0469a4cb44cee727fa,
         type: 2}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114797928754833816, guid: 11dfb18ed9862a0469a4cb44cee727fa,
         type: 2}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1510237643049782, guid: 11dfb18ed9862a0469a4cb44cee727fa, type: 2}
       propertyPath: m_Name
       value: AInecromancer
+      objectReference: {fileID: 0}
+    - target: {fileID: 1510237643049782, guid: 11dfb18ed9862a0469a4cb44cee727fa, type: 2}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 23368105079235312, guid: 11dfb18ed9862a0469a4cb44cee727fa, type: 2}
