@@ -6,14 +6,15 @@ using UnityEngine.SceneManagement;
 public class Quit : MonoBehaviour {
 
 	public void quit() {
-        Application.Quit();
-        Debug.Log("Quit");
+        //Application.Quit();
+        //Debug.Log("Quit");
+        SceneManager.LoadScene(0);
 
     }
 
     public void restart()
     {
-        SceneManager.LoadScene("Sprint1");
+        SceneManager.LoadScene(1);
         Debug.Log("Restart");
     }
 }

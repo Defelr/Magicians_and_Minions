@@ -7,12 +7,12 @@ public class MainMenu : MonoBehaviour {
 
 	public void Singleplayer()
     {
-        SceneManager.LoadScene("CampaignMap_Test");
+        SceneManager.LoadScene(1);
         Debug.Log("Signleplayer");
     }
 
     public void Multiplayer()
     {
-        //SceneManager.LoadScene();
+        //SceneManager.LoadScene(3);
     }
 }
