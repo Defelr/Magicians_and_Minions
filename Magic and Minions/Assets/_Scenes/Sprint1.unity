@@ -547,6 +547,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a03821c4f37b02c4ca1e79650419c876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  First: {fileID: 0}
+  Second: {fileID: 0}
 --- !u!224 &724498058 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224746334826761950, guid: 4804eeeeadbfe7849bcdad8dea6d7f6b,
@@ -2452,12 +2454,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSound: {fileID: 8300000, guid: ffc8518eb0420d640a1640e76b99e033, type: 3}
+  currentCamera: {fileID: 1063266303}
   turn: 0
+  player: 0
   x: 8
   spaces: []
   currentObject: {fileID: 0}
-  currentObjectL: {fileID: 0}
-  currentTarget: {fileID: 0}
+  StartingC: {fileID: 0}
+  StartingC2: {fileID: 0}
   summon: {fileID: 0}
   option: 
 --- !u!82 &1623350523
