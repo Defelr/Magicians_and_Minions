@@ -1,17 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+public struct Data
+{
+    public int HP, DMG, MANA;
+    public Data(int hp, int dmg, int mana)
+    {
+        HP = hp;
+        DMG = dmg;
+        MANA = mana;
+    }
+}
 public struct Coordinates
 {
     public int ID, status;// 0 == empty, 1 == occupied, there might be more
     public GameObject G, location;
+    public Data D;
 
-    public Coordinates(int ID1, int S, GameObject G1, GameObject L1)
+    public Coordinates(int ID1, int S, GameObject G1, Data D1, GameObject L1)
     {
         ID = ID1;
         status = S;
         G = G1;
         location = L1;
+        D = D1;
     }
 }
 
@@ -21,8 +33,11 @@ public class DDOL : MonoBehaviour
     public AudioClip moveSound;
     private AudioSource source;
 
+    public Camera currentCamera;
+
     public static DDOL instance = null;
-    public int turn = 0;
+    public int turn = 1;
+    public int player = 0;
     //Grid size
     public int x = 8; //n == x board is n X n length
     public List<List<Coordinates>> Coords;
@@ -34,9 +49,13 @@ public class DDOL : MonoBehaviour
     Coordinates Coord;
 
     public GameObject StartingC;
+    public GameObject StartingC2;
+
+    private Data player1_d = new Data(0,0,0);
+    private Data player2_d;
 
 
-
+    private int temp_x = -1, temp_y = -1;
     //FOR SUMMONING
     public GameObject summon;
 
@@ -56,7 +75,7 @@ public class DDOL : MonoBehaviour
         {
             for (int j = 0; j < x; j++)
             {
-                Coord = new Coordinates(-1, 0, null, locations[i][j]);
+                Coord = new Coordinates(-1, 0, null, player1_d, locations[i][j]);
                 Coords[i].Add(Coord);
             }
         }
@@ -64,6 +83,21 @@ public class DDOL : MonoBehaviour
         GameObject new_p = Coords[0][0].location;
         Vector3 vx = new Vector3(new_p.transform.position.x, 5.5F, new_p.transform.position.z);
         Instantiate(StartingC, vx, new_p.transform.rotation);
+        StartingC.gameObject.layer = LayerMask.NameToLayer("Player1");
+        player1_d = new Data(20, -1, 10); //HARD CODED
+        Coords[0][0] = new Coordinates(StartingC.GetInstanceID(), 1, StartingC, player1_d, Coords[0][0].location);
+
+        StartingC2.transform.localScale = new Vector3(1F, 1F, 1F);
+        new_p = Coords[x-1][x-1].location;
+        vx = new Vector3(new_p.transform.position.x, 6.047379F, new_p.transform.position.z);
+        Instantiate(StartingC2, vx, new_p.transform.rotation);
+        StartingC2.gameObject.layer = LayerMask.NameToLayer("Player2");
+        player2_d = new Data(20, -1, 10); //HARD CODED
+        Coords[x-1][x-1] = new Coordinates(StartingC2.GetInstanceID(), 1, StartingC2, player2_d, Coords[x-1][x-1].location);
+    }
+    public void Update()
+    {
+        player = turn % 2;
     }
     public void Awake()
     {
@@ -73,12 +107,12 @@ public class DDOL : MonoBehaviour
         else if (instance != this)
             DontDestroyOnLoad(gameObject);
     }
-    public Coordinates SetObject(int ID, int Status, GameObject CO, GameObject COL)
+    public Coordinates SetObject(int ID, int Status, Data d, GameObject CO, GameObject COL)
     {
 
         currentObject = CO;
         currentObjectL = COL;
-        Coord = new Coordinates(ID, Status, CO, COL);
+        Coord = new Coordinates(ID, Status, CO, d, COL);
         return Coord;
     }
     public void MouseDown()
@@ -151,10 +185,32 @@ public class DDOL : MonoBehaviour
             {
                 if ((n_row >= 0 && n_row < x) && (n_col >= 0 && n_col < x))
                 {
-                    if (Coords[n_row][n_col].status == 0)
+                    if (option == "move" || option == "summon")
                     {
-                        Debug.Log(Coords[n_row][n_col].location);
-                        spaces.Add(Coords[n_row][n_col].location);
+                        if (Coords[n_row][n_col].status == 0)
+                        {
+                            Debug.Log(Coords[n_row][n_col].location);
+                            spaces.Add(Coords[n_row][n_col].location);
+                        }
+                    }else if (option == "attack")
+                    {
+                        if(Coords[n_row][n_col].status == 1)
+                        {
+                            if (player == 0)
+                            {
+                                if (Coords[n_row][n_col].G.gameObject.layer == LayerMask.NameToLayer("Player2"))
+                                {
+                                    spaces.Add(Coords[n_row][n_col].location);
+                                }
+                            }
+                            else
+                            {
+                                if (Coords[n_row][n_col].G.gameObject.layer == LayerMask.NameToLayer("Player1"))
+                                {
+                                    spaces.Add(Coords[n_row][n_col].location);
+                                }
+                            }
+                        }
                     }
                 }
                 n_col++;
@@ -165,17 +221,53 @@ public class DDOL : MonoBehaviour
         Debug.Log("HI" + spaces.Count);
         return spaces;
     }
+    public void SetLocationTemp(int obj)
+    {
+        for (int i = 0; i < x; i++)
+        {
+            for (int j = 0; j < x; j++)
+            {
+                if (Coords[i][j].ID == obj)
+                {
+                    temp_x = i;
+                    temp_y = j;
+                    return;
+                }
+            }
+        }
+    }
     public void SummonPawn(Transform new_p)
     {
-        Vector3 vx;
-        if (summon.gameObject.name == "wraith")
+        if (player == 0)
         {
-            vx = new Vector3(new_p.transform.position.x, 6.48F, new_p.transform.position.z);
+            SetLocationTemp(StartingC.gameObject.GetInstanceID());
         }
         else
         {
-            vx = new Vector3(new_p.transform.position.x, new_p.transform.position.y, new_p.transform.position.z);
+            SetLocationTemp(StartingC2.gameObject.GetInstanceID());
         }
+        Debug.Log(StartingC.gameObject.name);
+        Debug.Log(StartingC2.gameObject.name);
+        Vector3 vx;
+        Data minionD = new Data(0, 0, 0);
+        Data MagicianM = new Data(0, 0, 0);
+       
+            if (summon.gameObject.name == "wraith")
+            {
+                vx = new Vector3(new_p.transform.position.x, 6.48F, new_p.transform.position.z);
+                minionD = new Data(4, 2, -1);//TEMP DATA
+               // MagicianM = new Data(Coords[temp_x][temp_y].D.HP, Coords[temp_x][temp_y].D.DMG, Coords[temp_x][temp_y].D.MANA - 3);
+                //   Coords[temp_x][temp_y] = new Coordinates(Coords[temp_x][temp_y].ID, 1, Coords[temp_x][temp_y].G, MagicianM, Coords[temp_x][temp_y].location);//3 is the cost of the minion
+            }
+            else
+            {
+                vx = new Vector3(new_p.transform.position.x, new_p.transform.position.y, new_p.transform.position.z);
+                minionD = new Data(2, 1, -1);//TEMP DATA
+                //MagicianM = new Data(Coords[temp_x][temp_y].D.HP, Coords[temp_x][temp_y].D.DMG, Coords[temp_x][temp_y].D.MANA - 1);
+                // Coords[temp_x][temp_y] = new Coordinates(Coords[temp_x][temp_y].ID, 1, Coords[temp_x][temp_y].G, MagicianM, Coords[temp_x][temp_y].location);//1 is the cost of the minion
+            }
+       Debug.Log(temp_y);
+       Debug.Log(temp_x);
         summon.transform.localScale = new Vector3(10F, 10F, 10F);
 
         Instantiate(summon, vx, new_p.transform.rotation);
@@ -185,7 +277,15 @@ public class DDOL : MonoBehaviour
             {
                 if (Coords[i][j].location == new_p.gameObject)
                 {
-                    Coords[i][j] = new Coordinates(summon.GetInstanceID(), 1, summon, Coords[i][j].location);
+                    if (turn % 2 == 0)
+                    {
+                        summon.gameObject.layer = LayerMask.NameToLayer("Player1");
+                    }
+                    else
+                    {
+                        summon.gameObject.layer = LayerMask.NameToLayer("Player2");
+                    }
+                    Coords[i][j] = new Coordinates(summon.GetInstanceID(), 1, summon, minionD, Coords[i][j].location);
                 }
             }
         }
@@ -197,6 +297,7 @@ public class DDOL : MonoBehaviour
         //Find the collider of the intial position and set it to false
         float timeLerped = 0.0f;
         Transform startPos = currentObject.transform;
+        Data temp_d = new Data(0, 0, 0);
         ClearSpaces();
         while (timeLerped < 1.0)
         {
@@ -209,11 +310,18 @@ public class DDOL : MonoBehaviour
             {
                 if (Coords[i][j].ID == currentObject.GetInstanceID())
                 {
-                    Coords[i][j] = new Coordinates(-1, 0, null, Coords[i][j].location);
+                    temp_d = Coords[i][j].D;
+                    Coords[i][j] = new Coordinates(-1, 0, null, new Data(0,0,0), Coords[i][j].location);
                 }
+            }
+        }
+        for (int i = 0; i < x; i++)
+        {
+            for (int j = 0; j < x; j++)
+            {
                 if (Coords[i][j].location == new_p.gameObject)
                 {
-                    Coords[i][j] = new Coordinates(currentObject.GetInstanceID(), 1, currentObject, Coords[i][j].location);
+                    Coords[i][j] = new Coordinates(currentObject.GetInstanceID(), 1, currentObject, temp_d, Coords[i][j].location);
                 }
             }
         }

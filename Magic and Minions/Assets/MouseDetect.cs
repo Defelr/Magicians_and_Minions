@@ -9,7 +9,7 @@ public class MouseDetect : MonoBehaviour
     {
 
     }
-
+    private 
     // Update is called once per frame
     void Update()
     {
@@ -37,7 +37,7 @@ public class MouseDetect : MonoBehaviour
                             if (DDOL.instance.Coords[i][j].location.gameObject.name == col.gameObject.name)
                             {
                                 Debug.Log("IN ID ADDER");
-                                DDOL.instance.Coords[i][j] = DDOL.instance.SetObject(this.gameObject.GetInstanceID(), 1, this.gameObject, DDOL.instance.Coords[i][j].location);
+                                DDOL.instance.Coords[i][j] = DDOL.instance.SetObject(this.gameObject.GetInstanceID(), 1, DDOL.instance.Coords[i][j].D, this.gameObject, DDOL.instance.Coords[i][j].location);
                                 Debug.Log(this.gameObject.GetInstanceID());
                                 Debug.Log(DDOL.instance.Coords[i][j].ID);
                                 return;
@@ -49,10 +49,11 @@ public class MouseDetect : MonoBehaviour
             }
         }
     }
-    public void On_Clicked()
+    public void Move()
     {
         Debug.Log("Start");
         List<GameObject> spaces = new List<GameObject>();
+        DDOL.instance.option = "move";
         spaces = DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
         if (spaces.Count <= 0)
         {
@@ -65,7 +66,25 @@ public class MouseDetect : MonoBehaviour
                 Renderer R = c.GetComponent<Renderer>();
                 R.enabled = true;
             }
-            DDOL.instance.option = "move";
+        }
+    }
+    public void Attack()
+    {
+        Debug.Log("ATTACK STARTS");
+        List<GameObject> spaces = new List<GameObject>();
+        DDOL.instance.option = "attack";
+        spaces = DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
+        if (spaces.Count <= 0)
+        {
+            Debug.Log("Can't Move");
+        }
+        else
+        {
+            foreach (GameObject c in spaces)
+            {
+                Renderer R = c.GetComponent<Renderer>();
+                R.enabled = true;
+            }
         }
     }
 }

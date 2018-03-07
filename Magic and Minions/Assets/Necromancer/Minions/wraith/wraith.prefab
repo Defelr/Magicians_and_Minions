@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 95871834396645500}
   - component: {fileID: 136697752383959024}
   - component: {fileID: 114958930684501284}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: wraith
   m_TagString: Wraith
   m_Icon: {fileID: 0}

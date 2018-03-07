@@ -6,6 +6,7 @@ public class Magician_N : MonoBehaviour
 {
     public GameObject Wraith;
     public GameObject Skeleton;
+    public GameObject GreatSpirit;
     private List<GameObject> spaces;
 
     // Use this for initialization
@@ -37,6 +38,13 @@ public class Magician_N : MonoBehaviour
         DDOL.instance.option = "summon";
         Debug.Log("Start");
         DDOL.instance.summon = Wraith;
+        Summon();
+    }
+    public void SummonGreatSpirit()
+    {
+        DDOL.instance.option = "summon";
+        Debug.Log("Start");
+        DDOL.instance.summon = GreatSpirit;
         Summon();
     }
 }

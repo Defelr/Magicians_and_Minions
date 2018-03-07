@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4898575909277266}
   - component: {fileID: 136043227514003692}
   - component: {fileID: 114826547346036266}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: skeleton
   m_TagString: Skeleton
   m_Icon: {fileID: 0}
