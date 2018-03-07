@@ -8,7 +8,7 @@ public class MainMenu : MonoBehaviour {
 	public void Singleplayer()
     {
         SceneManager.LoadScene(1);
-        Debug.Log("Signleplayer");
+        Debug.Log("Singleplayer");
     }
 
     public void Multiplayer()

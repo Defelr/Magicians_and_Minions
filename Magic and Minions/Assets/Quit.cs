@@ -16,7 +16,7 @@ public class Quit : MonoBehaviour {
 
     public void Restart()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
         Debug.Log("Restart");
     }
 

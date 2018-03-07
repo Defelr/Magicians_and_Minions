@@ -15,8 +15,8 @@ EditorBuildSettings:
     path: Assets/_Scenes/MainMenu_Test.unity
     guid: fc749e05e97299e498f1bfc99a6dc571
   - enabled: 1
-    path: Assets/_Scenes/Sprint1.unity
-    guid: bce43d642e0a65a43a45de89e95ff601
-  - enabled: 1
     path: Assets/_Scenes/CampaignMap_Test.unity
     guid: 442a2846c5e306144b6f362c5835ce2d
+  - enabled: 1
+    path: Assets/_Scenes/Sprint1.unity
+    guid: bce43d642e0a65a43a45de89e95ff601
