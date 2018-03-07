@@ -2017,7 +2017,7 @@ Prefab:
     - target: {fileID: 114037633958722618, guid: 4804eeeeadbfe7849bcdad8dea6d7f6b,
         type: 2}
       propertyPath: m_Interactable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4804eeeeadbfe7849bcdad8dea6d7f6b, type: 2}
