@@ -19,9 +19,10 @@ public class KillerAI_Necromancer : MonoBehaviour {
 
     public void PlayTurn()
     {
+        Debug.Log("start turn");
         //If less than 7 minions, summon minion
         //TODO: CHECK MANA
-        if (Random.Range(0.0f, 1.0f) < 5)
+        if (Random.Range(0.0f, 1.0f) < 0.5f)
         {
             SummonWraith();
         } else
@@ -36,48 +37,28 @@ public class KillerAI_Necromancer : MonoBehaviour {
 
     public void SummonSkeleton()
     {
+        Debug.Log("summon skeleton");
         DDOL.instance.option = "summon";
-        Collider colp = GetComponent<Collider>();
-        GameObject grid_B = GameObject.Find("Grid_Board");
-        foreach (Transform child in grid_B.transform)
-        {
-            Collider col = child.GetComponent<Collider>();
-            if (col.isTrigger /*&& !colp.isTrigger*/) //Uncomment so that people can only move once. When turn ends, all triggers should go back to false
-            {
-
-                DDOL.instance.Movement(child.gameObject, gameObject);
-                DDOL.instance.SetSummon(Skeleton);
-                /*foreach (GameObject c in DDOL.instance.spaces)
-                {
-                    // Debug.Log(c.gameObject.name);
-                    Renderer R = c.GetComponent<Renderer>();
-                    R.enabled = true;
-                }
-                Debug.Log(name);*/
-            }
-        }
+        DDOL.instance.summon = Skeleton;
+        Debug.Log(DDOL.instance.summon);
+        Summon();
     }
     public void SummonWraith()
     {
+        Debug.Log("summon wraith");
         DDOL.instance.option = "summon";
-        Collider colp = GetComponent<Collider>();
-        GameObject grid_B = GameObject.Find("Grid_Board");
-        foreach (Transform child in grid_B.transform)
-        {
-            Collider col = child.GetComponent<Collider>();
-            if (col.isTrigger /*&& !colp.isTrigger*/) //Uncomment so that people can only move once. When turn ends, all triggers should go back to false
-            {
+        DDOL.instance.summon = Wraith;
+        Debug.Log(DDOL.instance.summon);
+        Summon();
 
-                DDOL.instance.Movement(child.gameObject, gameObject);
-                DDOL.instance.SetSummon(Wraith);
-                /*foreach (GameObject c in DDOL.instance.spaces)
-                {
-                    // Debug.Log(c.gameObject.name);
-                    Renderer R = c.GetComponent<Renderer>();
-                    R.enabled = true;
-                }
-                Debug.Log(name);*/
-            }
+    }
+
+    public void Summon()
+    {
+        List<GameObject> loc = DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
+        if (loc.Count != 0)
+        {
+            DDOL.instance.SummonPawn(loc[Random.Range(0, loc.Count - 1)].transform);
         }
     }
 }
