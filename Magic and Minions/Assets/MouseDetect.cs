@@ -32,14 +32,10 @@ public class MouseDetect : MonoBehaviour
                         for (int j = 0; j < DDOL.instance.x; j++)
                         {
                             Debug.Log("Mouse Down");
-                            Debug.Log(DDOL.instance.Coords[i][j].location.gameObject.name);
-                            Debug.Log(col.gameObject.name);
                             if (DDOL.instance.Coords[i][j].location.gameObject.name == col.gameObject.name)
                             {
                                 Debug.Log("IN ID ADDER");
                                 DDOL.instance.Coords[i][j] = DDOL.instance.SetObject(this.gameObject.GetInstanceID(), 1, DDOL.instance.Coords[i][j].D, this.gameObject, DDOL.instance.Coords[i][j].location);
-                                Debug.Log(this.gameObject.GetInstanceID());
-                                Debug.Log(DDOL.instance.Coords[i][j].ID);
                                 return;
                             }
                         }

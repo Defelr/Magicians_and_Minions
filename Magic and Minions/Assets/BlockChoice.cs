@@ -37,7 +37,7 @@ public class BlockChoice : MonoBehaviour
                 DDOL.instance.MoveCharacter(transform);
             }
             C.isTrigger = true;
-            DDOL.instance.option = "NaN";
+            DDOL.instance.option = "";
         }
     }
 }
