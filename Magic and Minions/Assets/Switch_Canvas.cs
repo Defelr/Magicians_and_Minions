@@ -59,7 +59,6 @@ public class Switch_Canvas : MonoBehaviour {
                 }
                 if (hitInfo.transform.gameObject.tag == "Necro")
                 {
-<<<<<<< HEAD
                     foreach(Transform TPanel in MenuCanvasPanel.transform)
                     {
                         if(TPanel.tag != "Necro")
@@ -71,12 +70,10 @@ public class Switch_Canvas : MonoBehaviour {
                             TPanel.gameObject.SetActive(true);
                         }
                     }
-=======
                     minionInterface.SetActive(false);
                     necroInterface.SetActive (true);
                     wraithImage.SetActive(false);
                     skelImage.SetActive(false);
->>>>>>> dev_Rob
                     necroMana.text = DDOL.instance.Coords[temp_x][temp_y].D.MANA.ToString();
                     necroHP.text = DDOL.instance.Coords[temp_x][temp_y].D.HP.ToString();
 
@@ -84,7 +81,6 @@ public class Switch_Canvas : MonoBehaviour {
                 } 
                 if (hitInfo.transform.gameObject.tag == "Wraith")
                 {
-<<<<<<< HEAD
                     foreach (Transform TPanel in MenuCanvasPanel.transform)
                     {
                         if (TPanel.tag != "Wraith")
@@ -112,7 +108,6 @@ public class Switch_Canvas : MonoBehaviour {
                         }
                     }
                     MenuCanvasPanel.transform.Find("Minion_Canvas").gameObject.SetActive(true);
-=======
                     necroInterface.SetActive(false);
                     minionInterface.SetActive(true);
                     skelImage.SetActive(false);
@@ -124,7 +119,6 @@ public class Switch_Canvas : MonoBehaviour {
                     minionInterface.SetActive(true);
                     wraithImage.SetActive(false);
                     skelImage.SetActive(true);
->>>>>>> dev_Rob
                 }
             }
        }
