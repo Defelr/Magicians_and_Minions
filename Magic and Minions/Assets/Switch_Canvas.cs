@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Switch_Canvas : MonoBehaviour {
 
-    public GameObject necroCanvas;
-    public GameObject minionCanvas;
+    public GameObject necroInterface;
+    public GameObject minionInterface;
     public GameObject wraithImage;
     public GameObject skelImage;
 
@@ -34,7 +34,7 @@ public class Switch_Canvas : MonoBehaviour {
                 LM = player2;
             }
             RaycastHit hitInfo = new RaycastHit();
-                if (Physics.Raycast(DDOL.instance.currentCamera.ScreenPointToRay(Input.mousePosition), out hitInfo, Mathf.Infinity, LM))
+            if (Physics.Raycast(DDOL.instance.currentCamera.ScreenPointToRay(Input.mousePosition), out hitInfo, Mathf.Infinity, LM))
             {
                 int temp_x = -1, temp_y =-1;
                 for(int i = 0; i < DDOL.instance.x; i++)
@@ -50,8 +50,8 @@ public class Switch_Canvas : MonoBehaviour {
                 }
                 if (hitInfo.transform.gameObject.tag == "Necro")
                 {
-                    minionCanvas.SetActive(false);
-                    necroCanvas.SetActive (true);
+                    minionInterface.SetActive(false);
+                    necroInterface.SetActive (true);
                     wraithImage.SetActive(false);
                     skelImage.SetActive(false);
                     necroMana.text = DDOL.instance.Coords[temp_x][temp_y].D.MANA.ToString();
@@ -61,15 +61,15 @@ public class Switch_Canvas : MonoBehaviour {
                 } 
                 if (hitInfo.transform.gameObject.tag == "Wraith" && DDOL.instance.currentObject.tag == "Wraith" )
                 {
-                    necroCanvas.SetActive(false);
-                    minionCanvas.SetActive(true);
+                    necroInterface.SetActive(false);
+                    minionInterface.SetActive(true);
                     skelImage.SetActive(false);
                    wraithImage.SetActive(true);
                 }
                 else if (hitInfo.transform.gameObject.tag == "Skeleton" && DDOL.instance.currentObject.tag == "Skeleton")
                 {
-                    necroCanvas.SetActive(false);
-                    minionCanvas.SetActive(true);
+                    necroInterface.SetActive(false);
+                    minionInterface.SetActive(true);
                     wraithImage.SetActive(false);
                     skelImage.SetActive(true);
                 }
