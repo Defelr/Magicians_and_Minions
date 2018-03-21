@@ -23,3 +23,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/Sprint2.unity
     guid: d16374893e552964c80f78b28f4a09c3
+  - enabled: 1
+    path: Assets/_Scenes/Character_Selection.unity
+    guid: 2b9c123a77d952c4e853697f1cb94467
