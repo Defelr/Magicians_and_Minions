@@ -64,8 +64,6 @@ public class DDOL : MonoBehaviour
 
     public string option = "";
 
-    public GameObject SystemEvent;
-
     public void End_Turn()
     {
         if (turn % 2 == 0)
@@ -83,10 +81,7 @@ public class DDOL : MonoBehaviour
         DDOL.instance.turn++;
 
     }
-    public void ClearUI()
-    {
-        SystemEvent.GetComponent<Switch_Canvas>().Clear();
-    }
+
     public void Start()
     {
         currentObject = null;
@@ -156,7 +151,6 @@ public class DDOL : MonoBehaviour
             Renderer R = c.GetComponent<Renderer>();
             R.enabled = false;
         }
-        ClearUI();
     }
     public void ShowSpaces()
     {

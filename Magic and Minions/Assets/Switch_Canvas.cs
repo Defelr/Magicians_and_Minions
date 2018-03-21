@@ -5,27 +5,18 @@ using UnityEngine;
 
 public class Switch_Canvas : MonoBehaviour {
 
-    public GameObject necroCanvas;
-    public GameObject minionCanvas;
+    public GameObject necroInterface;
+    public GameObject minionInterface;
     public GameObject wraithImage;
     public GameObject skelImage;
 
-    public GameObject MenuCanvasPanel;
-
-    public Text necroMana;
-    public Text necroHP;
+    //public Text necroMana;
+    //public Text necroHP;
 
     public LayerMask player1;
     public LayerMask player2;
     private LayerMask LM;   
 
-   public void Clear()
-    {
-        foreach (Transform TPanel in MenuCanvasPanel.transform)
-        {
-            TPanel.gameObject.SetActive(false);
-        }
-    }
 	// Use this for initialization
 	void Start () {
 		
@@ -59,51 +50,28 @@ public class Switch_Canvas : MonoBehaviour {
                 }
                 if (hitInfo.transform.gameObject.tag == "Necro")
                 {
-                    foreach(Transform TPanel in MenuCanvasPanel.transform)
-                    {
-                        if(TPanel.tag != "Necro")
-                        {
-                            TPanel.gameObject.SetActive(false);
-                        }
-                        else
-                        {
-                            TPanel.gameObject.SetActive(true);
-                        }
-                    }
-                    necroMana.text = DDOL.instance.Coords[temp_x][temp_y].D.MANA.ToString();
-                    necroHP.text = DDOL.instance.Coords[temp_x][temp_y].D.HP.ToString();
+                    minionInterface.SetActive(false);
+                    necroInterface.SetActive (true);
+                    wraithImage.SetActive(false);
+                    skelImage.SetActive(false);
+                    //necroMana.text = DDOL.instance.Coords[temp_x][temp_y].D.MANA.ToString();
+                    //necroHP.text = DDOL.instance.Coords[temp_x][temp_y].D.HP.ToString();
 
 
                 } 
-                if (hitInfo.transform.gameObject.tag == "Wraith")
+                if (hitInfo.transform.gameObject.tag == "Wraith" && DDOL.instance.currentObject.tag == "Wraith" )
                 {
-                    foreach (Transform TPanel in MenuCanvasPanel.transform)
-                    {
-                        if (TPanel.tag != "Wraith")
-                        {
-                            TPanel.gameObject.SetActive(false);
-                        }
-                        else
-                        {
-                            TPanel.gameObject.SetActive(true);
-                        }
-                    }
-                    MenuCanvasPanel.transform.Find("Minion_Canvas").gameObject.SetActive(true);
+                    necroInterface.SetActive(false);
+                    minionInterface.SetActive(true);
+                    skelImage.SetActive(false);
+                   wraithImage.SetActive(true);
                 }
                 else if (hitInfo.transform.gameObject.tag == "Skeleton" && DDOL.instance.currentObject.tag == "Skeleton")
                 {
-                    foreach (Transform TPanel in MenuCanvasPanel.transform)
-                    {
-                        if (TPanel.tag != "Skeleton")
-                        {
-                            TPanel.gameObject.SetActive(false);
-                        }
-                        else
-                        {
-                            TPanel.gameObject.SetActive(true);
-                        }
-                    }
-                    MenuCanvasPanel.transform.Find("Minion_Canvas").gameObject.SetActive(true);
+                    necroInterface.SetActive(false);
+                    minionInterface.SetActive(true);
+                    wraithImage.SetActive(false);
+                    skelImage.SetActive(true);
                 }
             }
        }
