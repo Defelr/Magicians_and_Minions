@@ -10,8 +10,8 @@ public class Switch_Canvas : MonoBehaviour {
     public GameObject wraithImage;
     public GameObject skelImage;
 
-    public Text necroMana;
-    public Text necroHP;
+    //public Text necroMana;
+    //public Text necroHP;
 
     public LayerMask player1;
     public LayerMask player2;
@@ -54,8 +54,8 @@ public class Switch_Canvas : MonoBehaviour {
                     necroInterface.SetActive (true);
                     wraithImage.SetActive(false);
                     skelImage.SetActive(false);
-                    necroMana.text = DDOL.instance.Coords[temp_x][temp_y].D.MANA.ToString();
-                    necroHP.text = DDOL.instance.Coords[temp_x][temp_y].D.HP.ToString();
+                    //necroMana.text = DDOL.instance.Coords[temp_x][temp_y].D.MANA.ToString();
+                    //necroHP.text = DDOL.instance.Coords[temp_x][temp_y].D.HP.ToString();
 
 
                 } 
