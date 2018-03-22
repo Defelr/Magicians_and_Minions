@@ -6,10 +6,21 @@ public class MouseDetect : MonoBehaviour
 {
     public int HP;
     public int DMG;
+    public int Mana;
+
+    public int Movement_c; //AMOUNT OF TIMES THEY CAN MOVE
+    public int Attack_c;  //AMOUNT OF TIMES THEY CAN ATTACK
+
+    public int Moves;//Amount of times moved/attacked
+    public int Attacks;
+
+
 
     // Use this for initialization
     void Start()
     {
+        Moves = Movement_c;
+        Attacks = Attack_c;
     }
     // Update is called once per frame
     void Update()
@@ -36,44 +47,10 @@ public class MouseDetect : MonoBehaviour
                         if(DDOL.instance.TeamFinder(DDOL.instance.currentObject) != DDOL.instance.TeamFinder(this.gameObject))
                         {
                             this.GetComponent<MouseDetect>().DamageHP(DDOL.instance.currentObject.GetComponent<MouseDetect>().DMG);
+                            DDOL.instance.option = "";
                             return;
                         }
                     }
-                }
-            }
-            else
-            {
-                GameObject grid_B = GameObject.Find("Grid_Board");
-                DDOL.instance.ClearSpaces();
-                foreach (Transform child in grid_B.transform)
-                {
-                    Collider col = child.GetComponent<Collider>();
-                    Collider thiscol = this.GetComponent<Collider>();
-                    if (col.bounds.Intersects(thiscol.bounds))
-                    {
-                        for (int i = 0; i < DDOL.instance.x; i++)
-                        {
-                            for (int j = 0; j < DDOL.instance.x; j++)
-                            {
-                                Debug.Log("Mouse Down");
-                                Debug.Log(DDOL.instance.Coords[i][j].location.gameObject.name);
-                                Debug.Log(col.gameObject.name);
-                                if (DDOL.instance.Coords[i][j].location.gameObject.name == col.gameObject.name)
-                                {
-                                    if ((DDOL.instance.player == 0 || DDOL.instance.player == 1) && DDOL.instance.player == DDOL.instance.Coords[i][j].Team)
-                                    {
-                                        Debug.Log("IN ID ADDER");
-                                        Debug.Log(this.gameObject.layer.ToString());
-                                        DDOL.instance.Coords[i][j] = DDOL.instance.SetObject(this.gameObject.GetInstanceID(), 1, DDOL.instance.Coords[i][j].D, this.gameObject, DDOL.instance.Coords[i][j].location);
-                                        Debug.Log(this.gameObject.GetInstanceID());
-                                        Debug.Log(DDOL.instance.Coords[i][j].ID);
-                                        return;
-                                    }
-                                }
-                            }
-                        }
-                    }
-
                 }
             }
         }
@@ -105,7 +82,8 @@ public class MouseDetect : MonoBehaviour
         spaces = DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
         if (spaces.Count <= 0)
         {
-            Debug.Log("Can't Move");
+            Debug.Log("Can't Attack Anyone");
+            DDOL.instance.option = "";
         }
         else
         {

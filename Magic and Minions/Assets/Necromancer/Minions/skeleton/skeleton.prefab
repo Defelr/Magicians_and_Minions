@@ -198,6 +198,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HP: 5
   DMG: 2
+  Mana: 0
+  Movement_c: 0
+  Attack_c: 0
+  Moves: 0
+  Attacks: 0
 --- !u!136 &136043227514003692
 CapsuleCollider:
   m_ObjectHideFlags: 1

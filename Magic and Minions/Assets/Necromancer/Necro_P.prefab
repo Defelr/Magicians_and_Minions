@@ -633,6 +633,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HP: 0
   DMG: 0
+  Mana: 0
+  Movement_c: 0
+  Attack_c: 0
+  Moves: 0
+  Attacks: 0
 --- !u!114 &114232576236218498
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -646,6 +651,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HP: 20
   DMG: 0
+  Mana: 0
+  Movement_c: 0
+  Attack_c: 0
+  Moves: 0
+  Attacks: 0
 --- !u!114 &114588284729658244
 MonoBehaviour:
   m_ObjectHideFlags: 1
