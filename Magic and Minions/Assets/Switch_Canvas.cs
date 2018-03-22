@@ -12,6 +12,7 @@ public class Switch_Canvas : MonoBehaviour {
 
     //public Text necroMana;
     //public Text necroHP;
+    public GameObject MenuCanvasPanel;
 
     public LayerMask player1;
     public LayerMask player2;
@@ -21,6 +22,14 @@ public class Switch_Canvas : MonoBehaviour {
 	void Start () {
 		
 	}
+
+    public void Clear()
+    {
+        foreach(Transform TPanel in MenuCanvasPanel.transform)
+        {
+            TPanel.gameObject.SetActive(false);
+        }
+    }
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetMouseButtonDown(0))
@@ -50,10 +59,17 @@ public class Switch_Canvas : MonoBehaviour {
                 }
                 if (hitInfo.transform.gameObject.tag == "Necro")
                 {
-                    minionInterface.SetActive(false);
-                    necroInterface.SetActive (true);
-                    wraithImage.SetActive(false);
-                    skelImage.SetActive(false);
+                    foreach (Transform TPanel in MenuCanvasPanel.transform)
+                    {
+                        if(TPanel.tag != "Necro")
+                        {
+                            TPanel.gameObject.SetActive(false);
+                        }
+                        else
+                        {
+                            TPanel.gameObject.SetActive(true);
+                        }
+                    }
                     //necroMana.text = DDOL.instance.Coords[temp_x][temp_y].D.MANA.ToString();
                     //necroHP.text = DDOL.instance.Coords[temp_x][temp_y].D.HP.ToString();
 

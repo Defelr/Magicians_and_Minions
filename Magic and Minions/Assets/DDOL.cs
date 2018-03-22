@@ -13,12 +13,13 @@ public struct Data
 }
 public struct Coordinates
 {
-    public int ID, status;// 0 == empty, 1 == occupied, there might be more
+    public int ID, status, Team;// 0 == empty, 1 == occupied, there might be more
     public GameObject G, location;
     public Data D;
 
-    public Coordinates(int ID1, int S, GameObject G1, Data D1, GameObject L1)
+    public Coordinates(int ID1, int S, int TEAM, GameObject G1, Data D1, GameObject L1)
     {
+        Team = TEAM;
         ID = ID1;
         status = S;
         G = G1;
@@ -64,6 +65,7 @@ public class DDOL : MonoBehaviour
 
     public string option = "";
 
+    public GameObject SystemEvent;
     public void End_Turn()
     {
         if (turn % 2 == 0)
@@ -79,7 +81,12 @@ public class DDOL : MonoBehaviour
             currentCamera = First;
         }
         DDOL.instance.turn++;
+        ClearUI();
 
+    }
+    public void ClearUI()
+    {
+        SystemEvent.GetComponent<Switch_Canvas>().Clear();
     }
 
     public void Start()
@@ -96,7 +103,7 @@ public class DDOL : MonoBehaviour
         {
             for (int j = 0; j < x; j++)
             {
-                Coord = new Coordinates(-1, 0, null, player1_d, locations[i][j]);
+                Coord = new Coordinates(-1, 0, -1, null, player1_d, locations[i][j]);
                 Coords[i].Add(Coord);
             }
         }
@@ -106,7 +113,7 @@ public class DDOL : MonoBehaviour
         Instantiate(StartingC, vx, new_p.transform.rotation);
         StartingC.gameObject.layer = LayerMask.NameToLayer("Player1");
         player1_d = new Data(20, -1, 10); //HARD CODED
-        Coords[0][0] = new Coordinates(StartingC.GetInstanceID(), 1, StartingC, player1_d, Coords[0][0].location);
+        Coords[0][0] = new Coordinates(StartingC.GetInstanceID(), 1, 0, StartingC, player1_d, Coords[0][0].location);
 
         StartingC2.transform.localScale = new Vector3(1F, 1F, 1F);
         new_p = Coords[x-1][x-1].location;
@@ -114,7 +121,7 @@ public class DDOL : MonoBehaviour
         Instantiate(StartingC2, vx, new_p.transform.rotation);
         StartingC2.gameObject.layer = LayerMask.NameToLayer("Player2");
         player2_d = new Data(20, -1, 10); //HARD CODED
-        Coords[x-1][x-1] = new Coordinates(StartingC2.GetInstanceID(), 1, StartingC2, player2_d, Coords[x-1][x-1].location);
+        Coords[x-1][x-1] = new Coordinates(StartingC2.GetInstanceID(), 1, 1, StartingC2, player2_d, Coords[x-1][x-1].location);
     }
     public void Update()
     {
@@ -133,7 +140,7 @@ public class DDOL : MonoBehaviour
 
         currentObject = CO;
         currentObjectL = COL;
-        Coord = new Coordinates(ID, Status, CO, d, COL);
+        Coord = new Coordinates(ID, Status, player, CO, d, COL);
         return Coord;
     }
     public void MouseDown()
@@ -178,6 +185,21 @@ public class DDOL : MonoBehaviour
             }
         }
         return l;
+    }
+    //Returns the team the character belongs too
+    public int TeamFinder(GameObject finding)
+    {
+        for (int i = 0; i < DDOL.instance.x; i++)
+        {
+            for (int j = 0; j < DDOL.instance.x; j++)
+            {
+                if(Coords[i][j].ID == finding.GetInstanceID())
+                {
+                    return Coords[i][j].Team;
+                }
+            }
+        }
+        return -1;
     }
     //MOVEMENT
     public List<GameObject> SpaceLocation(int r, int ID)
@@ -306,7 +328,7 @@ public class DDOL : MonoBehaviour
                     {
                         summon.gameObject.layer = LayerMask.NameToLayer("Player2");
                     }
-                    Coords[i][j] = new Coordinates(summon.GetInstanceID(), 1, summon, minionD, Coords[i][j].location);
+                    Coords[i][j] = new Coordinates(summon.GetInstanceID(), 1, player, summon, minionD, Coords[i][j].location);
                 }
             }
         }
@@ -332,7 +354,7 @@ public class DDOL : MonoBehaviour
                 if (Coords[i][j].ID == currentObject.GetInstanceID())
                 {
                     temp_d = Coords[i][j].D;
-                    Coords[i][j] = new Coordinates(-1, 0, null, new Data(0,0,0), Coords[i][j].location);
+                    Coords[i][j] = new Coordinates(-1, 0, -1, null, new Data(0,0,0), Coords[i][j].location);
                 }
             }
         }
@@ -342,7 +364,7 @@ public class DDOL : MonoBehaviour
             {
                 if (Coords[i][j].location == new_p.gameObject)
                 {
-                    Coords[i][j] = new Coordinates(currentObject.GetInstanceID(), 1, currentObject, temp_d, Coords[i][j].location);
+                    Coords[i][j] = new Coordinates(currentObject.GetInstanceID(), 1, player, currentObject, temp_d, Coords[i][j].location);
                 }
             }
         }
