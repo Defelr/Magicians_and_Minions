@@ -66,6 +66,10 @@ public class DDOL : MonoBehaviour
     public string option = "";
 
     public GameObject SystemEvent;
+
+    //FOR BlockChoice
+    public Material G_Color;
+    public Material Gr_Color;
     public void End_Turn()
     {
         if (turn % 2 == 0)
@@ -110,18 +114,18 @@ public class DDOL : MonoBehaviour
         StartingC.transform.localScale = new Vector3(1F, 1F, 1F);
         GameObject new_p = Coords[0][0].location;
         Vector3 vx = new Vector3(new_p.transform.position.x, 5.5F, new_p.transform.position.z);
-        Instantiate(StartingC, vx, new_p.transform.rotation);
+        GameObject IC = (GameObject)Instantiate(StartingC, vx, new_p.transform.rotation);
         StartingC.gameObject.layer = LayerMask.NameToLayer("Player1");
         player1_d = new Data(20, -1, 10); //HARD CODED
-        Coords[0][0] = new Coordinates(StartingC.GetInstanceID(), 1, 0, StartingC, player1_d, Coords[0][0].location);
+        Coords[0][0] = new Coordinates(IC.GetInstanceID(), 1, 0, IC, player1_d, Coords[0][0].location);
 
         StartingC2.transform.localScale = new Vector3(1F, 1F, 1F);
         new_p = Coords[x-1][x-1].location;
         vx = new Vector3(new_p.transform.position.x, 6.047379F, new_p.transform.position.z);
-        Instantiate(StartingC2, vx, new_p.transform.rotation);
+        GameObject IC2 = (GameObject)Instantiate(StartingC2, vx, new_p.transform.rotation);
         StartingC2.gameObject.layer = LayerMask.NameToLayer("Player2");
         player2_d = new Data(20, -1, 10); //HARD CODED
-        Coords[x-1][x-1] = new Coordinates(StartingC2.GetInstanceID(), 1, 1, StartingC2, player2_d, Coords[x-1][x-1].location);
+        Coords[x-1][x-1] = new Coordinates(IC2.GetInstanceID(), 1, 1, IC2, player2_d, Coords[x-1][x-1].location);
     }
     public void Update()
     {
@@ -158,6 +162,7 @@ public class DDOL : MonoBehaviour
             Renderer R = c.GetComponent<Renderer>();
             R.enabled = false;
         }
+        spaces.Clear();
     }
     public void ShowSpaces()
     {
@@ -189,9 +194,9 @@ public class DDOL : MonoBehaviour
     //Returns the team the character belongs too
     public int TeamFinder(GameObject finding)
     {
-        for (int i = 0; i < DDOL.instance.x; i++)
+        for (int i = 0; i < x; i++)
         {
-            for (int j = 0; j < DDOL.instance.x; j++)
+            for (int j = 0; j < x; j++)
             {
                 if(Coords[i][j].ID == finding.GetInstanceID())
                 {
@@ -313,7 +318,7 @@ public class DDOL : MonoBehaviour
        Debug.Log(temp_x);
         summon.transform.localScale = new Vector3(10F, 10F, 10F);
 
-        Instantiate(summon, vx, new_p.transform.rotation);
+        GameObject ICS = (GameObject)Instantiate(summon, vx, new_p.transform.rotation);
         for (int i = 0; i < x; i++)
         {
             for (int j = 0; j < x; j++)
@@ -328,7 +333,7 @@ public class DDOL : MonoBehaviour
                     {
                         summon.gameObject.layer = LayerMask.NameToLayer("Player2");
                     }
-                    Coords[i][j] = new Coordinates(summon.GetInstanceID(), 1, player, summon, minionD, Coords[i][j].location);
+                    Coords[i][j] = new Coordinates(ICS.GetInstanceID(), 1, player, ICS, minionD, Coords[i][j].location);
                 }
             }
         }
@@ -373,6 +378,5 @@ public class DDOL : MonoBehaviour
         Collider colp = currentObject.GetComponent<Collider>();
         colp.isTrigger = true;
         col.isTrigger = false;
-        spaces.Clear();
     }
 }

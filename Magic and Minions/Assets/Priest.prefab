@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114292934071668654}
   m_Layer: 9
   m_Name: Priest
-  m_TagString: Untagged
+  m_TagString: Paladin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e64afda0fb5d1d49b0c620c01c77f3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 20
+  HP: 4
   DMG: 0
   Mana: 0
   Movement_c: 0

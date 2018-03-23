@@ -21,6 +21,17 @@ public class MouseDetect : MonoBehaviour
     {
         Moves = Movement_c;
         Attacks = Attack_c;
+        if(this.tag == "Necro")
+        {
+            HP = 20;
+            DMG = 0;
+            Mana = 10;
+        }else if (this. tag == "Paladin")
+        {
+            HP = 20;
+            DMG = 0;
+            Mana = 10;
+        }
     }
     // Update is called once per frame
     void Update()
@@ -36,24 +47,45 @@ public class MouseDetect : MonoBehaviour
     }
     public void OnMouseOver()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (DDOL.instance.option == "attack")
         {
-            if (DDOL.instance.option == "attack")
+            for (int i = 0; i < DDOL.instance.x; i++)
             {
-                for (int i = 0; i < DDOL.instance.x; i++)
+                for(int j = 0; j < DDOL.instance.x; j++)
                 {
-                    for (int j = 0; j < DDOL.instance.x; j++)
+                    if(DDOL.instance.Coords[i][j].ID == this.gameObject.GetInstanceID())
                     {
-                        if(DDOL.instance.TeamFinder(DDOL.instance.currentObject) != DDOL.instance.TeamFinder(this.gameObject))
-                        {
-                            this.GetComponent<MouseDetect>().DamageHP(DDOL.instance.currentObject.GetComponent<MouseDetect>().DMG);
-                            DDOL.instance.option = "";
-                            return;
-                        }
+                        DDOL.instance.Coords[i][j].location.gameObject.GetComponent<Renderer>().material = DDOL.instance.G_Color;
                     }
                 }
             }
         }
+    }
+    public void OnMouseExit()
+    {
+        for (int i = 0; i < DDOL.instance.x; i++)
+        {
+            for (int j = 0; j < DDOL.instance.x; j++)
+            {
+                if (DDOL.instance.Coords[i][j].G == this.gameObject)
+                {
+                    DDOL.instance.Coords[i][j].location.gameObject.GetComponent<Renderer>().material = DDOL.instance.Gr_Color;
+                }
+            }
+        }
+    }
+    public void OnMouseDown()
+    {
+            if (DDOL.instance.option == "attack")
+            {
+               if(DDOL.instance.TeamFinder(DDOL.instance.currentObject) != DDOL.instance.TeamFinder(this.gameObject))
+                        {
+                            this.GetComponent<MouseDetect>().DamageHP(DDOL.instance.currentObject.GetComponent<MouseDetect>().DMG);
+                            DDOL.instance.option = "";
+                            DDOL.instance.ClearSpaces();
+                            return;
+                        }
+            }
     }
     public void Move()
     {
