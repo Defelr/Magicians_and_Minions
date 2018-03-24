@@ -317,10 +317,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 5
-  DMG: 2
+  DMG: 1
   Mana: 0
   Movement_c: 0
-  Attack_c: 0
+  Attack_c: 2
   Moves: 0
   Attacks: 0
 --- !u!136 &136697752383959024

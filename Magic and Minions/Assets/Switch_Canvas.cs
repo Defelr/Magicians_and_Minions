@@ -70,10 +70,6 @@ public class Switch_Canvas : MonoBehaviour {
                             TPanel.gameObject.SetActive(true);
                         }
                     }
-                    //necroMana.text = DDOL.instance.Coords[temp_x][temp_y].D.MANA.ToString();
-                    //necroHP.text = DDOL.instance.Coords[temp_x][temp_y].D.HP.ToString();
-
-
                 }
                 else if (hitInfo.transform.gameObject.tag == "Wraith" && DDOL.instance.currentObject.tag == "Wraith")
                 {
@@ -88,6 +84,20 @@ public class Switch_Canvas : MonoBehaviour {
                     minionInterface.SetActive(true);
                     wraithImage.SetActive(false);
                     skelImage.SetActive(true);
+                }
+                else if (hitInfo.transform.gameObject.tag == "Paladin")
+                {
+                    foreach (Transform TPanel in MenuCanvasPanel.transform)
+                    {
+                        if (TPanel.tag != "Paladin")
+                        {
+                            TPanel.gameObject.SetActive(false);
+                        }
+                        else
+                        {
+                            TPanel.gameObject.SetActive(true);
+                        }
+                    }
                 }
                 else
                 {
@@ -114,7 +124,7 @@ public class Switch_Canvas : MonoBehaviour {
                                     {
                                         Debug.Log("IN ID ADDER");
                                         Debug.Log(hitInfo.transform.gameObject.layer.ToString());
-                                        DDOL.instance.Coords[i][j] = DDOL.instance.SetObject(hitInfo.transform.gameObject.GetInstanceID(), 1, DDOL.instance.Coords[i][j].D, hitInfo.transform.gameObject, DDOL.instance.Coords[i][j].location);
+                                        DDOL.instance.SetObject(hitInfo.transform.gameObject.GetInstanceID(), 1, DDOL.instance.Coords[i][j].D, hitInfo.transform.gameObject, DDOL.instance.Coords[i][j].location);
                                         Debug.Log(hitInfo.transform.gameObject.GetInstanceID());
                                         Debug.Log(DDOL.instance.Coords[i][j].ID);
                                         return;

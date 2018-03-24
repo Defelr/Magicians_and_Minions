@@ -19,18 +19,22 @@ public class MouseDetect : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Moves = Movement_c;
-        Attacks = Attack_c;
+        Moves = 0;
+        Attacks = 0;
         if(this.tag == "Necro")
         {
             HP = 20;
             DMG = 0;
             Mana = 10;
+            Movement_c = 1;
+            Attack_c = 0;
         }else if (this. tag == "Paladin")
         {
             HP = 20;
             DMG = 0;
             Mana = 10;
+            Movement_c = 1;
+            Attack_c = 0;
         }
     }
     // Update is called once per frame
@@ -89,22 +93,24 @@ public class MouseDetect : MonoBehaviour
     }
     public void Move()
     {
-        Debug.Log("Start");
-        List<GameObject> spaces = new List<GameObject>();
-        DDOL.instance.option = "move";
-        spaces = DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
-        if (spaces.Count <= 0)
-        {
-            Debug.Log("Can't Move");
-        }
-        else
-        {
-            foreach (GameObject c in spaces)
+        Debug.Log("MOVE: " + Moves);
+            Debug.Log("Start");
+            List<GameObject> spaces = new List<GameObject>();
+            DDOL.instance.option = "move";
+            spaces = DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
+            if (spaces.Count <= 0)
             {
-                Renderer R = c.GetComponent<Renderer>();
-                R.enabled = true;
+                Debug.Log("Can't Move");
+                spaces.Clear();
             }
-        }
+            else
+            {
+                foreach (GameObject c in spaces)
+                {
+                    Renderer R = c.GetComponent<Renderer>();
+                    R.enabled = true; 
+                }
+            }
     }
     public void Attack()
     {

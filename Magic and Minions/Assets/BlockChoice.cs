@@ -44,6 +44,7 @@ public class BlockChoice : MonoBehaviour
             if (DDOL.instance.option == "move")
             {
                 Debug.Log("You can move Here!");
+                DDOL.instance.currentObject.GetComponent<MouseDetect>().Moves++;
                 DDOL.instance.MoveCharacter(transform);
             }
             if(DDOL.instance.option == "attack")

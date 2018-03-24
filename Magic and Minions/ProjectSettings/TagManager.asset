@@ -12,6 +12,7 @@ TagManager:
   - Skeleton
   - P2
   - Paladin
+  - GreatSpirit
   layers:
   - Default
   - TransparentFX

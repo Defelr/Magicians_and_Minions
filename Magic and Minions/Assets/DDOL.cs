@@ -139,13 +139,11 @@ public class DDOL : MonoBehaviour
         else if (instance != this)
             DontDestroyOnLoad(gameObject);
     }
-    public Coordinates SetObject(int ID, int Status, Data d, GameObject CO, GameObject COL)
+    public void SetObject(int ID, int Status, Data d, GameObject CO, GameObject COL)
     {
 
         currentObject = CO;
         currentObjectL = COL;
-        Coord = new Coordinates(ID, Status, player, CO, d, COL);
-        return Coord;
     }
     public void MouseDown()
     {
@@ -296,27 +294,32 @@ public class DDOL : MonoBehaviour
         }
         Debug.Log(StartingC.gameObject.name);
         Debug.Log(StartingC2.gameObject.name);
-        Vector3 vx;
+        Vector3 vx = new Vector3(new_p.transform.position.x, new_p.transform.position.y, new_p.transform.position.z);
         Data minionD = new Data(0, 0, 0);
         Data MagicianM = new Data(0, 0, 0);
-       
-            if (summon.gameObject.name == "wraith")
-            {
-                vx = new Vector3(new_p.transform.position.x, 6.48F, new_p.transform.position.z);
-                minionD = new Data(4, 2, -1);//TEMP DATA
-               // MagicianM = new Data(Coords[temp_x][temp_y].D.HP, Coords[temp_x][temp_y].D.DMG, Coords[temp_x][temp_y].D.MANA - 3);
-                //   Coords[temp_x][temp_y] = new Coordinates(Coords[temp_x][temp_y].ID, 1, Coords[temp_x][temp_y].G, MagicianM, Coords[temp_x][temp_y].location);//3 is the cost of the minion
-            }
-            else
-            {
-                vx = new Vector3(new_p.transform.position.x, new_p.transform.position.y, new_p.transform.position.z);
-                minionD = new Data(2, 1, -1);//TEMP DATA
-                //MagicianM = new Data(Coords[temp_x][temp_y].D.HP, Coords[temp_x][temp_y].D.DMG, Coords[temp_x][temp_y].D.MANA - 1);
-                // Coords[temp_x][temp_y] = new Coordinates(Coords[temp_x][temp_y].ID, 1, Coords[temp_x][temp_y].G, MagicianM, Coords[temp_x][temp_y].location);//1 is the cost of the minion
-            }
+
+        if (summon.gameObject.tag == "Wraith")
+        {
+            vx = new Vector3(new_p.transform.position.x, 6.48F, new_p.transform.position.z);
+            //summon.transform.localScale = new Vector3(10F, 10F, 10F);
+            minionD = new Data(4, 2, -1);//TEMP DATA
+                                         // MagicianM = new Data(Coords[temp_x][temp_y].D.HP, Coords[temp_x][temp_y].D.DMG, Coords[temp_x][temp_y].D.MANA - 3);
+                                         //   Coords[temp_x][temp_y] = new Coordinates(Coords[temp_x][temp_y].ID, 1, Coords[temp_x][temp_y].G, MagicianM, Coords[temp_x][temp_y].location);//3 is the cost of the minion
+        }
+        else if (summon.gameObject.tag == "Skeleton")
+        {
+            vx = new Vector3(new_p.transform.position.x, new_p.transform.position.y, new_p.transform.position.z);
+            //summon.transform.localScale = new Vector3(10F, 10F, 10F);
+            minionD = new Data(2, 1, -1);//TEMP DATA
+                                         //MagicianM = new Data(Coords[temp_x][temp_y].D.HP, Coords[temp_x][temp_y].D.DMG, Coords[temp_x][temp_y].D.MANA - 1);
+                                         // Coords[temp_x][temp_y] = new Coordinates(Coords[temp_x][temp_y].ID, 1, Coords[temp_x][temp_y].G, MagicianM, Coords[temp_x][temp_y].location);//1 is the cost of the minion
+        }
+        else if (summon.gameObject.tag == "GreatSpirit")
+        {
+            vx = new Vector3(new_p.transform.position.x, 6.019F, new_p.transform.position.z);
+        }
        Debug.Log(temp_y);
        Debug.Log(temp_x);
-        summon.transform.localScale = new Vector3(10F, 10F, 10F);
 
         GameObject ICS = (GameObject)Instantiate(summon, vx, new_p.transform.rotation);
         for (int i = 0; i < x; i++)
