@@ -56,9 +56,26 @@ public class BlockChoice : MonoBehaviour
                         if (DDOL.instance.Coords[i][j].location == this.gameObject)
                         {
                             Debug.Log(DDOL.instance.Coords[i][j].G);
-                            DDOL.instance.Coords[i][j].G.GetComponent<MouseDetect>().DamageHP(DDOL.instance.currentObject.GetComponent<MouseDetect>().DMG);
+                            if (DDOL.instance.spell == "Unlife")
+                            {
+                                if(DDOL.instance.Coords[i][j].G.GetComponent<MouseDetect>().HP - 2 <= 0)
+                                {
+                                    DDOL.instance.summon = DDOL.instance.IC.GetComponent<Magician_N>().Skeleton;
+                                    DDOL.instance.SummonPawn(this.transform);
+
+                                    Debug.Log("IT WORKED");
+                                }
+                                DDOL.instance.Coords[i][j].G.GetComponent<MouseDetect>().DamageHP(2);
+
+                            }
+                            else
+                            {
+                                DDOL.instance.Coords[i][j].G.GetComponent<MouseDetect>().DamageHP(DDOL.instance.currentObject.GetComponent<MouseDetect>().DMG);
+                            }
                             DDOL.instance.option = "";
+                            DDOL.instance.spell = "";
                             DDOL.instance.ClearSpaces();
+                            
                             return;
                         }
                     }

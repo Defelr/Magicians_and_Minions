@@ -196,11 +196,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e64afda0fb5d1d49b0c620c01c77f3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 5
-  DMG: 2
-  Mana: 0
-  Movement_c: 0
-  Attack_c: 0
+  HP: 3
+  DMG: 1
+  Mana: -1
+  Cost: 2
+  Movement_c: 1
+  Attack_c: 1
   Moves: 0
   Attacks: 0
 --- !u!136 &136043227514003692

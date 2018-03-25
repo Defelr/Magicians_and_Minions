@@ -54,6 +54,10 @@ public class DDOL : MonoBehaviour
 
     public GameObject StartingC;
     public GameObject StartingC2;
+    public Transform SC;
+    public Transform SC2;
+    public GameObject IC;
+    public GameObject IC2;
 
     private Data player1_d = new Data(0,0,0);
     private Data player2_d;
@@ -64,12 +68,15 @@ public class DDOL : MonoBehaviour
     public GameObject summon;
 
     public string option = "";
+    //Spells
+    public string spell;
 
     public GameObject SystemEvent;
 
     //FOR BlockChoice
     public Material G_Color;
     public Material Gr_Color;
+
     public void End_Turn()
     {
         if (turn % 2 == 0)
@@ -77,12 +84,14 @@ public class DDOL : MonoBehaviour
             Second.enabled = true;
             First.enabled = false;
             currentCamera = Second;
+            IC.GetComponent<Magician_N>().ManaMechanic();
         }
         else
         {
             Second.enabled = false;
             First.enabled = true;
             currentCamera = First;
+            IC2.GetComponent<Magician_N>().ManaMechanic();
         }
         DDOL.instance.turn++;
         ClearUI();
@@ -114,18 +123,20 @@ public class DDOL : MonoBehaviour
         StartingC.transform.localScale = new Vector3(1F, 1F, 1F);
         GameObject new_p = Coords[0][0].location;
         Vector3 vx = new Vector3(new_p.transform.position.x, 5.5F, new_p.transform.position.z);
-        GameObject IC = (GameObject)Instantiate(StartingC, vx, new_p.transform.rotation);
+        IC = (GameObject)Instantiate(StartingC, vx, new_p.transform.rotation);
         StartingC.gameObject.layer = LayerMask.NameToLayer("Player1");
         player1_d = new Data(20, -1, 10); //HARD CODED
         Coords[0][0] = new Coordinates(IC.GetInstanceID(), 1, 0, IC, player1_d, Coords[0][0].location);
+        IC.transform.parent = SC.gameObject.transform;
 
         StartingC2.transform.localScale = new Vector3(1F, 1F, 1F);
         new_p = Coords[x-1][x-1].location;
         vx = new Vector3(new_p.transform.position.x, 6.047379F, new_p.transform.position.z);
-        GameObject IC2 = (GameObject)Instantiate(StartingC2, vx, new_p.transform.rotation);
+        IC2 = (GameObject)Instantiate(StartingC2, vx, new_p.transform.rotation);
         StartingC2.gameObject.layer = LayerMask.NameToLayer("Player2");
         player2_d = new Data(20, -1, 10); //HARD CODED
         Coords[x-1][x-1] = new Coordinates(IC2.GetInstanceID(), 1, 1, IC2, player2_d, Coords[x-1][x-1].location);
+        IC2.transform.parent = SC2.gameObject.transform;
     }
     public void Update()
     {
@@ -308,7 +319,7 @@ public class DDOL : MonoBehaviour
         }
         else if (summon.gameObject.tag == "Skeleton")
         {
-            vx = new Vector3(new_p.transform.position.x, new_p.transform.position.y, new_p.transform.position.z);
+            vx = new Vector3(new_p.transform.position.x, new_p.transform.position.y-.45F, new_p.transform.position.z);
             //summon.transform.localScale = new Vector3(10F, 10F, 10F);
             minionD = new Data(2, 1, -1);//TEMP DATA
                                          //MagicianM = new Data(Coords[temp_x][temp_y].D.HP, Coords[temp_x][temp_y].D.DMG, Coords[temp_x][temp_y].D.MANA - 1);
@@ -328,19 +339,23 @@ public class DDOL : MonoBehaviour
             {
                 if (Coords[i][j].location == new_p.gameObject)
                 {
-                    if (turn % 2 == 0)
+                    if (player == 0)
                     {
-                        summon.gameObject.layer = LayerMask.NameToLayer("Player1");
+                        ICS.gameObject.layer = LayerMask.NameToLayer("Player1");
+                        ICS.transform.parent = SC.transform;
                     }
                     else
                     {
-                        summon.gameObject.layer = LayerMask.NameToLayer("Player2");
+                        ICS.gameObject.layer = LayerMask.NameToLayer("Player2");
+                        ICS.transform.parent = SC2.transform;
                     }
                     Coords[i][j] = new Coordinates(ICS.GetInstanceID(), 1, player, ICS, minionD, Coords[i][j].location);
                 }
             }
         }
+        currentObject.gameObject.GetComponent<MouseDetect>().DiminishMana(ICS.gameObject.GetComponent<MouseDetect>().Cost);
         ClearSpaces();
+        summon = null;
         return;
     }
     public void MoveCharacter(Transform new_p)

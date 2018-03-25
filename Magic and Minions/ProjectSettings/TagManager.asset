@@ -13,6 +13,7 @@ TagManager:
   - P2
   - Paladin
   - GreatSpirit
+  - Player2
   layers:
   - Default
   - TransparentFX

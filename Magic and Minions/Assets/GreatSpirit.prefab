@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33679711352117028}
   - component: {fileID: 136010034810059752}
   - component: {fileID: 23873965202041682}
+  - component: {fileID: 114709722591382626}
   m_Layer: 9
   m_Name: GreatSpirit
   m_TagString: GreatSpirit
@@ -83,6 +84,25 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1839410023522890}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114709722591382626
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1839410023522890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e64afda0fb5d1d49b0c620c01c77f3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HP: 5
+  DMG: 2
+  Mana: -1
+  Cost: 2
+  Movement_c: 1
+  Attack_c: 1
+  Moves: 0
+  Attacks: 0
 --- !u!136 &136010034810059752
 CapsuleCollider:
   m_ObjectHideFlags: 1
