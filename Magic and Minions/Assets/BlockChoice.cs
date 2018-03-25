@@ -83,7 +83,6 @@ public class BlockChoice : MonoBehaviour
                     }
                 }
             }
-            C.isTrigger = true;
             DDOL.instance.option = "";
         }
     }
