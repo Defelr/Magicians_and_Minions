@@ -45,18 +45,6 @@ public class Switch_Canvas : MonoBehaviour {
             RaycastHit hitInfo = new RaycastHit();
             if (Physics.Raycast(DDOL.instance.currentCamera.ScreenPointToRay(Input.mousePosition), out hitInfo, Mathf.Infinity, LM))
             {
-                int temp_x = -1, temp_y = -1;
-                for (int i = 0; i < DDOL.instance.x; i++)
-                {
-                    for (int j = 0; j < DDOL.instance.x; j++)
-                    {
-                        if (DDOL.instance.Coords[i][j].ID == hitInfo.transform.gameObject.GetInstanceID())
-                        {
-                            temp_x = i;
-                            temp_y = j;
-                        }
-                    }
-                }
                 if (hitInfo.transform.gameObject.tag == "Necro")
                 {
                     foreach (Transform TPanel in MenuCanvasPanel.transform)
