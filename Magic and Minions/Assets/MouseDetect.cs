@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MouseDetect : MonoBehaviour
 {
+
     public int HP;
     public int DMG;
     public int Mana;
@@ -47,9 +48,11 @@ public class MouseDetect : MonoBehaviour
                         DDOL.instance.Coords[i][j] = new Coordinates(-1, 0, -1, null, DDOL.instance.locations[i][j]);
                         if(this.gameObject == DDOL.instance.IC.gameObject)
                         {
+                            HotseatWin.winVar = 2;
                             Debug.Log("PLAYER 2 WON");
                         }else if(this.gameObject == DDOL.instance.IC2.gameObject)
                         {
+                            HotseatWin.winVar = 1;
                             Debug.Log("PLAYER 1 WON");
                         }
                         Destroy(this.gameObject);
