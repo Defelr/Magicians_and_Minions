@@ -322,8 +322,8 @@ MonoBehaviour:
   Cost: 3
   Movement_c: 1
   Attack_c: 1
-  Moves: 0
-  Attacks: 0
+  Moves: 1
+  Attacks: 1
 --- !u!136 &136697752383959024
 CapsuleCollider:
   m_ObjectHideFlags: 1

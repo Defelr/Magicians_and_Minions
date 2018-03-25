@@ -124,7 +124,7 @@ public class Switch_Canvas : MonoBehaviour {
                                     {
                                         Debug.Log("IN ID ADDER");
                                         Debug.Log(hitInfo.transform.gameObject.layer.ToString());
-                                        DDOL.instance.SetObject(hitInfo.transform.gameObject.GetInstanceID(), 1, DDOL.instance.Coords[i][j].D, hitInfo.transform.gameObject, DDOL.instance.Coords[i][j].location);
+                                        DDOL.instance.SetObject(hitInfo.transform.gameObject.GetInstanceID(), 1, hitInfo.transform.gameObject, DDOL.instance.Coords[i][j].location);
                                         Debug.Log(hitInfo.transform.gameObject.GetInstanceID());
                                         Debug.Log(DDOL.instance.Coords[i][j].ID);
                                         return;

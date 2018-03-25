@@ -20,8 +20,17 @@ public class MouseDetect : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Moves = 0;
-        Attacks = 0;
+        //PLAYER 1 and PLAYER 2 can move, but anything the initially summon cannot until the next turn
+        if (DDOL.instance.IC.gameObject == this.gameObject || DDOL.instance.IC2.gameObject == this.gameObject)
+        {
+            Moves = 0;
+            Attacks = 0;
+        }
+        else
+        {
+            Moves = Movement_c;
+            Attacks = Attack_c;
+        }
 
     }
     // Update is called once per frame
@@ -29,8 +38,31 @@ public class MouseDetect : MonoBehaviour
     {
         if(HP <= 0)
         {
-            Destroy(this.gameObject);
+            for (int i = 0; i < DDOL.instance.x; i++)
+            {
+                for (int j = 0; j < DDOL.instance.x; j++)
+                {
+                    if(DDOL.instance.Coords[i][j].G == this.gameObject)
+                    {
+                        DDOL.instance.Coords[i][j] = new Coordinates(-1, 0, -1, null, DDOL.instance.locations[i][j]);
+                        if(this.gameObject == DDOL.instance.IC.gameObject)
+                        {
+                            Debug.Log("PLAYER 2 WON");
+                        }else if(this.gameObject == DDOL.instance.IC2.gameObject)
+                        {
+                            Debug.Log("PLAYER 1 WON");
+                        }
+                        Destroy(this.gameObject);
+                        return;
+                    }
+                }
+            }
         }
+    }
+    public void ResetV()
+    {
+        Moves = 0;
+        Attacks = 0;
     }
     public void DiminishMana(int ManaCost)
     {
@@ -93,6 +125,7 @@ public class MouseDetect : MonoBehaviour
                 else
                 {
                     this.GetComponent<MouseDetect>().DamageHP(DDOL.instance.currentObject.GetComponent<MouseDetect>().DMG);
+                    DDOL.instance.currentObject.GetComponent<MouseDetect>().Attacks++;
                 }
                 DDOL.instance.option = "";
                 DDOL.instance.spell = "";
@@ -108,14 +141,14 @@ public class MouseDetect : MonoBehaviour
             List<GameObject> spaces = new List<GameObject>();
             DDOL.instance.option = "move";
             spaces = DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
-            if (spaces.Count <= 0)
+            if (spaces.Count <= 0 || DDOL.instance.currentObject.GetComponent<MouseDetect>().Moves >= DDOL.instance.currentObject.GetComponent<MouseDetect>().Movement_c)
             {
                 Debug.Log("Can't Move");
                 spaces.Clear();
             }
             else
             {
-                foreach (GameObject c in spaces)
+            foreach (GameObject c in spaces)
                 {
                     Renderer R = c.GetComponent<Renderer>();
                     R.enabled = true; 
@@ -128,10 +161,11 @@ public class MouseDetect : MonoBehaviour
         List<GameObject> spaces = new List<GameObject>();
         DDOL.instance.option = "attack";
         spaces = DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
-        if (spaces.Count <= 0)
+        if (spaces.Count <= 0 || DDOL.instance.currentObject.GetComponent<MouseDetect>().Attacks >= DDOL.instance.currentObject.GetComponent<MouseDetect>().Attack_c)
         {
             Debug.Log("Can't Attack Anyone");
             DDOL.instance.option = "";
+            spaces.Clear();
         }
         else
         {

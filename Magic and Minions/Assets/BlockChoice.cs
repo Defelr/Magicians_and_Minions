@@ -61,7 +61,8 @@ public class BlockChoice : MonoBehaviour
                                 if(DDOL.instance.Coords[i][j].G.GetComponent<MouseDetect>().HP - 2 <= 0)
                                 {
                                     DDOL.instance.summon = DDOL.instance.IC.GetComponent<Magician_N>().Skeleton;
-                                    DDOL.instance.SummonPawn(this.transform);
+
+                                    DDOL.instance.SummonPawn(DDOL.instance.Coords[i][j].G.transform);
 
                                     Debug.Log("IT WORKED");
                                 }
@@ -71,6 +72,7 @@ public class BlockChoice : MonoBehaviour
                             else
                             {
                                 DDOL.instance.Coords[i][j].G.GetComponent<MouseDetect>().DamageHP(DDOL.instance.currentObject.GetComponent<MouseDetect>().DMG);
+                                DDOL.instance.currentObject.GetComponent<MouseDetect>().Attacks++;
                             }
                             DDOL.instance.option = "";
                             DDOL.instance.spell = "";

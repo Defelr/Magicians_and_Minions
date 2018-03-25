@@ -1,30 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public struct Data
-{
-    public int HP, DMG, MANA;
-    public Data(int hp, int dmg, int mana)
-    {
-        HP = hp;
-        DMG = dmg;
-        MANA = mana;
-    }
-}
 public struct Coordinates
 {
     public int ID, status, Team;// 0 == empty, 1 == occupied, there might be more
     public GameObject G, location;
-    public Data D;
 
-    public Coordinates(int ID1, int S, int TEAM, GameObject G1, Data D1, GameObject L1)
+    public Coordinates(int ID1, int S, int TEAM, GameObject G1, GameObject L1)
     {
         Team = TEAM;
         ID = ID1;
         status = S;
         G = G1;
         location = L1;
-        D = D1;
     }
 }
 
@@ -59,9 +47,6 @@ public class DDOL : MonoBehaviour
     public GameObject IC;
     public GameObject IC2;
 
-    private Data player1_d = new Data(0,0,0);
-    private Data player2_d;
-
 
     private int temp_x = -1, temp_y = -1;
     //FOR SUMMONING
@@ -84,18 +69,40 @@ public class DDOL : MonoBehaviour
             Second.enabled = true;
             First.enabled = false;
             currentCamera = Second;
-            IC.GetComponent<Magician_N>().ManaMechanic();
+            if (IC)
+            {
+                IC.GetComponent<Magician_N>().ManaMechanic();
+                ResetCharacters(SC);
+            }
+            else
+            {
+                Debug.Log("GG");
+            }
         }
         else
         {
             Second.enabled = false;
             First.enabled = true;
             currentCamera = First;
-            IC2.GetComponent<Magician_N>().ManaMechanic();
+            if (IC2)
+            {
+                IC2.GetComponent<Magician_N>().ManaMechanic();
+                ResetCharacters(SC2);
+            }
+            else
+            {
+                Debug.Log("GG");
+            }
         }
         DDOL.instance.turn++;
         ClearUI();
 
+    }
+    public void ResetCharacters(Transform P) { 
+        foreach(Transform T in P)
+        {
+            T.gameObject.GetComponent<MouseDetect>().ResetV();
+        }
     }
     public void ClearUI()
     {
@@ -116,7 +123,7 @@ public class DDOL : MonoBehaviour
         {
             for (int j = 0; j < x; j++)
             {
-                Coord = new Coordinates(-1, 0, -1, null, player1_d, locations[i][j]);
+                Coord = new Coordinates(-1, 0, -1, null, locations[i][j]);
                 Coords[i].Add(Coord);
             }
         }
@@ -125,8 +132,7 @@ public class DDOL : MonoBehaviour
         Vector3 vx = new Vector3(new_p.transform.position.x, 5.5F, new_p.transform.position.z);
         IC = (GameObject)Instantiate(StartingC, vx, new_p.transform.rotation);
         StartingC.gameObject.layer = LayerMask.NameToLayer("Player1");
-        player1_d = new Data(20, -1, 10); //HARD CODED
-        Coords[0][0] = new Coordinates(IC.GetInstanceID(), 1, 0, IC, player1_d, Coords[0][0].location);
+        Coords[0][0] = new Coordinates(IC.GetInstanceID(), 1, 0, IC, Coords[0][0].location);
         IC.transform.parent = SC.gameObject.transform;
 
         StartingC2.transform.localScale = new Vector3(1F, 1F, 1F);
@@ -134,8 +140,7 @@ public class DDOL : MonoBehaviour
         vx = new Vector3(new_p.transform.position.x, 6.047379F, new_p.transform.position.z);
         IC2 = (GameObject)Instantiate(StartingC2, vx, new_p.transform.rotation);
         StartingC2.gameObject.layer = LayerMask.NameToLayer("Player2");
-        player2_d = new Data(20, -1, 10); //HARD CODED
-        Coords[x-1][x-1] = new Coordinates(IC2.GetInstanceID(), 1, 1, IC2, player2_d, Coords[x-1][x-1].location);
+        Coords[x-1][x-1] = new Coordinates(IC2.GetInstanceID(), 1, 1, IC2, Coords[x-1][x-1].location);
         IC2.transform.parent = SC2.gameObject.transform;
     }
     public void Update()
@@ -150,7 +155,7 @@ public class DDOL : MonoBehaviour
         else if (instance != this)
             DontDestroyOnLoad(gameObject);
     }
-    public void SetObject(int ID, int Status, Data d, GameObject CO, GameObject COL)
+    public void SetObject(int ID, int Status, GameObject CO, GameObject COL)
     {
 
         currentObject = CO;
@@ -306,24 +311,16 @@ public class DDOL : MonoBehaviour
         Debug.Log(StartingC.gameObject.name);
         Debug.Log(StartingC2.gameObject.name);
         Vector3 vx = new Vector3(new_p.transform.position.x, new_p.transform.position.y, new_p.transform.position.z);
-        Data minionD = new Data(0, 0, 0);
-        Data MagicianM = new Data(0, 0, 0);
 
         if (summon.gameObject.tag == "Wraith")
         {
             vx = new Vector3(new_p.transform.position.x, 6.48F, new_p.transform.position.z);
             //summon.transform.localScale = new Vector3(10F, 10F, 10F);
-            minionD = new Data(4, 2, -1);//TEMP DATA
-                                         // MagicianM = new Data(Coords[temp_x][temp_y].D.HP, Coords[temp_x][temp_y].D.DMG, Coords[temp_x][temp_y].D.MANA - 3);
-                                         //   Coords[temp_x][temp_y] = new Coordinates(Coords[temp_x][temp_y].ID, 1, Coords[temp_x][temp_y].G, MagicianM, Coords[temp_x][temp_y].location);//3 is the cost of the minion
         }
         else if (summon.gameObject.tag == "Skeleton")
         {
             vx = new Vector3(new_p.transform.position.x, new_p.transform.position.y-.45F, new_p.transform.position.z);
-            //summon.transform.localScale = new Vector3(10F, 10F, 10F);
-            minionD = new Data(2, 1, -1);//TEMP DATA
-                                         //MagicianM = new Data(Coords[temp_x][temp_y].D.HP, Coords[temp_x][temp_y].D.DMG, Coords[temp_x][temp_y].D.MANA - 1);
-                                         // Coords[temp_x][temp_y] = new Coordinates(Coords[temp_x][temp_y].ID, 1, Coords[temp_x][temp_y].G, MagicianM, Coords[temp_x][temp_y].location);//1 is the cost of the minion
+            //summon.transform.localScale = new Vector3(10F, 10F, 10F)
         }
         else if (summon.gameObject.tag == "GreatSpirit")
         {
@@ -337,7 +334,7 @@ public class DDOL : MonoBehaviour
         {
             for (int j = 0; j < x; j++)
             {
-                if (Coords[i][j].location == new_p.gameObject)
+                if (Coords[i][j].location == new_p.gameObject || Coords[i][j].G == new_p.gameObject)
                 {
                     if (player == 0)
                     {
@@ -349,7 +346,7 @@ public class DDOL : MonoBehaviour
                         ICS.gameObject.layer = LayerMask.NameToLayer("Player2");
                         ICS.transform.parent = SC2.transform;
                     }
-                    Coords[i][j] = new Coordinates(ICS.GetInstanceID(), 1, player, ICS, minionD, Coords[i][j].location);
+                    Coords[i][j] = new Coordinates(ICS.GetInstanceID(), 1, player, ICS, Coords[i][j].location);
                 }
             }
         }
@@ -363,7 +360,6 @@ public class DDOL : MonoBehaviour
         //Find the collider of the intial position and set it to false
         float timeLerped = 0.0f;
         Transform startPos = currentObject.transform;
-        Data temp_d = new Data(0, 0, 0);
         ClearSpaces();
         while (timeLerped < 1.0)
         {
@@ -376,8 +372,7 @@ public class DDOL : MonoBehaviour
             {
                 if (Coords[i][j].ID == currentObject.GetInstanceID())
                 {
-                    temp_d = Coords[i][j].D;
-                    Coords[i][j] = new Coordinates(-1, 0, -1, null, new Data(0,0,0), Coords[i][j].location);
+                    Coords[i][j] = new Coordinates(-1, 0, -1, null, Coords[i][j].location);
                 }
             }
         }
@@ -387,7 +382,7 @@ public class DDOL : MonoBehaviour
             {
                 if (Coords[i][j].location == new_p.gameObject)
                 {
-                    Coords[i][j] = new Coordinates(currentObject.GetInstanceID(), 1, player, currentObject, temp_d, Coords[i][j].location);
+                    Coords[i][j] = new Coordinates(currentObject.GetInstanceID(), 1, player, currentObject, Coords[i][j].location);
                 }
             }
         }
