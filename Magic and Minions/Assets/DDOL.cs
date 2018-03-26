@@ -94,7 +94,8 @@ public class DDOL : MonoBehaviour
                 Debug.Log("GG");
             }
         }
-        DDOL.instance.turn++;
+        UnShowSpaces();
+        turn++;
         ClearUI();
 
     }
@@ -184,6 +185,14 @@ public class DDOL : MonoBehaviour
         {
             Renderer R = c.GetComponent<Renderer>();
             R.enabled = true;
+        }
+    }
+    public void UnShowSpaces()
+    {
+        foreach(GameObject c in spaces)
+        {
+            Renderer R = c.GetComponent<Renderer>();
+            R.enabled = false;
         }
     }
     public List<List<GameObject>> PossibleSpaces(GameObject p)
