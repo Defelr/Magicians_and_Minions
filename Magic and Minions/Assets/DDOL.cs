@@ -297,6 +297,10 @@ public class DDOL : MonoBehaviour
                             }
                         }
                     }
+                    else
+                    {
+                        spaces.Add(Coords[n_row][n_col].location);
+                    }
                 }
                 n_col++;
             }
@@ -344,7 +348,7 @@ public class DDOL : MonoBehaviour
                 }
             }
         }
-        if (spell != "Swarm")
+        if (spell != "Swarm")//HERE IS A POINT WHERE THE COST IS DIMIINSHED BASED ON SWARM
         {
             currentObject.gameObject.GetComponent<MouseDetect>().DiminishMana(ICS.gameObject.GetComponent<MouseDetect>().Cost);
         }

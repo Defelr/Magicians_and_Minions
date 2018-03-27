@@ -104,4 +104,16 @@ public class Magician_N : MonoBehaviour
             Range(1);
         }
     }
+    public void LifeDrain()
+    {
+        if (CheckSummon(4))
+        {
+            DDOL.instance.option = "all";
+            DDOL.instance.summon = Skeleton;
+            DDOL.instance.spell = "LifeDrain";
+            DDOL.instance.currentCost = 4;
+            Debug.Log("Life Drain");
+            Range(1); //Changed ranged from 4 to 1
+        }
+    }
 }
