@@ -7,12 +7,16 @@ public class BlockChoice : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
     }
 
     // Update is called once per frame
     private void Update()
     {
+
+    }
+    private void OnCollisionEnter()
+    {
+        Debug.Log("SPAWNED");
     }
     private void OnMouseOver()
     {
@@ -28,25 +32,53 @@ public class BlockChoice : MonoBehaviour
     private void OnMouseDown()
     {
         Renderer Re = null;
-        Renderer R = GetComponent<Renderer>();
+        GameObject temp = null;
+        Renderer R = this.gameObject.GetComponent<Renderer>();
         Collider C = GetComponent<Collider>();
+        List<GameObject> tempList = new List<GameObject>();
         if (R.enabled)
         {
             if (DDOL.instance.option == "summon")
             {
                 DDOL.instance.SummonPawn(transform);
-                foreach (GameObject c in DDOL.instance.spaces)
+                if (DDOL.instance.spell == "Swarm" && GetComponentInParent<Board_count>().times < 4)
                 {
-                    Re = c.GetComponent<Renderer>();
-                    Re.enabled = false;
+                    if(GetComponentInParent<Board_count>().times == 0)
+                    {
+                        DDOL.instance.GetCurrentPlayer().GetComponent<MouseDetect>().DiminishMana(DDOL.instance.currentCost);
+                    }
+                    foreach (GameObject c in DDOL.instance.spaces)
+                    {
+                        if (c.gameObject != this.gameObject)
+                        {
+                            tempList.Add(c);
+                        }
+                    }
+                    DDOL.instance.spaces = tempList;
+                    tempList = null;
+                    R.enabled = false;
+                    R.gameObject.GetComponentInParent<Board_count>().times++;
+                    if (GetComponentInParent<Board_count>().times == 3)
+                    {
+                        DDOL.instance.spell = "";
+                    }
+                    DDOL.instance.ShowSpaces();
+                }
+                else
+                {
+                    DDOL.instance.summon = null;
+                    this.GetComponentInParent<Board_count>().times = 0;
+                    DDOL.instance.ClearSpaces();
                 }
             }
+
             if (DDOL.instance.option == "move")
             {
                 Debug.Log("You can move Here!");
                 DDOL.instance.currentObject.GetComponent<MouseDetect>().Moves++;
                 DDOL.instance.MoveCharacter(transform);
             }
+
             if(DDOL.instance.option == "attack")
             {
                 for (int i = 0; i < DDOL.instance.x; i++)
@@ -67,6 +99,8 @@ public class BlockChoice : MonoBehaviour
                                     Debug.Log("IT WORKED");
                                 }
                                 DDOL.instance.Coords[i][j].G.GetComponent<MouseDetect>().DamageHP(2);
+                                DDOL.instance.currentObject.GetComponent<MouseDetect>().DiminishMana(DDOL.instance.currentCost);
+                                DDOL.instance.currentCost = 0;
 
                             }
                             else
@@ -83,7 +117,12 @@ public class BlockChoice : MonoBehaviour
                     }
                 }
             }
-            DDOL.instance.option = "";
+
+            if(DDOL.instance.spell != "Swarm")
+            {
+                DDOL.instance.option = "";
+            }
+
         }
     }
 }
