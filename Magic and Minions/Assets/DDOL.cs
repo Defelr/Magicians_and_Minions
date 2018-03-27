@@ -55,6 +55,7 @@ public class DDOL : MonoBehaviour
     public string option = "";
     //Spells
     public string spell;
+    public int currentCost;
 
     public GameObject SystemEvent;
 
@@ -94,12 +95,14 @@ public class DDOL : MonoBehaviour
                 Debug.Log("GG");
             }
         }
-        DDOL.instance.turn++;
+        UnShowSpaces();
+        turn++;
         ClearUI();
+        spell = ""; //We can play with this as to add a warning before the player ends their turn ? for now it's set to this because by ending your turn no spell should be active at the start of the nex players turn
 
     }
-    public void ResetCharacters(Transform P) { 
-        foreach(Transform T in P)
+    public void ResetCharacters(Transform ParentPlayer) { 
+        foreach(Transform T in ParentPlayer)
         {
             T.gameObject.GetComponent<MouseDetect>().ResetV();
         }
@@ -108,9 +111,9 @@ public class DDOL : MonoBehaviour
     {
         SystemEvent.GetComponent<Switch_Canvas>().Clear();
     }
-
     public void Start()
     {
+      //  SystemEvent.GetComponent<Quit>().ResetWC();
         currentObject = null;
         ClearSpaces();
         locations = PossibleSpaces(GameObject.Find("Grid_Board"));
@@ -155,6 +158,22 @@ public class DDOL : MonoBehaviour
         else if (instance != this)
             DontDestroyOnLoad(gameObject);
     }
+    public GameObject GetCurrentPlayer()
+    {
+        if(player == 0)
+        {
+            return IC;
+        }
+        return IC2;
+    }
+    public void SetCurrentPlayer()
+    {
+        if(player == 0)
+        {
+            currentObject = IC;
+        }
+        currentObject = IC2;
+    }
     public void SetObject(int ID, int Status, GameObject CO, GameObject COL)
     {
 
@@ -163,10 +182,7 @@ public class DDOL : MonoBehaviour
     }
     public void MouseDown()
     {
-        if (currentObject != null)
-        {
-            ClearSpaces();
-        }
+
     }
     public void ClearSpaces()
     {
@@ -184,6 +200,14 @@ public class DDOL : MonoBehaviour
         {
             Renderer R = c.GetComponent<Renderer>();
             R.enabled = true;
+        }
+    }
+    public void UnShowSpaces()
+    {
+        foreach(GameObject c in spaces)
+        {
+            Renderer R = c.GetComponent<Renderer>();
+            R.enabled = false;
         }
     }
     public List<List<GameObject>> PossibleSpaces(GameObject p)
@@ -251,7 +275,6 @@ public class DDOL : MonoBehaviour
                     {
                         if (Coords[n_row][n_col].status == 0)
                         {
-                            Debug.Log(Coords[n_row][n_col].location);
                             spaces.Add(Coords[n_row][n_col].location);
                         }
                     }else if (option == "attack")
@@ -274,42 +297,20 @@ public class DDOL : MonoBehaviour
                             }
                         }
                     }
+                    else
+                    {
+                        spaces.Add(Coords[n_row][n_col].location);
+                    }
                 }
                 n_col++;
             }
             n_row++;
             n_col = y - t;
         }
-        Debug.Log("HI" + spaces.Count);
         return spaces;
-    }
-    public void SetLocationTemp(int obj)
-    {
-        for (int i = 0; i < x; i++)
-        {
-            for (int j = 0; j < x; j++)
-            {
-                if (Coords[i][j].ID == obj)
-                {
-                    temp_x = i;
-                    temp_y = j;
-                    return;
-                }
-            }
-        }
     }
     public void SummonPawn(Transform new_p)
     {
-        if (player == 0)
-        {
-            SetLocationTemp(StartingC.gameObject.GetInstanceID());
-        }
-        else
-        {
-            SetLocationTemp(StartingC2.gameObject.GetInstanceID());
-        }
-        Debug.Log(StartingC.gameObject.name);
-        Debug.Log(StartingC2.gameObject.name);
         Vector3 vx = new Vector3(new_p.transform.position.x, new_p.transform.position.y, new_p.transform.position.z);
 
         if (summon.gameObject.tag == "Wraith")
@@ -326,9 +327,6 @@ public class DDOL : MonoBehaviour
         {
             vx = new Vector3(new_p.transform.position.x, 6.019F, new_p.transform.position.z);
         }
-       Debug.Log(temp_y);
-       Debug.Log(temp_x);
-
         GameObject ICS = (GameObject)Instantiate(summon, vx, new_p.transform.rotation);
         for (int i = 0; i < x; i++)
         {
@@ -350,10 +348,10 @@ public class DDOL : MonoBehaviour
                 }
             }
         }
-        currentObject.gameObject.GetComponent<MouseDetect>().DiminishMana(ICS.gameObject.GetComponent<MouseDetect>().Cost);
-        ClearSpaces();
-        summon = null;
-        return;
+        if (spell != "Swarm")//HERE IS A POINT WHERE THE COST IS DIMIINSHED BASED ON SWARM
+        {
+            currentObject.gameObject.GetComponent<MouseDetect>().DiminishMana(ICS.gameObject.GetComponent<MouseDetect>().Cost);
+        }
     }
     public void MoveCharacter(Transform new_p)
     {

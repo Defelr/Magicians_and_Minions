@@ -87,8 +87,33 @@ public class Magician_N : MonoBehaviour
         {
             DDOL.instance.option = "attack";
             DDOL.instance.spell = "Unlife";
+            DDOL.instance.currentCost = 2;
             Debug.Log("Unlife Blast");
             Range(3);
+        }
+    }
+    public void Swarm()
+    {
+        if (CheckSummon(2))
+        {
+            DDOL.instance.option = "summon";
+            DDOL.instance.summon = Skeleton;
+            DDOL.instance.spell = "Swarm";
+            DDOL.instance.currentCost = 2;
+            Debug.Log("Swarm");
+            Range(1);
+        }
+    }
+    public void LifeDrain()
+    {
+        if (CheckSummon(4))
+        {
+            DDOL.instance.option = "all";
+            DDOL.instance.summon = Skeleton;
+            DDOL.instance.spell = "LifeDrain";
+            DDOL.instance.currentCost = 4;
+            Debug.Log("Life Drain");
+            Range(1); //Changed ranged from 4 to 1
         }
     }
 }

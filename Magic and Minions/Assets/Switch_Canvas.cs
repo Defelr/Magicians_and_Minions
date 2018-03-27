@@ -92,7 +92,10 @@ public class Switch_Canvas : MonoBehaviour {
                     Clear();
                 }
                 GameObject grid_B = GameObject.Find("Grid_Board");
-                DDOL.instance.ClearSpaces();
+                if (DDOL.instance.spell != "Swarm")
+                {
+                    DDOL.instance.ClearSpaces();
+                }
                 foreach (Transform child in grid_B.transform)
                 {
                     Collider col = child.GetComponent<Collider>();
