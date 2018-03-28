@@ -2436,6 +2436,7 @@ MonoBehaviour:
   G_Color: {fileID: 2100000, guid: a569c7c788a494940abe92b07b9b90f9, type: 2}
   Gr_Color: {fileID: 2100000, guid: 08cab5072e73f4047990906afd5bbca6, type: 2}
   TempHP: 0
+  ICS: {fileID: 0}
 --- !u!82 &1623350523
 AudioSource:
   m_ObjectHideFlags: 0
