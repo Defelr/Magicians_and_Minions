@@ -18,8 +18,8 @@ public class MouseDetect : MonoBehaviour
     public int Moves;//Amount of times moved/attacked
     public int Attacks;
 
-    private Slider healthSlider;
-    private Text manaSlider;
+    private Slider healthSlider = null;
+    private Text manaSlider = null;
     // Use this for initialization
     void Start()
     {
@@ -69,7 +69,7 @@ public class MouseDetect : MonoBehaviour
         }
        foreach(Transform TPanel in DDOL.instance.SystemEvent.GetComponent<Switch_Canvas>().MenuCanvasPanel.transform)
         {
-            if(TPanel.tag == this.tag || this.tag == "Wraith" || this.tag == "Skeleton")
+            if(TPanel.tag == this.tag)
             {
                 foreach(Transform BPanel in TPanel)
                 {
@@ -80,6 +80,18 @@ public class MouseDetect : MonoBehaviour
                         healthSlider.value = GetComponent<MouseDetect>().HP;
                         manaSlider = BPanel.Find("Mana").gameObject.GetComponent<Text>();
                         manaSlider.text = GetComponent<MouseDetect>().Mana.ToString();
+                    }
+                }
+            }
+            else if (TPanel.tag == this.tag || this.tag == "Wraith" || this.tag == "Skeleton")
+            {
+                foreach (Transform BPanel in TPanel)
+                {
+                    if (BPanel.tag == this.tag)
+                    {
+                        healthSlider = BPanel.Find("Health_Sldr").gameObject.GetComponent<Slider>();
+                        healthSlider.maxValue = GetComponent<MouseDetect>().MAX_HP;
+                        healthSlider.value = GetComponent<MouseDetect>().HP;
                     }
                 }
             }

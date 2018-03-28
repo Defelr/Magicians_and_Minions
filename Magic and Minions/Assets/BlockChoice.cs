@@ -136,6 +136,8 @@ public class BlockChoice : MonoBehaviour
                                 Debug.Log(DDOL.instance.spell + " " + DDOL.instance.Coords[i][j].G + " Block Choice");
                                 DDOL.instance.Coords[i][j].G.GetComponent<MouseDetect>().DamageHP(4);
                                 DDOL.instance.spell = "LifeDrain2";
+                                DDOL.instance.currentObject.GetComponent<MouseDetect>().DiminishMana(DDOL.instance.currentCost);
+                                DDOL.instance.currentCost = 0;
                             }
                             else if (DDOL.instance.spell == "LifeDrain2")
                             {
