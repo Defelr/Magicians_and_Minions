@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4898575909277266}
   - component: {fileID: 136043227514003692}
   - component: {fileID: 114826547346036266}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: skeleton
   m_TagString: Skeleton
   m_Icon: {fileID: 0}
@@ -196,6 +196,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e64afda0fb5d1d49b0c620c01c77f3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HP: 3
+  DMG: 1
+  Mana: -1
+  Cost: 2
+  Movement_c: 1
+  Attack_c: 1
+  Moves: 1
+  Attacks: 1
 --- !u!136 &136043227514003692
 CapsuleCollider:
   m_ObjectHideFlags: 1

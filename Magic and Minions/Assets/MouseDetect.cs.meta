@@ -5,7 +5,12 @@ licenseType: Free
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - winPanel: {fileID: 1870972630176722, guid: d4fb3cdb59a568145ae82411dd757f8f, type: 2}
+  - player1Pnl: {fileID: 1880594065258600, guid: d4fb3cdb59a568145ae82411dd757f8f,
+      type: 2}
+  - player2Pnl: {fileID: 1657265639158398, guid: d4fb3cdb59a568145ae82411dd757f8f,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

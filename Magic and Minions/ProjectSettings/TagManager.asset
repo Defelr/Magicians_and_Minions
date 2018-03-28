@@ -10,6 +10,10 @@ TagManager:
   - Necro_C
   - Wraith
   - Skeleton
+  - P2
+  - Paladin
+  - GreatSpirit
+  - Player2
   layers:
   - Default
   - TransparentFX
@@ -19,8 +23,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - Player1
+  - Player2
   - 
   - 
   - 

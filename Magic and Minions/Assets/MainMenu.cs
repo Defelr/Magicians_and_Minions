@@ -8,11 +8,17 @@ public class MainMenu : MonoBehaviour {
 	public void Singleplayer()
     {
         SceneManager.LoadScene(1);
-        Debug.Log("Signleplayer");
+        Debug.Log("Singleplayer");
     }
 
     public void Multiplayer()
     {
-        //SceneManager.LoadScene(3);
+        SceneManager.LoadScene(3);
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+        Debug.Log("Exit");
     }
 }
