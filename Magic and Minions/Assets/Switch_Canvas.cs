@@ -37,9 +37,9 @@ public class Switch_Canvas : MonoBehaviour {
         if (DDOL.instance.currentObject)
         {
             GameObject tempCO = DDOL.instance.currentObject;
-            if(tempCO.tag == "Necro")
+            if (tempCO.tag == "Necro")
             {
-                foreach(Transform C in necroInterface.transform)
+                foreach (Transform C in necroInterface.transform)
                 {
                     if (C.gameObject.name == "Move_Btn")
                     {
@@ -86,7 +86,8 @@ public class Switch_Canvas : MonoBehaviour {
                         {
                             C.gameObject.GetComponent<Button>().interactable = true;
                         }
-                    } else if(C.gameObject.name == "Ability_Btn (4)")
+                    }
+                    else if (C.gameObject.name == "Ability_Btn (4)")
                     {
                         if (!tempCO.GetComponent<Magician_N>().SwarmCheck())
                         {
@@ -96,9 +97,42 @@ public class Switch_Canvas : MonoBehaviour {
                         {
                             C.gameObject.GetComponent<Button>().interactable = true;
                         }
-                    } else if (C.gameObject.name == "Ability_Btn (1)")
+                    }
+                    else if (C.gameObject.name == "Ability_Btn (1)")
                     {
                         if (!tempCO.GetComponent<Magician_N>().LifeDrainCheck())
+                        {
+                            C.gameObject.GetComponent<Button>().interactable = false;
+                        }
+                        else
+                        {
+                            C.gameObject.GetComponent<Button>().interactable = true;
+                        }
+                    }
+                }
+            }
+            else if (tempCO.tag == "Paladin")
+            {
+
+            }
+            else //ELSE SHOULD ALWAYS HANDLE MINIONS
+            {
+                foreach (Transform C in minionInterface.transform)
+                {
+                    if (C.gameObject.name == "Move_Btn")
+                    {
+                        if (tempCO.GetComponent<MouseDetect>().Moves >= tempCO.GetComponent<MouseDetect>().Movement_c)
+                        {
+                            C.gameObject.GetComponent<Button>().interactable = false;
+                        }
+                        else
+                        {
+                            C.gameObject.GetComponent<Button>().interactable = true;
+                        }
+                    }
+                    else if (C.gameObject.name == "Attack_Btn")
+                    {
+                        if (tempCO.GetComponent<MouseDetect>().Attacks >= tempCO.GetComponent<MouseDetect>().Attack_c)
                         {
                             C.gameObject.GetComponent<Button>().interactable = false;
                         }

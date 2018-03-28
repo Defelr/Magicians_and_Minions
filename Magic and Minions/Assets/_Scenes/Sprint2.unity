@@ -2463,6 +2463,7 @@ MonoBehaviour:
   G_Color: {fileID: 2100000, guid: a569c7c788a494940abe92b07b9b90f9, type: 2}
   Gr_Color: {fileID: 2100000, guid: 08cab5072e73f4047990906afd5bbca6, type: 2}
   TempHP: 0
+  ICS: {fileID: 0}
 --- !u!82 &1623350523
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3089,7 +3090,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1634589577543022, guid: 1d9dc009ab5ba4d478e3a240b4415257, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224869124511485524, guid: 1d9dc009ab5ba4d478e3a240b4415257,
         type: 2}
@@ -3203,6 +3204,21 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114484822531749612, guid: 1d9dc009ab5ba4d478e3a240b4415257,
+        type: 2}
+      propertyPath: m_Value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224869124511485524, guid: 1d9dc009ab5ba4d478e3a240b4415257,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114484822531749612, guid: 1d9dc009ab5ba4d478e3a240b4415257,
+        type: 2}
+      propertyPath: m_Interactable
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1d9dc009ab5ba4d478e3a240b4415257, type: 2}

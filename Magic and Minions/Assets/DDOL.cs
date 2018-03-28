@@ -406,9 +406,5 @@ public class DDOL : MonoBehaviour
             }
         }
         source.PlayOneShot(moveSound, 0.7F);
-        Collider col = currentObjectL.GetComponent<Collider>();
-        Collider colp = currentObject.GetComponent<Collider>();
-        colp.isTrigger = true;
-        col.isTrigger = false;
     }
 }
