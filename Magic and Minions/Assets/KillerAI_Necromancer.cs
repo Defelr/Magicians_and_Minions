@@ -19,50 +19,68 @@ public class KillerAI_Necromancer : MonoBehaviour {
 
     public void PlayTurn()
     {
-        //If less than 7 minions, summon minion
+        DDOL.instance.currentObject = DDOL.instance.IC2;
+        Debug.Log(DDOL.instance.currentObject);
+        //If less than 7 minions, summon minion, preference for wraiths
         if (minions.Count < 7)
         {
-            if (Random.Range(0.0f, 1.0f) < 0.5f)
-            {
-                SummonWraith();
-            }
-            else
+            Debug.Log("Summon minion");
+            if (!SummonWraith())
             {
                 SummonSkeleton();
             }
         }
         //TODO: CHECK MANA
         //Select minion closest to opponent and move it
-        GameObject m = minions[Random.Range(0, minions.Count - 1)];
-        MoveMinion(m);
-        DDOL.instance.currentObject = this.gameObject;
+        //GameObject m = minions[Random.Range(0, minions.Count - 1)];
+        //MoveMinion(m);
+        //DDOL.instance.currentObject = this.gameObject;
         //Attack opponent or opponent minion if in range
         //Try to cast spell
 
     }
 
-    public void SummonSkeleton()
+    public bool SummonSkeleton()
     {
-        DDOL.instance.option = "summon";
-        DDOL.instance.summon = Skeleton;
-        List<GameObject> loc = DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
-        if (loc.Count != 0)
+        Debug.Log("Summon skeleton attempt");
+        if (DDOL.instance.currentObject.GetComponent<MouseDetect>().Mana >=
+            Skeleton.GetComponent<MouseDetect>().Cost) {
+            Debug.Log("Summon skeleton success");
+            DDOL.instance.option = "summon";
+            DDOL.instance.summon = Skeleton;
+            List<GameObject> loc = DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
+            if (loc.Count != 0)
+            {
+                DDOL.instance.SummonPawn(loc[Random.Range(0, loc.Count - 1)].transform);
+            }
+            minions.Add(DDOL.instance.summon);
+            return true;
+        } else
         {
-            DDOL.instance.SummonPawn(loc[Random.Range(0, loc.Count - 1)].transform);
+            Debug.Log("Summon skeleton failure");
+            return false;
         }
-        minions.Add(DDOL.instance.summon);
     }
-    public void SummonWraith()
+    public bool SummonWraith()
     {
-        DDOL.instance.option = "summon";
-        DDOL.instance.summon = Wraith;
-        List<GameObject> loc = DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
-        if (loc.Count != 0)
+        Debug.Log("Summon wraith attempt");
+        if (DDOL.instance.currentObject.GetComponent<MouseDetect>().Mana>=
+            Wraith.GetComponent<MouseDetect>().Cost) {
+            Debug.Log("Summon wraith success");
+            DDOL.instance.option = "summon";
+            DDOL.instance.summon = Wraith;
+            List<GameObject> loc = DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
+            if (loc.Count != 0)
+            {
+                DDOL.instance.SummonPawn(loc[Random.Range(0, loc.Count - 1)].transform);
+            }
+            minions.Add(DDOL.instance.summon);
+            return true;
+        } else
         {
-            DDOL.instance.SummonPawn(loc[Random.Range(0, loc.Count - 1)].transform);
+            Debug.Log("Summon wraith failure");
+            return false;
         }
-        minions.Add(DDOL.instance.summon);
-
     }
 
     //TODO: FIX
