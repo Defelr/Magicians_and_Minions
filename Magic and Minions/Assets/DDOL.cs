@@ -252,6 +252,20 @@ public class DDOL : MonoBehaviour
         }
         return -1;
     }
+    public GameObject FindCurrentObject(GameObject Loc)
+    {
+        for(int i = 0; i < x; i++)
+        {
+            for(int j = 0; j < x; j++)
+            {
+                if(Coords[i][j].location.gameObject == Loc.gameObject)
+                {
+                    return Coords[i][j].G;
+                }
+            }
+        }
+        return null;
+    }
     //MOVEMENT
     public List<GameObject> SpaceLocation(int r, int ID)
     {
