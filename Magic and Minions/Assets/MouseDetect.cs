@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MouseDetect : MonoBehaviour
 {
 
     public int HP;
+    public int MAX_HP;
     public int DMG;
     public int Mana;
     public int Cost;
@@ -16,7 +18,8 @@ public class MouseDetect : MonoBehaviour
     public int Moves;//Amount of times moved/attacked
     public int Attacks;
 
-
+    private Slider healthSlider = null;
+    private Text manaSlider = null;
     // Use this for initialization
     void Start()
     {
@@ -31,31 +34,64 @@ public class MouseDetect : MonoBehaviour
             Moves = Movement_c;
             Attacks = Attack_c;
         }
-
     }
     // Update is called once per frame
     void Update()
     {
-        if(HP <= 0)
+        if (HP <= 0)
         {
             for (int i = 0; i < DDOL.instance.x; i++)
             {
                 for (int j = 0; j < DDOL.instance.x; j++)
                 {
-                    if(DDOL.instance.Coords[i][j].G == this.gameObject)
+                    if (DDOL.instance.Coords[i][j].G == this.gameObject)
                     {
                         DDOL.instance.Coords[i][j] = new Coordinates(-1, 0, -1, null, DDOL.instance.locations[i][j]);
-                        if(this.gameObject == DDOL.instance.IC.gameObject)
+                        if (this.gameObject == DDOL.instance.IC.gameObject)
                         {
                             HotseatWin.winVar = 2;
                             Debug.Log("PLAYER 2 WON");
-                        }else if(this.gameObject == DDOL.instance.IC2.gameObject)
+                        }
+                        else if (this.gameObject == DDOL.instance.IC2.gameObject)
                         {
                             HotseatWin.winVar = 1;
                             Debug.Log("PLAYER 1 WON");
                         }
                         Destroy(this.gameObject);
                         return;
+                    }
+                }
+            }
+        }
+        if (HP > MAX_HP)
+        {
+            MAX_HP = HP; //If the HP of a player or minion exceeds max, make the HP the new Max
+        }
+       foreach(Transform TPanel in DDOL.instance.SystemEvent.GetComponent<Switch_Canvas>().MenuCanvasPanel.transform)
+        {
+            if(TPanel.tag == this.tag)
+            {
+                foreach(Transform BPanel in TPanel)
+                {
+                    if (BPanel.tag == this.tag)
+                    {
+                        healthSlider = BPanel.Find("Health_Sldr").gameObject.GetComponent<Slider>();
+                        healthSlider.maxValue = GetComponent<MouseDetect>().MAX_HP;
+                        healthSlider.value = GetComponent<MouseDetect>().HP;
+                        manaSlider = BPanel.Find("Mana").gameObject.GetComponent<Text>();
+                        manaSlider.text = GetComponent<MouseDetect>().Mana.ToString();
+                    }
+                }
+            }
+            else if (TPanel.tag == this.tag || this.tag == "Wraith" || this.tag == "Skeleton")
+            {
+                foreach (Transform BPanel in TPanel)
+                {
+                    if (BPanel.tag == this.tag)
+                    {
+                        healthSlider = BPanel.Find("Health_Sldr").gameObject.GetComponent<Slider>();
+                        healthSlider.maxValue = GetComponent<MouseDetect>().MAX_HP;
+                        healthSlider.value = GetComponent<MouseDetect>().HP;
                     }
                 }
             }

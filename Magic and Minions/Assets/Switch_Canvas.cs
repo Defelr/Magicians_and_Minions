@@ -20,6 +20,7 @@ public class Switch_Canvas : MonoBehaviour {
 
     private GameObject CurrentInterafce;
 
+    private Slider healthSlider;
 	// Use this for initialization
 	void Start () {
 		
@@ -76,7 +77,7 @@ public class Switch_Canvas : MonoBehaviour {
                             C.gameObject.GetComponent<Button>().interactable = true;
                         }
                     }
-                    else if (C.gameObject.name == "Abilit_Btn")
+                    else if (C.gameObject.name == "Ability_Btn")
                     {
                         if (!tempCO.GetComponent<Magician_N>().UnLifeBlastCheck())
                         {

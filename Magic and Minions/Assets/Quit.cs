@@ -6,8 +6,7 @@ using UnityEngine.SceneManagement;
 public class Quit : MonoBehaviour {
     public GameObject P1;
     public GameObject P2;
-    public GameObject Again;
-    public GameObject Main;
+    public GameObject winPnl;
 
 	public void Quit1() {
         //Application.Quit();
@@ -24,9 +23,10 @@ public class Quit : MonoBehaviour {
 
     public void ResetWC()
     {
-        P1.SetActive(false);
-        P2.SetActive(false);
-        Again.SetActive(false);
-        Main.SetActive(false);
+        HotseatWin.winVar = 0;
+        winPnl.SetActive(false);
+        SceneManager.LoadScene(2);
+        //P1.SetActive(false);
+        //P2.SetActive(false);
     }
 }
