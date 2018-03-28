@@ -23,12 +23,20 @@ public class KillerAI_Necromancer : MonoBehaviour {
     //    StartCoroutine("PlayTurn");
     //}
 
+    //TODO: look more into how spells work
+    //      may want to consider moving AI around to cast spells
+    //      potentially; for each location it can move into, save as temp
+    //      get the occupied tiles around it
+    //      if rather full, maybe step in to cast a spell
+    //      if not, perhaps don't move
+
     public void PlayTurn()
     {
         print("Let Toriel say the f-word");
         DDOL.instance.currentObject = DDOL.instance.IC2;
         ai = DDOL.instance.IC2;
         //If less than 7 minions, summon minion, preference for wraiths
+        //TODO: probably put in some consideration about summoning skeletons for mana
         if (minions.Count < 7)
        {
             Debug.Log("Summon minion");
@@ -56,44 +64,67 @@ public class KillerAI_Necromancer : MonoBehaviour {
         DDOL.instance.End_Turn();
     }
 
+    //Summons skeleton
     public bool SummonSkeleton()
     {
         Debug.Log("Summon skeleton attempt");
+        //If we have enough mana...
         if (DDOL.instance.currentObject.GetComponent<MouseDetect>().Mana >=
             Skeleton.GetComponent<MouseDetect>().Cost) {
             Debug.Log("Summon skeleton success");
+            //Set DDOL flags to summon skeleton
             DDOL.instance.option = "summon";
             DDOL.instance.summon = Skeleton;
+            //Generate list of possible spaces to summon skeleton in
             List<GameObject> loc = DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
             if (loc.Count != 0)
             {
+                //Summon randomly to one of those locations
                 DDOL.instance.SummonPawn(loc[Random.Range(0, loc.Count - 1)].transform);
+            } else
+            {
+                //Return false if no place to summon minion to
+                return false;
             }
+            //Add instance to minions list for later referencing
             minions.Add(DDOL.instance.ICS);
             return true;
         } else
         {
+            //Return false if not enough mana
             Debug.Log("Summon skeleton failure");
             return false;
         }
     }
+
+    //Summon wraith
     public bool SummonWraith()
     {
         Debug.Log("Summon wraith attempt");
+        //If we have enough mana...
         if (DDOL.instance.currentObject.GetComponent<MouseDetect>().Mana>=
             Wraith.GetComponent<MouseDetect>().Cost) {
             Debug.Log("Summon wraith success");
+            //Set DDOL flags to summon wraith
             DDOL.instance.option = "summon";
             DDOL.instance.summon = Wraith;
+            //Generate list of possible spaces to summon wraith in
             List<GameObject> loc = DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
             if (loc.Count != 0)
             {
+                //Summon randomly to one of these locations
                 DDOL.instance.SummonPawn(loc[Random.Range(0, loc.Count - 1)].transform);
+            } else
+            {
+                //Return flase if no place to summon minion to
+                return false;
             }
+            //Add instance to minions list for later referencing
             minions.Add(DDOL.instance.ICS);
             return true;
         } else
         {
+            //Return flase if not enough mana
             Debug.Log("Summon wraith failure");
             return false;
         }
@@ -102,8 +133,10 @@ public class KillerAI_Necromancer : MonoBehaviour {
     //TODO: weight so that it's not always same minion being moved
     public GameObject MinionToMove()
     {
+        //Get player
         GameObject p = GameObject.FindGameObjectWithTag("Player");
         Debug.Log("player: " + p.transform.position);
+        //Find closest minion by comparing each minion distance
         GameObject minion = minions[0];
         float min = Vector3.Distance(p.transform.position, minions[0].transform.position);
         foreach(GameObject m in minions)
@@ -114,39 +147,45 @@ public class KillerAI_Necromancer : MonoBehaviour {
                 minion = m;
             }
         }
+        //Return closest minion
         return minion;
     }
 
     //TODO: move minion towards player, not randomly
     public void MoveMinion(GameObject m)
     {
+        //Set DDOL flags to move minion
         Debug.Log("before: " + m.transform.position);
         DDOL.instance.option = "move";
-        DDOL.instance.currentObject = m;
-        List<GameObject> loc = DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
+        //Get locations minion in question can move to
+        List<GameObject> loc = DDOL.instance.SpaceLocation(1, m.GetInstanceID());
         if (loc.Count != 0)
         {
+            //For now, moves randomly WILL BE CHANGED
             print("first test");
             DDOL.instance.MoveCharacter(loc[Random.Range(0, loc.Count - 1)].transform);
             print("test");
         }
-        DDOL.instance.currentObject = ai;
         Debug.Log("after: " + m.transform.position);
     }
 
-    //TODO: actually implement
     //TODO: look through all minions to see if any have something to attack
     //      if multiple, attack with one closest to ai's piece
     public void MinionAttack(GameObject m)
     {
-        DDOL.instance.currentObject = m;
+        //Set DDOL flags to attack
         DDOL.instance.option = "attack";
-        List<GameObject> loc = DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
+        //Get list of things minion can attack
+        List<GameObject> loc = DDOL.instance.SpaceLocation(1, m.GetInstanceID());
         if (loc.Count != 0)
         {
-            //DDOL.instance.SummonPawn(loc[Random.Range(0, loc.Count - 1)].transform);
+            //Pick one of those at random
+            GameObject l = loc[Random.Range(0, loc.Count - 1)];
+            //Get the actual object at chosen location
+            GameObject victim = DDOL.instance.FindCurrentObject(l);
+            //attack
+            victim.GetComponent<MouseDetect>().DamageHP(DDOL.instance.currentObject.GetComponent<MouseDetect>().DMG);
         }
-        DDOL.instance.currentObject = ai;
     }
 
     public bool UnLifeBlast()
