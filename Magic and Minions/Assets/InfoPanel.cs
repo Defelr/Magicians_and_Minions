@@ -12,14 +12,14 @@ public class InfoPanel : MonoBehaviour {
 	public void SetPanel () {
 		if (active == false)
         {
-            interfacePnl.SetActive(false);
+            //interfacePnl.SetActive(false);
             infoPnl.SetActive(true);
             active = true;
         }
         else if (active == true)
         {
             infoPnl.SetActive(false);
-            interfacePnl.SetActive(true);
+            //interfacePnl.SetActive(true);
             active = false;
         }
 	}
