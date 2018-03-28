@@ -909,8 +909,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   P1: {fileID: 251011721}
   P2: {fileID: 607224963}
-  Again: {fileID: 1022489009}
-  Main: {fileID: 113848885}
+  winPnl: {fileID: 1473496068}
 --- !u!224 &724498058
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1031,7 +1030,7 @@ Prefab:
     - target: {fileID: 114933972385176442, guid: d4fb3cdb59a568145ae82411dd757f8f,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114169546367161580, guid: d4fb3cdb59a568145ae82411dd757f8f,
         type: 2}
@@ -1259,7 +1258,7 @@ Prefab:
     - target: {fileID: 114933972385176442, guid: d4fb3cdb59a568145ae82411dd757f8f,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: Restart
+      value: ResetWC
       objectReference: {fileID: 0}
     - target: {fileID: 114933972385176442, guid: d4fb3cdb59a568145ae82411dd757f8f,
         type: 2}
