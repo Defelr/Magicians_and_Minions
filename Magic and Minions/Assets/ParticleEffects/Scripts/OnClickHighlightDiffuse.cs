@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class OnClickHighlightDiffuse : MonoBehaviour {
 
-    public Shader shader1;
-    public Shader shader2;
-    public Renderer rend;
+    //public Shader shader1;
+    //public Shader shader2;
+    //public Renderer rend;
+    private ParticleSystem select;
 
     // Use this for initialization
     void Start () {
-        rend = GetComponent<Renderer>();
+        select = GetComponent<ParticleSystem>();
+        //rend = GetComponent<Renderer>();
         // the following are defaults that keep overwriting the inputs.
-        shader1 = Shader.Find("Standard");
-        shader2 = Shader.Find("N3K/Outline");
+       // shader1 = Shader.Find("Standard");
+        //shader2 = Shader.Find("N3K/Outline");
     }
 
     void FixedUpdate()
@@ -29,10 +31,7 @@ public class OnClickHighlightDiffuse : MonoBehaviour {
             {
                 if (hit.transform.name == this.name)
                 {
-                    if (rend.material.shader == shader1)
-                        rend.material.shader = shader2;
-                    else
-                        rend.material.shader = shader1;
+                    //if (this.ParticleSystem.enabled == true) ;
                 }
             }
 
