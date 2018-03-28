@@ -17,7 +17,6 @@ public class MouseDetect : MonoBehaviour
     public int Attacks;
 
 
-
     // Use this for initialization
     void Start()
     {
@@ -79,9 +78,13 @@ public class MouseDetect : MonoBehaviour
     {
         HP -= DecHP; 
     }
+    public void HealHP(int IncHP)
+    {
+        HP += IncHP;
+    }
     public void OnMouseOver()
     {
-        if (DDOL.instance.option == "attack")
+        if (DDOL.instance.option == "attack" || DDOL.instance.option == "all")
         {
             for (int i = 0; i < DDOL.instance.x; i++)
             {
@@ -116,13 +119,12 @@ public class MouseDetect : MonoBehaviour
             {
                 if (DDOL.instance.spell == "Unlife")
                 {
-                    if(this.GetComponent<MouseDetect>().HP - 2 <= 0)
+                    if(HP - 2 <= 0)
                     {
                         DDOL.instance.summon = DDOL.instance.IC.GetComponent<Magician_N>().Skeleton;
                         DDOL.instance.SummonPawn(this.transform);
-                        Debug.Log("IT WORKED");
                     }
-                    this.GetComponent<MouseDetect>().DamageHP(2);
+                    DamageHP(2);
 
                 }
                 else
@@ -135,12 +137,36 @@ public class MouseDetect : MonoBehaviour
                 DDOL.instance.ClearSpaces();
                 return;
             }
+        }else if (DDOL.instance.option == "all")
+        {
+            if (DDOL.instance.spell == "LifeDrain")
+            {
+                if (HP - 4 <= 0)
+                {
+                    DDOL.instance.TempHP = HP;
+
+                }
+                else
+                {
+                    DDOL.instance.TempHP = 4;
+                }
+                Debug.Log(DDOL.instance.spell + " " + this.gameObject + " Mouse Detect");
+                DDOL.instance.spell = "LifeDrain2";
+                DamageHP(4);
+            }
+            else if (DDOL.instance.spell == "LifeDrain2")
+            {
+                Debug.Log(DDOL.instance.spell + " " + this.gameObject + " Mouse Detect");
+                HealHP(DDOL.instance.TempHP);
+                DDOL.instance.spell = "";
+                DDOL.instance.option = "";
+                DDOL.instance.TempHP = 0;
+                DDOL.instance.ClearSpaces();
+            }
         }
     }
     public void Move()
     {
-        Debug.Log("MOVE: " + Moves);
-            Debug.Log("Start");
             List<GameObject> spaces = new List<GameObject>();
             DDOL.instance.option = "move";
             spaces = DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
