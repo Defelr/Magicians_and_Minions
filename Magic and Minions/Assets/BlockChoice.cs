@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BlockChoice : MonoBehaviour
 {
+    private bool Summon;
+    private Transform SummonPos;
     // Use this for initialization
     void Start()
     {
@@ -73,14 +75,14 @@ public class BlockChoice : MonoBehaviour
                 }
             }
 
-            if (DDOL.instance.option == "move")
+            else if (DDOL.instance.option == "move")
             {
                 Debug.Log("You can move Here!");
                 DDOL.instance.currentObject.GetComponent<MouseDetect>().Moves++;
                 DDOL.instance.MoveCharacter(transform);
             }
 
-            if(DDOL.instance.option == "attack")
+            else if(DDOL.instance.option == "attack")
             {
                 for (int i = 0; i < DDOL.instance.x; i++)
                 {
@@ -90,18 +92,31 @@ public class BlockChoice : MonoBehaviour
                         {
                             if (DDOL.instance.spell == "Unlife")
                             {
-                                if(DDOL.instance.Coords[i][j].G.GetComponent<MouseDetect>().HP - 2 <= 0)
+                                if (DDOL.instance.Coords[i][j].G.GetComponent<MouseDetect>().HP - 2 <= 0)
                                 {
-                                    DDOL.instance.summon = DDOL.instance.IC.GetComponent<Magician_N>().Skeleton;
-
-                                    DDOL.instance.SummonPawn(DDOL.instance.Coords[i][j].G.transform);
+                                    Summon = true;
+                                    SummonPos = DDOL.instance.Coords[i][j].location.transform;
                                 }
                                 DDOL.instance.Coords[i][j].G.GetComponent<MouseDetect>().DamageHP(2);
                                 DDOL.instance.currentObject.GetComponent<MouseDetect>().DiminishMana(DDOL.instance.currentCost);
                                 DDOL.instance.currentCost = 0;
+                                if (Summon)
+                                {
+                                    Summon = false;
+                                    if (DDOL.instance.player == 0)
+                                    {
+                                        DDOL.instance.summon = DDOL.instance.IC.GetComponent<Magician_N>().Skeleton;
+                                    }
+                                    else
+                                    {
+                                        DDOL.instance.summon = DDOL.instance.IC2.GetComponent<Magician_N>().Skeleton;
+                                    }
+
+                                    DDOL.instance.SummonPawn(SummonPos);
+                                }
 
                             }
-                            else
+                            else if (DDOL.instance.spell == "") 
                             {
                                 DDOL.instance.Coords[i][j].G.GetComponent<MouseDetect>().DamageHP(DDOL.instance.currentObject.GetComponent<MouseDetect>().DMG);
                                 DDOL.instance.currentObject.GetComponent<MouseDetect>().Attacks++;
@@ -115,7 +130,7 @@ public class BlockChoice : MonoBehaviour
                     }
                 }
             }
-            if (DDOL.instance.option == "all")
+            else if (DDOL.instance.option == "all")
             {
                 for (int i = 0; i < DDOL.instance.x; i++)
                 {
