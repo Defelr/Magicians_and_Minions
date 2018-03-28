@@ -16,7 +16,9 @@ public class Switch_Canvas : MonoBehaviour {
 
     public LayerMask player1;
     public LayerMask player2;
-    private LayerMask LM;   
+    private LayerMask LM;
+
+    private GameObject CurrentInterafce;
 
 	// Use this for initialization
 	void Start () {
@@ -32,6 +34,82 @@ public class Switch_Canvas : MonoBehaviour {
     }
 	// Update is called once per frame
 	void Update () {
+        if (DDOL.instance.currentObject)
+        {
+            GameObject tempCO = DDOL.instance.currentObject;
+            if(tempCO.tag == "Necro")
+            {
+                foreach(Transform C in necroInterface.transform)
+                {
+                    if (C.gameObject.name == "Move_Btn")
+                    {
+                        if (tempCO.GetComponent<MouseDetect>().Moves >= tempCO.GetComponent<MouseDetect>().Movement_c)
+                        {
+                            C.gameObject.GetComponent<Button>().interactable = false;
+                        }
+                        else
+                        {
+                            C.gameObject.GetComponent<Button>().interactable = true;
+                        }
+                    }
+                    else if (C.gameObject.name == "Ability_Btn (2)")
+                    {
+                        if (tempCO.GetComponent<MouseDetect>().Mana < tempCO.GetComponent<Magician_N>().Wraith.GetComponent<MouseDetect>().Cost)
+                        {
+                            C.gameObject.GetComponent<Button>().interactable = false;
+
+                        }
+                        else
+                        {
+                            C.gameObject.GetComponent<Button>().interactable = true;
+                        }
+                    }
+                    else if (C.gameObject.name == "Ability_Btn (3)")
+                    {
+                        if (tempCO.GetComponent<MouseDetect>().Mana < tempCO.GetComponent<Magician_N>().Skeleton.GetComponent<MouseDetect>().Cost)
+                        {
+                            C.gameObject.GetComponent<Button>().interactable = false;
+
+                        }
+                        else
+                        {
+                            C.gameObject.GetComponent<Button>().interactable = true;
+                        }
+                    }
+                    else if (C.gameObject.name == "Abilit_Btn")
+                    {
+                        if (!tempCO.GetComponent<Magician_N>().UnLifeBlastCheck())
+                        {
+                            C.gameObject.GetComponent<Button>().interactable = false;
+                        }
+                        else
+                        {
+                            C.gameObject.GetComponent<Button>().interactable = true;
+                        }
+                    } else if(C.gameObject.name == "Ability_Btn (4)")
+                    {
+                        if (!tempCO.GetComponent<Magician_N>().SwarmCheck())
+                        {
+                            C.gameObject.GetComponent<Button>().interactable = false;
+                        }
+                        else
+                        {
+                            C.gameObject.GetComponent<Button>().interactable = true;
+                        }
+                    } else if (C.gameObject.name == "Ability_Btn (1)")
+                    {
+                        if (!tempCO.GetComponent<Magician_N>().LifeDrainCheck())
+                        {
+                            C.gameObject.GetComponent<Button>().interactable = false;
+                        }
+                        else
+                        {
+                            C.gameObject.GetComponent<Button>().interactable = true;
+                        }
+                    }
+                }
+            }
+        }
 		if (Input.GetMouseButtonDown(0))
         {
             if (DDOL.instance.turn % 2 == 0)

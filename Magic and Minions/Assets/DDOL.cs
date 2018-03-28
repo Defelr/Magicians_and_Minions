@@ -65,6 +65,8 @@ public class DDOL : MonoBehaviour
 
     public int TempHP;
 
+    public GameObject ICS; 
+
     public void End_Turn()
     {
         if (turn % 2 == 0)
@@ -357,7 +359,7 @@ public class DDOL : MonoBehaviour
                 }
             }
         }
-        GameObject ICS = (GameObject)Instantiate(summon, vx, new_p.transform.rotation);
+        ICS = (GameObject)Instantiate(summon, vx, new_p.transform.rotation);
         if (player == 0)
         {
             ICS.transform.parent = SC.transform;
