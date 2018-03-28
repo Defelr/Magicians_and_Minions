@@ -20,6 +20,7 @@ public class Switch_Canvas : MonoBehaviour {
 
     private GameObject CurrentInterafce;
 
+    private Slider healthSlider;
 	// Use this for initialization
 	void Start () {
 		

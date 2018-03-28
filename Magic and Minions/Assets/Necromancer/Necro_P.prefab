@@ -632,6 +632,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 0
+  MAX_HP: 0
   DMG: 0
   Mana: 0
   Cost: 0
@@ -651,6 +652,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 20
+  MAX_HP: 0
   DMG: 0
   Mana: 10
   Cost: -1
