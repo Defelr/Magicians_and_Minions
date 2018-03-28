@@ -20,7 +20,7 @@ public class BlockChoice : MonoBehaviour
     }
     private void OnMouseOver()
     {
-        if (DDOL.instance.option == "attack")
+        if (DDOL.instance.option == "attack" || DDOL.instance.option == "all")
         {
             this.gameObject.GetComponent<Renderer>().material = DDOL.instance.G_Color;
         }
@@ -64,10 +64,11 @@ public class BlockChoice : MonoBehaviour
                     }
                     DDOL.instance.ShowSpaces();
                 }
-                else
+                if(DDOL.instance.spell == "")
                 {
                     DDOL.instance.summon = null;
                     this.GetComponentInParent<Board_count>().times = 0;
+                    DDOL.instance.option = "";
                     DDOL.instance.ClearSpaces();
                 }
             }
@@ -87,7 +88,6 @@ public class BlockChoice : MonoBehaviour
                     {
                         if (DDOL.instance.Coords[i][j].location == this.gameObject)
                         {
-                            Debug.Log(DDOL.instance.Coords[i][j].G);
                             if (DDOL.instance.spell == "Unlife")
                             {
                                 if(DDOL.instance.Coords[i][j].G.GetComponent<MouseDetect>().HP - 2 <= 0)
@@ -95,8 +95,6 @@ public class BlockChoice : MonoBehaviour
                                     DDOL.instance.summon = DDOL.instance.IC.GetComponent<Magician_N>().Skeleton;
 
                                     DDOL.instance.SummonPawn(DDOL.instance.Coords[i][j].G.transform);
-
-                                    Debug.Log("IT WORKED");
                                 }
                                 DDOL.instance.Coords[i][j].G.GetComponent<MouseDetect>().DamageHP(2);
                                 DDOL.instance.currentObject.GetComponent<MouseDetect>().DiminishMana(DDOL.instance.currentCost);
@@ -117,12 +115,44 @@ public class BlockChoice : MonoBehaviour
                     }
                 }
             }
-
-            if(DDOL.instance.spell != "Swarm")
+            if (DDOL.instance.option == "all")
             {
-                DDOL.instance.option = "";
+                for (int i = 0; i < DDOL.instance.x; i++)
+                {
+                    for (int j = 0; j < DDOL.instance.x; j++)
+                    {
+                        if (DDOL.instance.Coords[i][j].location == this.gameObject)
+                        {
+                            if (DDOL.instance.spell == "LifeDrain")
+                            {
+                                if (DDOL.instance.Coords[i][j].G.GetComponent<MouseDetect>().HP - 4 <= 0)
+                                {
+                                    DDOL.instance.TempHP = DDOL.instance.Coords[i][j].G.GetComponent<MouseDetect>().HP;
+                                }
+                                else
+                                {
+                                    DDOL.instance.TempHP = 4;
+                                }
+                                Debug.Log(DDOL.instance.spell + " " + DDOL.instance.Coords[i][j].G + " Block Choice");
+                                DDOL.instance.Coords[i][j].G.GetComponent<MouseDetect>().DamageHP(4);
+                                DDOL.instance.spell = "LifeDrain2";
+                            }
+                            else if (DDOL.instance.spell == "LifeDrain2")
+                            {
+                                Debug.Log(DDOL.instance.spell + " " + DDOL.instance.Coords[i][j].G + " Block Choice");
+                                DDOL.instance.Coords[i][j].G.GetComponent<MouseDetect>().HealHP(DDOL.instance.TempHP);
+                                DDOL.instance.spell = "";
+                                DDOL.instance.TempHP = 0;
+                            }
+                            if(DDOL.instance.spell == "")
+                            {
+                                DDOL.instance.option = "";
+                                DDOL.instance.ClearSpaces();
+                            }
+                        }
+                    }
+                }
             }
-
         }
     }
 }

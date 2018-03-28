@@ -2450,7 +2450,7 @@ MonoBehaviour:
   currentObject: {fileID: 1702157419013918, guid: 75315e50b6cf4734dbc7f6d5b96b1eff,
     type: 2}
   StartingC: {fileID: 1702157419013918, guid: 75315e50b6cf4734dbc7f6d5b96b1eff, type: 2}
-  StartingC2: {fileID: 1034766658594952, guid: c82ae13076bdccc48afd26a62c6df5a2, type: 2}
+  StartingC2: {fileID: 1702157419013918, guid: 75315e50b6cf4734dbc7f6d5b96b1eff, type: 2}
   SC: {fileID: 2062984470}
   SC2: {fileID: 1399495387}
   IC: {fileID: 0}
@@ -2462,6 +2462,7 @@ MonoBehaviour:
   SystemEvent: {fileID: 685602774}
   G_Color: {fileID: 2100000, guid: a569c7c788a494940abe92b07b9b90f9, type: 2}
   Gr_Color: {fileID: 2100000, guid: 08cab5072e73f4047990906afd5bbca6, type: 2}
+  TempHP: 0
 --- !u!82 &1623350523
 AudioSource:
   m_ObjectHideFlags: 0
