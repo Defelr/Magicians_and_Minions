@@ -81,6 +81,30 @@ public class Magician_N : MonoBehaviour
         }
     }
     //SPELLS SECTION
+    public bool UnLifeBlastCheck()
+    {
+        if (CheckSummon(2))
+        {
+            return true;
+        }
+        return false;
+    }
+    public bool SwarmCheck()
+    {
+        if (CheckSummon(2))
+        {
+            return true;
+        }
+        return false;
+    }
+    public bool LifeDrainCheck()
+    {
+        if (CheckSummon(4))
+        {
+            return true;
+        }
+        return false;
+    }
     public void UnLifeBlast()
     {
         if (CheckSummon(2))//Cost of spell

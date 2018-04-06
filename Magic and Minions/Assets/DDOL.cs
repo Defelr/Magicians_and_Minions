@@ -63,6 +63,10 @@ public class DDOL : MonoBehaviour
     public Material G_Color;
     public Material Gr_Color;
 
+    public int TempHP;
+
+    public GameObject ICS; 
+
     public void End_Turn()
     {
         if (turn % 2 == 0)
@@ -99,6 +103,10 @@ public class DDOL : MonoBehaviour
         turn++;
         ClearUI();
         spell = ""; //We can play with this as to add a warning before the player ends their turn ? for now it's set to this because by ending your turn no spell should be active at the start of the nex players turn
+        option = "";
+        currentObject = null;
+        summon = null;
+        TempHP = 0;
 
     }
     public void ResetCharacters(Transform ParentPlayer) { 
@@ -133,16 +141,16 @@ public class DDOL : MonoBehaviour
         StartingC.transform.localScale = new Vector3(1F, 1F, 1F);
         GameObject new_p = Coords[0][0].location;
         Vector3 vx = new Vector3(new_p.transform.position.x, 5.5F, new_p.transform.position.z);
-        IC = (GameObject)Instantiate(StartingC, vx, new_p.transform.rotation);
         StartingC.gameObject.layer = LayerMask.NameToLayer("Player1");
+        IC = (GameObject)Instantiate(StartingC, vx, new_p.transform.rotation);
         Coords[0][0] = new Coordinates(IC.GetInstanceID(), 1, 0, IC, Coords[0][0].location);
         IC.transform.parent = SC.gameObject.transform;
 
         StartingC2.transform.localScale = new Vector3(1F, 1F, 1F);
         new_p = Coords[x-1][x-1].location;
-        vx = new Vector3(new_p.transform.position.x, 6.047379F, new_p.transform.position.z);
-        IC2 = (GameObject)Instantiate(StartingC2, vx, new_p.transform.rotation);
+        vx = new Vector3(new_p.transform.position.x, 5.5F, new_p.transform.position.z);
         StartingC2.gameObject.layer = LayerMask.NameToLayer("Player2");
+        IC2 = (GameObject)Instantiate(StartingC2, vx, new_p.transform.rotation);
         Coords[x-1][x-1] = new Coordinates(IC2.GetInstanceID(), 1, 1, IC2, Coords[x-1][x-1].location);
         IC2.transform.parent = SC2.gameObject.transform;
     }
@@ -244,6 +252,20 @@ public class DDOL : MonoBehaviour
         }
         return -1;
     }
+    public GameObject FindCurrentObject(GameObject Loc)
+    {
+        for(int i = 0; i < x; i++)
+        {
+            for(int j = 0; j < x; j++)
+            {
+                if(Coords[i][j].location.gameObject == Loc.gameObject)
+                {
+                    return Coords[i][j].G;
+                }
+            }
+        }
+        return null;
+    }
     //MOVEMENT
     public List<GameObject> SpaceLocation(int r, int ID)
     {
@@ -277,9 +299,9 @@ public class DDOL : MonoBehaviour
                         {
                             spaces.Add(Coords[n_row][n_col].location);
                         }
-                    }else if (option == "attack")
+                    } else if (option == "attack")
                     {
-                        if(Coords[n_row][n_col].status == 1)
+                        if (Coords[n_row][n_col].status == 1)
                         {
                             if (player == 0)
                             {
@@ -297,9 +319,12 @@ public class DDOL : MonoBehaviour
                             }
                         }
                     }
-                    else
+                    else if (option == "all")
                     {
-                        spaces.Add(Coords[n_row][n_col].location);
+                        if (Coords[n_row][n_col].status == 1)
+                        {
+                            spaces.Add(Coords[n_row][n_col].location);
+                        }
                     }
                 }
                 n_col++;
@@ -327,7 +352,8 @@ public class DDOL : MonoBehaviour
         {
             vx = new Vector3(new_p.transform.position.x, 6.019F, new_p.transform.position.z);
         }
-        GameObject ICS = (GameObject)Instantiate(summon, vx, new_p.transform.rotation);
+        int i_x = 0;
+        int j_y = 0;
         for (int i = 0; i < x; i++)
         {
             for (int j = 0; j < x; j++)
@@ -336,18 +362,27 @@ public class DDOL : MonoBehaviour
                 {
                     if (player == 0)
                     {
-                        ICS.gameObject.layer = LayerMask.NameToLayer("Player1");
-                        ICS.transform.parent = SC.transform;
+                        summon.gameObject.layer = LayerMask.NameToLayer("Player1");
                     }
                     else
                     {
-                        ICS.gameObject.layer = LayerMask.NameToLayer("Player2");
-                        ICS.transform.parent = SC2.transform;
+                        summon.gameObject.layer = LayerMask.NameToLayer("Player2");
                     }
-                    Coords[i][j] = new Coordinates(ICS.GetInstanceID(), 1, player, ICS, Coords[i][j].location);
+                    i_x = i;
+                    j_y = j;
                 }
             }
         }
+        ICS = (GameObject)Instantiate(summon, vx, new_p.transform.rotation);
+        if (player == 0)
+        {
+            ICS.transform.parent = SC.transform;
+        }
+        else
+        {
+            ICS.transform.parent = SC2.transform;
+        }
+        Coords[i_x][j_y] = new Coordinates(ICS.GetInstanceID(), 1, player, ICS, Coords[i_x][j_y].location);
         if (spell != "Swarm")//HERE IS A POINT WHERE THE COST IS DIMIINSHED BASED ON SWARM
         {
             currentObject.gameObject.GetComponent<MouseDetect>().DiminishMana(ICS.gameObject.GetComponent<MouseDetect>().Cost);
@@ -385,9 +420,5 @@ public class DDOL : MonoBehaviour
             }
         }
         source.PlayOneShot(moveSound, 0.7F);
-        Collider col = currentObjectL.GetComponent<Collider>();
-        Collider colp = currentObject.GetComponent<Collider>();
-        colp.isTrigger = true;
-        col.isTrigger = false;
     }
 }
