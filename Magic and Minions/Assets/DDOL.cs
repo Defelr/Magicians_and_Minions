@@ -150,6 +150,8 @@ public class DDOL : MonoBehaviour
         new_p = Coords[x-1][x-1].location;
         vx = new Vector3(new_p.transform.position.x, 5.5F, new_p.transform.position.z);
         StartingC2.gameObject.layer = LayerMask.NameToLayer("Player2");
+        new_p.transform.rotation.Set(new_p.transform.rotation.x, new_p.transform.rotation.y + 180, new_p.transform.rotation.z, new_p.transform.rotation.w);
+        new_p.transform.RotateAround(transform.position, transform.up, 180f);
         IC2 = (GameObject)Instantiate(StartingC2, vx, new_p.transform.rotation);
         Coords[x-1][x-1] = new Coordinates(IC2.GetInstanceID(), 1, 1, IC2, Coords[x-1][x-1].location);
         IC2.transform.parent = SC2.gameObject.transform;

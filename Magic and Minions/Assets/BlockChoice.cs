@@ -171,5 +171,8 @@ public class BlockChoice : MonoBehaviour
                 }
             }
         }
+        else
+        {
+        }
     }
 }
