@@ -9,6 +9,7 @@ public class BlockChoice : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+       gameObject.GetComponent<ParticleSystem>().Stop();
     }
 
     // Update is called once per frame
@@ -33,8 +34,6 @@ public class BlockChoice : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        Renderer Re = null;
-        GameObject temp = null;
         Renderer R = this.gameObject.GetComponent<Renderer>();
         Collider C = GetComponent<Collider>();
         List<GameObject> tempList = new List<GameObject>();
