@@ -156,6 +156,7 @@ public class Switch_Canvas : MonoBehaviour {
                 LM = player2;
             }
             RaycastHit hitInfo = new RaycastHit();
+
             if (Physics.Raycast(DDOL.instance.currentCamera.ScreenPointToRay(Input.mousePosition), out hitInfo, Mathf.Infinity, LM) && (DDOL.instance.option == "move" || DDOL.instance.option == "" ))
             {
                 GameObject grid_B = GameObject.Find("Grid_Board");

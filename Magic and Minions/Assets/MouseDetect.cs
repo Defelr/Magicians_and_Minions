@@ -34,6 +34,7 @@ public class MouseDetect : MonoBehaviour
             Moves = Movement_c;
             Attacks = Attack_c;
         }
+        gameObject.GetComponent<ParticleSystem>().Stop();
     }
     // Update is called once per frame
     void Update()
@@ -61,6 +62,11 @@ public class MouseDetect : MonoBehaviour
                         return;
                     }
                 }
+            }
+            //Work on getting the Particle System to stop when you select another character // probably also when the turn ends
+            if(DDOL.instance.currentObject.gameObject != gameObject)
+            {
+                gameObject.GetComponent<ParticleSystem>().Stop();
             }
         }
         if (HP > MAX_HP)
