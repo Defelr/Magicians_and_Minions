@@ -118,11 +118,13 @@ public class MouseDetect : MonoBehaviour
     }
     public void DamageHP(int DecHP)
     {
-        HP -= DecHP; 
+        HP -= DecHP;
+        FloatingHealthBars.pieceHP = HP;
     }
     public void HealHP(int IncHP)
     {
         HP += IncHP;
+        FloatingHealthBars.pieceHP = HP;
     }
     public void OnMouseOver()
     {
