@@ -29,6 +29,14 @@ public class Magician_N : MonoBehaviour
         }
         return false;
     }
+    private void CheckPrevious()
+    {
+        DDOL.instance.summon = null;
+        DDOL.instance.option = "";
+        DDOL.instance.spell = "";
+        DDOL.instance.UnShowSpaces();
+        DDOL.instance.spaces.Clear();
+    }
     public void Range(int range)
     {
         DDOL.instance.SpaceLocation(range, DDOL.instance.currentObject.GetInstanceID());
@@ -51,6 +59,7 @@ public class Magician_N : MonoBehaviour
     //MINIONS SECTION
     public void SummonSkeleton()
     {
+        CheckPrevious();
         if (CheckSummon(Skeleton.GetComponent<MouseDetect>().Cost))
         {
             DDOL.instance.option = "summon";
@@ -62,6 +71,7 @@ public class Magician_N : MonoBehaviour
     }
     public void SummonWraith()
     {
+        CheckPrevious();
         if (CheckSummon(Wraith.GetComponent<MouseDetect>().Cost))
         {
             DDOL.instance.option = "summon";
@@ -72,6 +82,7 @@ public class Magician_N : MonoBehaviour
     }
     public void SummonGreatSpirit()
     {
+        CheckPrevious();
         if (CheckSummon(GreatSpirit.GetComponent<MouseDetect>().Cost))
         {
             DDOL.instance.option = "summon";
@@ -107,6 +118,7 @@ public class Magician_N : MonoBehaviour
     }
     public void UnLifeBlast()
     {
+        CheckPrevious();
         if (CheckSummon(2))//Cost of spell
         {
             DDOL.instance.option = "attack";
@@ -118,6 +130,7 @@ public class Magician_N : MonoBehaviour
     }
     public void Swarm()
     {
+        CheckPrevious();
         if (CheckSummon(2))
         {
             DDOL.instance.option = "summon";
@@ -130,10 +143,10 @@ public class Magician_N : MonoBehaviour
     }
     public void LifeDrain()
     {
+        CheckPrevious();
         if (CheckSummon(4))
         {
             DDOL.instance.option = "all";
-            DDOL.instance.summon = Skeleton;
             DDOL.instance.spell = "LifeDrain";
             DDOL.instance.currentCost = 4;
             Debug.Log("Life Drain");

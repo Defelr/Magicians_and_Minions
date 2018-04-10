@@ -172,6 +172,10 @@ public class BlockChoice : MonoBehaviour
         }
         else
         {
+            DDOL.instance.option = "";
+            DDOL.instance.spell = "";
+            DDOL.instance.summon = null;
+            DDOL.instance.ClearSpaces();
         }
     }
 }

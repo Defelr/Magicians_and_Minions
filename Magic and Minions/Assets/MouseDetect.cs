@@ -209,7 +209,12 @@ public class MouseDetect : MonoBehaviour
     }
     public void Move()
     {
-            List<GameObject> spaces = new List<GameObject>();
+        DDOL.instance.summon = null;
+        DDOL.instance.option = "";
+        DDOL.instance.spell = "";
+        DDOL.instance.UnShowSpaces();
+        DDOL.instance.spaces.Clear();
+        List<GameObject> spaces = new List<GameObject>();
             DDOL.instance.option = "move";
             spaces = DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
             if (spaces.Count <= 0 || DDOL.instance.currentObject.GetComponent<MouseDetect>().Moves >= DDOL.instance.currentObject.GetComponent<MouseDetect>().Movement_c)
@@ -228,6 +233,11 @@ public class MouseDetect : MonoBehaviour
     }
     public void Attack()
     {
+        DDOL.instance.summon = null;
+        DDOL.instance.option = "";
+        DDOL.instance.spell = "";
+        DDOL.instance.UnShowSpaces();
+        DDOL.instance.spaces.Clear();
         Debug.Log("ATTACK STARTS");
         List<GameObject> spaces = new List<GameObject>();
         DDOL.instance.option = "attack";
