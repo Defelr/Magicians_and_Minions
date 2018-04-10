@@ -211,16 +211,12 @@ public class DDOL : MonoBehaviour
             Renderer R = c.GetComponent<Renderer>();
             R.enabled = false;
         }
-        /*foreach (GameObject c in spaces)
+         foreach (GameObject c in spaces)
         {
-            Renderer Re = c.gameObject.GetComponent<Renderer>();
             ParticleSystem pr = c.GetComponent<ParticleSystem>();
             var main = pr.main;
-            if (Re.enabled)
-            {
                 pr.Stop();
-            }
-        }*/
+        }
         spaces.Clear();
     }
     public void ShowSpaces()
@@ -230,17 +226,13 @@ public class DDOL : MonoBehaviour
             Renderer R = c.GetComponent<Renderer>();
             R.enabled = true;
         }
-      /*  foreach(GameObject c in spaces)
+        foreach(GameObject c in spaces)
         {
-            Renderer Re = c.gameObject.GetComponent<Renderer>();
             ParticleSystem pr = c.GetComponent<ParticleSystem>();
             var main = pr.main;
-            if (Re.enabled)
-            {
-                main.startColor = new Color(0.0F, 250.0F, 0.0F, 1.0F);
-                pr.Play();
-            }
-        }*/
+            main.startColor = new Color(0.0F, 250.0F, 0.0F, 1.0F);
+            pr.Play();
+        }
     }
     public void UnShowSpaces()
     {

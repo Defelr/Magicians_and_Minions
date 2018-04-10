@@ -224,11 +224,7 @@ public class MouseDetect : MonoBehaviour
             }
             else
             {
-            foreach (GameObject c in spaces)
-                {
-                    Renderer R = c.GetComponent<Renderer>();
-                    R.enabled = true; 
-                }
+            DDOL.instance.ShowSpaces();
             }
     }
     public void Attack()
@@ -250,11 +246,7 @@ public class MouseDetect : MonoBehaviour
         }
         else
         {
-            foreach (GameObject c in spaces)
-            {
-                Renderer R = c.GetComponent<Renderer>();
-                R.enabled = true;
-            }
+            DDOL.instance.ShowSpaces();
         }
     }
 }

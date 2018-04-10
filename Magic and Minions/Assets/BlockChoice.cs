@@ -16,6 +16,7 @@ public class BlockChoice : MonoBehaviour
     private void Update()
     {
 
+
     }
     private void OnCollisionEnter()
     {
