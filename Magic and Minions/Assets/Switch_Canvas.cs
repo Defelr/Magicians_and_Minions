@@ -157,87 +157,91 @@ public class Switch_Canvas : MonoBehaviour {
             }
             RaycastHit hitInfo = new RaycastHit();
 
-            if (Physics.Raycast(DDOL.instance.currentCamera.ScreenPointToRay(Input.mousePosition), out hitInfo, Mathf.Infinity, LM) && (DDOL.instance.option == "move" || DDOL.instance.option == "" ))
+            if (Physics.Raycast(DDOL.instance.currentCamera.ScreenPointToRay(Input.mousePosition), out hitInfo, Mathf.Infinity, LM) && (DDOL.instance.option == "move" || DDOL.instance.option == "" || DDOL.instance.option == "summon" ))
             {
-                GameObject grid_B = GameObject.Find("Grid_Board");
-                if (DDOL.instance.spell != "Swarm")
+                if ((hitInfo.transform.gameObject.GetComponent<MouseDetect>().Movement_c != hitInfo.transform.gameObject.GetComponent<MouseDetect>().Moves) &&
+                    hitInfo.transform.gameObject.GetComponent<MouseDetect>().Attack_c != hitInfo.transform.gameObject.GetComponent<MouseDetect>().Attacks)
                 {
-                    DDOL.instance.ClearSpaces();
-                }
-                foreach (Transform child in grid_B.transform)
-                {
-                    Collider col = child.GetComponent<Collider>();
-                    Collider thiscol = hitInfo.transform.GetComponent<Collider>();
-                    if (col.bounds.Intersects(thiscol.bounds))
+                    GameObject grid_B = GameObject.Find("Grid_Board");
+                    if (DDOL.instance.spell != "Swarm")
                     {
-                        for (int i = 0; i < DDOL.instance.x; i++)
+                        DDOL.instance.ClearSpaces();
+                    }
+                    foreach (Transform child in grid_B.transform)
+                    {
+                        Collider col = child.GetComponent<Collider>();
+                        Collider thiscol = hitInfo.transform.GetComponent<Collider>();
+                        if (col.bounds.Intersects(thiscol.bounds))
                         {
-                            for (int j = 0; j < DDOL.instance.x; j++)
+                            for (int i = 0; i < DDOL.instance.x; i++)
                             {
-                                Debug.Log("Mouse Down");
-                                Debug.Log(DDOL.instance.Coords[i][j].location.gameObject.name);
-                                Debug.Log(col.gameObject.name);
-                                if (DDOL.instance.Coords[i][j].location.gameObject.name == col.gameObject.name)
+                                for (int j = 0; j < DDOL.instance.x; j++)
                                 {
-                                    if ((DDOL.instance.player == 0 || DDOL.instance.player == 1) && DDOL.instance.player == DDOL.instance.Coords[i][j].Team)
+                                    Debug.Log("Mouse Down");
+                                    Debug.Log(DDOL.instance.Coords[i][j].location.gameObject.name);
+                                    Debug.Log(col.gameObject.name);
+                                    if (DDOL.instance.Coords[i][j].location.gameObject.name == col.gameObject.name)
                                     {
-                                        Debug.Log("IN ID ADDER");
-                                        Debug.Log(hitInfo.transform.gameObject.layer.ToString());
-                                        DDOL.instance.SetObject(hitInfo.transform.gameObject.GetInstanceID(), 1, hitInfo.transform.gameObject, DDOL.instance.Coords[i][j].location);
-                                        Debug.Log(hitInfo.transform.gameObject.GetInstanceID());
-                                        Debug.Log(DDOL.instance.Coords[i][j].ID);
+                                        if ((DDOL.instance.player == 0 || DDOL.instance.player == 1) && DDOL.instance.player == DDOL.instance.Coords[i][j].Team)
+                                        {
+                                            Debug.Log("IN ID ADDER");
+                                            Debug.Log(hitInfo.transform.gameObject.layer.ToString());
+                                            DDOL.instance.SetObject(hitInfo.transform.gameObject.GetInstanceID(), 1, hitInfo.transform.gameObject, DDOL.instance.Coords[i][j].location);
+                                            Debug.Log(hitInfo.transform.gameObject.GetInstanceID());
+                                            Debug.Log(DDOL.instance.Coords[i][j].ID);
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
 
-                }
-                if (hitInfo.transform.gameObject.tag == "Necro")
-                {
-                    foreach (Transform TPanel in MenuCanvasPanel.transform)
+                    }
+                    if (hitInfo.transform.gameObject.tag == "Necro")
                     {
-                        if (TPanel.tag != "Necro")
+                        foreach (Transform TPanel in MenuCanvasPanel.transform)
                         {
-                            TPanel.gameObject.SetActive(false);
-                        }
-                        else
-                        {
-                            TPanel.gameObject.SetActive(true);
+                            if (TPanel.tag != "Necro")
+                            {
+                                TPanel.gameObject.SetActive(false);
+                            }
+                            else
+                            {
+                                TPanel.gameObject.SetActive(true);
+                            }
                         }
                     }
-                }
-                else if (hitInfo.transform.gameObject.tag == "Wraith" && DDOL.instance.currentObject.tag == "Wraith")
-                {
-                    necroInterface.SetActive(false);
-                    minionInterface.SetActive(true);
-                    skelImage.SetActive(false);
-                    wraithImage.SetActive(true);
-                }
-                else if (hitInfo.transform.gameObject.tag == "Skeleton" && DDOL.instance.currentObject.tag == "Skeleton")
-                {
-                    necroInterface.SetActive(false);
-                    minionInterface.SetActive(true);
-                    wraithImage.SetActive(false);
-                    skelImage.SetActive(true);
-                }
-                else if (hitInfo.transform.gameObject.tag == "Paladin")
-                {
-                    foreach (Transform TPanel in MenuCanvasPanel.transform)
+                    else if (hitInfo.transform.gameObject.tag == "Wraith" && DDOL.instance.currentObject.tag == "Wraith")
                     {
-                        if (TPanel.tag != "Paladin")
+                        necroInterface.SetActive(false);
+                        minionInterface.SetActive(true);
+                        skelImage.SetActive(false);
+                        wraithImage.SetActive(true);
+                    }
+                    else if (hitInfo.transform.gameObject.tag == "Skeleton" && DDOL.instance.currentObject.tag == "Skeleton")
+                    {
+                        necroInterface.SetActive(false);
+                        minionInterface.SetActive(true);
+                        wraithImage.SetActive(false);
+                        skelImage.SetActive(true);
+                    }
+                    else if (hitInfo.transform.gameObject.tag == "Paladin")
+                    {
+                        foreach (Transform TPanel in MenuCanvasPanel.transform)
                         {
-                            TPanel.gameObject.SetActive(false);
-                        }
-                        else
-                        {
-                            TPanel.gameObject.SetActive(true);
+                            if (TPanel.tag != "Paladin")
+                            {
+                                TPanel.gameObject.SetActive(false);
+                            }
+                            else
+                            {
+                                TPanel.gameObject.SetActive(true);
+                            }
                         }
                     }
-                }
-                else
-                {
-                    Clear();
+                    else
+                    {
+                        Clear();
+                    }
                 }
             }
        }

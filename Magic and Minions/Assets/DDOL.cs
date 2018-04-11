@@ -241,6 +241,13 @@ public class DDOL : MonoBehaviour
             Renderer R = c.GetComponent<Renderer>();
             R.enabled = false;
         }
+        foreach (GameObject c in spaces)
+        {
+            ParticleSystem pr = c.GetComponent<ParticleSystem>();
+            var main = pr.main;          
+            pr.Stop();
+        }                          
+        spaces.Clear();
     }
     public List<List<GameObject>> PossibleSpaces(GameObject p)
     {
@@ -412,6 +419,10 @@ public class DDOL : MonoBehaviour
         if (spell != "Swarm")//HERE IS A POINT WHERE THE COST IS DIMIINSHED BASED ON SWARM
         {
             currentObject.gameObject.GetComponent<MouseDetect>().DiminishMana(ICS.gameObject.GetComponent<MouseDetect>().Cost);
+        }
+        else
+        {
+            Coords[i_x][j_y].location.GetComponent<ParticleSystem>().Stop();
         }
     }
     public void MoveCharacter(Transform new_p)

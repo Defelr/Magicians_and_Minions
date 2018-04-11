@@ -35,6 +35,35 @@ public class MouseDetect : MonoBehaviour
             Attacks = Attack_c;
         }
         gameObject.GetComponent<ParticleSystem>().Stop();
+        foreach (Transform TPanel in DDOL.instance.SystemEvent.GetComponent<Switch_Canvas>().MenuCanvasPanel.transform)
+        {
+            if (TPanel.tag == this.tag)
+            {
+                foreach (Transform BPanel in TPanel)
+                {
+                    if (BPanel.tag == this.tag)
+                    {
+                        healthSlider = BPanel.Find("Health_Sldr").gameObject.GetComponent<Slider>();
+                        healthSlider.maxValue = GetComponent<MouseDetect>().MAX_HP;
+                        healthSlider.value = GetComponent<MouseDetect>().HP;
+                        manaSlider = BPanel.Find("Mana").gameObject.GetComponent<Text>();
+                        manaSlider.text = GetComponent<MouseDetect>().Mana.ToString();
+                    }
+                }
+            }
+            else if (TPanel.tag == this.tag || this.tag == "Wraith" || this.tag == "Skeleton")
+            {
+                foreach (Transform BPanel in TPanel)
+                {
+                    if (BPanel.tag == this.tag)
+                    {
+                        healthSlider = BPanel.Find("Health_Sldr").gameObject.GetComponent<Slider>();
+                        healthSlider.maxValue = GetComponent<MouseDetect>().MAX_HP;
+                        healthSlider.value = GetComponent<MouseDetect>().HP;
+                    }
+                }
+            }
+        }
     }
     // Update is called once per frame
     void Update()
@@ -72,36 +101,10 @@ public class MouseDetect : MonoBehaviour
         if (HP > MAX_HP)
         {
             MAX_HP = HP; //If the HP of a player or minion exceeds max, make the HP the new Max
+            healthSlider.maxValue = MAX_HP;
+            healthSlider.value = HP;
         }
-       foreach(Transform TPanel in DDOL.instance.SystemEvent.GetComponent<Switch_Canvas>().MenuCanvasPanel.transform)
-        {
-            if(TPanel.tag == this.tag)
-            {
-                foreach(Transform BPanel in TPanel)
-                {
-                    if (BPanel.tag == this.tag)
-                    {
-                        healthSlider = BPanel.Find("Health_Sldr").gameObject.GetComponent<Slider>();
-                        healthSlider.maxValue = GetComponent<MouseDetect>().MAX_HP;
-                        healthSlider.value = GetComponent<MouseDetect>().HP;
-                        manaSlider = BPanel.Find("Mana").gameObject.GetComponent<Text>();
-                        manaSlider.text = GetComponent<MouseDetect>().Mana.ToString();
-                    }
-                }
-            }
-            else if (TPanel.tag == this.tag || this.tag == "Wraith" || this.tag == "Skeleton")
-            {
-                foreach (Transform BPanel in TPanel)
-                {
-                    if (BPanel.tag == this.tag)
-                    {
-                        healthSlider = BPanel.Find("Health_Sldr").gameObject.GetComponent<Slider>();
-                        healthSlider.maxValue = GetComponent<MouseDetect>().MAX_HP;
-                        healthSlider.value = GetComponent<MouseDetect>().HP;
-                    }
-                }
-            }
-        }
+       
     }
     public void ResetV()
     {
@@ -111,18 +114,22 @@ public class MouseDetect : MonoBehaviour
     public void DiminishMana(int ManaCost)
     {
         Mana -= ManaCost;
+        this.manaSlider.text = Mana.ToString();
     }
     public void IncrementMana(int ManaCost)
     {
         Mana += ManaCost;
+        this.manaSlider.text = Mana.ToString();
     }
     public void DamageHP(int DecHP)
     {
-        HP -= DecHP; 
+        HP -= DecHP;
+        this.healthSlider.value = HP;
     }
     public void HealHP(int IncHP)
     {
         HP += IncHP;
+        this.healthSlider.value = HP;
     }
     public void OnMouseOver()
     {
@@ -171,7 +178,7 @@ public class MouseDetect : MonoBehaviour
                 }
                 else
                 {
-                    this.GetComponent<MouseDetect>().DamageHP(DDOL.instance.currentObject.GetComponent<MouseDetect>().DMG);
+                    DamageHP(DDOL.instance.currentObject.GetComponent<MouseDetect>().DMG);
                     DDOL.instance.currentObject.GetComponent<MouseDetect>().Attacks++;
                 }
                 DDOL.instance.option = "";
