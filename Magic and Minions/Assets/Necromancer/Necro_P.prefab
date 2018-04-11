@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 136538401897121444}
   - component: {fileID: 114232576236218498}
   - component: {fileID: 114588284729658244}
-  - component: {fileID: 114098700450186496}
+  - component: {fileID: 114798874295591630}
   - component: {fileID: 198245902002260060}
   - component: {fileID: 199672150309768926}
   m_Layer: 9
@@ -623,18 +623,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &114098700450186496
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1702157419013918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7d0deccfb283534e8550cb30e0e2241, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pieceHPTxt: 
 --- !u!114 &114178625967263300
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -655,6 +643,8 @@ MonoBehaviour:
   Attack_c: 0
   Moves: 0
   Attacks: 0
+  healthSlider: {fileID: 0}
+  manaSlider: {fileID: 0}
 --- !u!114 &114232576236218498
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -669,12 +659,14 @@ MonoBehaviour:
   HP: 20
   MAX_HP: 0
   DMG: 0
-  Mana: 10
+  Mana: 5
   Cost: -1
   Movement_c: 1
   Attack_c: 1
   Moves: 0
   Attacks: 0
+  healthSlider: {fileID: 0}
+  manaSlider: {fileID: 0}
 --- !u!114 &114588284729658244
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -690,6 +682,18 @@ MonoBehaviour:
   Skeleton: {fileID: 1436106047229184, guid: 57ac5639bb826104da75d9cea25ba3af, type: 2}
   GreatSpirit: {fileID: 1839410023522890, guid: 77601aaa761b4c34b8b0e4d14a4d6d83,
     type: 2}
+--- !u!114 &114798874295591630
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1702157419013918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 379ecd4eab3410146bbb1492a2af3aef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pieceHPTxt: 
 --- !u!136 &136028548002215572
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -723,7 +727,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1702157419013918}
   serializedVersion: 5
-  lengthInSec: 0.0001
+  lengthInSec: 0.1
   simulationSpeed: 0.91
   stopAction: 0
   looping: 1
@@ -4105,7 +4109,7 @@ ParticleSystemRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89

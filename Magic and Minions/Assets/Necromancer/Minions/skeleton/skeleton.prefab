@@ -21,8 +21,8 @@ GameObject:
   - component: {fileID: 4898575909277266}
   - component: {fileID: 136043227514003692}
   - component: {fileID: 114826547346036266}
+  - component: {fileID: 114194734419397430}
   - component: {fileID: 198270133693365904}
-  - component: {fileID: 114846744116633456}
   - component: {fileID: 199603696050556026}
   m_Layer: 8
   m_Name: skeleton
@@ -188,6 +188,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1662919087454632}
   m_Mesh: {fileID: 4300000, guid: 236a2512a6bfe0846b379ef5d205df01, type: 3}
+--- !u!114 &114194734419397430
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1436106047229184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 379ecd4eab3410146bbb1492a2af3aef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pieceHPTxt: 
 --- !u!114 &114826547346036266
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -208,18 +220,8 @@ MonoBehaviour:
   Attack_c: 1
   Moves: 1
   Attacks: 1
---- !u!114 &114846744116633456
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1436106047229184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7d0deccfb283534e8550cb30e0e2241, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pieceHPTxt: 
+  healthSlider: {fileID: 0}
+  manaSlider: {fileID: 0}
 --- !u!136 &136043227514003692
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -240,7 +242,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1436106047229184}
   serializedVersion: 5
-  lengthInSec: 0.0001
+  lengthInSec: 0.1
   simulationSpeed: 0.12
   stopAction: 0
   looping: 1

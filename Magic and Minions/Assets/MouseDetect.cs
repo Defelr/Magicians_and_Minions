@@ -18,8 +18,8 @@ public class MouseDetect : MonoBehaviour
     public int Moves;//Amount of times moved/attacked
     public int Attacks;
 
-    private Slider healthSlider = null;
-    private Text manaSlider = null;
+    public Slider healthSlider = null;
+    public Text manaSlider = null;
     // Use this for initialization
     void Start()
     {
@@ -35,49 +35,11 @@ public class MouseDetect : MonoBehaviour
             Attacks = Attack_c;
         }
         gameObject.GetComponent<ParticleSystem>().Stop();
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        if (HP <= 0)
+        foreach (Transform TPanel in DDOL.instance.SystemEvent.GetComponent<Switch_Canvas>().MenuCanvasPanel.transform)
         {
-            for (int i = 0; i < DDOL.instance.x; i++)
+            if (TPanel.tag == this.tag)
             {
-                for (int j = 0; j < DDOL.instance.x; j++)
-                {
-                    if (DDOL.instance.Coords[i][j].G == this.gameObject)
-                    {
-                        DDOL.instance.Coords[i][j] = new Coordinates(-1, 0, -1, null, DDOL.instance.locations[i][j]);
-                        if (this.gameObject == DDOL.instance.IC.gameObject)
-                        {
-                            HotseatWin.winVar = 2;
-                            Debug.Log("PLAYER 2 WON");
-                        }
-                        else if (this.gameObject == DDOL.instance.IC2.gameObject)
-                        {
-                            HotseatWin.winVar = 1;
-                            Debug.Log("PLAYER 1 WON");
-                        }
-                        Destroy(this.gameObject);
-                        return;
-                    }
-                }
-            }
-            //Work on getting the Particle System to stop when you select another character // probably also when the turn ends
-            if(DDOL.instance.currentObject.gameObject != gameObject)
-            {
-                gameObject.GetComponent<ParticleSystem>().Stop();
-            }
-        }
-        if (HP > MAX_HP)
-        {
-            MAX_HP = HP; //If the HP of a player or minion exceeds max, make the HP the new Max
-        }
-       foreach(Transform TPanel in DDOL.instance.SystemEvent.GetComponent<Switch_Canvas>().MenuCanvasPanel.transform)
-        {
-            if(TPanel.tag == this.tag)
-            {
-                foreach(Transform BPanel in TPanel)
+                foreach (Transform BPanel in TPanel)
                 {
                     if (BPanel.tag == this.tag)
                     {
@@ -103,6 +65,47 @@ public class MouseDetect : MonoBehaviour
             }
         }
     }
+    // Update is called once per frame
+    void Update()
+    {
+        if (HP <= 0)
+        {
+            for (int i = 0; i < DDOL.instance.x; i++)
+            {
+                for (int j = 0; j < DDOL.instance.x; j++)
+                {
+                    if (DDOL.instance.Coords[i][j].G == this.gameObject)
+                    {
+                        if (this.gameObject == DDOL.instance.IC.gameObject)
+                        {
+                            HotseatWin.winVar = 2;
+                            Debug.Log("PLAYER 2 WON");
+                        }
+                        else if (this.gameObject == DDOL.instance.IC2.gameObject)
+                        {
+                            HotseatWin.winVar = 1;
+                            Debug.Log("PLAYER 1 WON");
+                        }
+                        Destroy(this.gameObject);
+                        DDOL.instance.Coords[i][j] = new Coordinates(-1, 0, -1, null, DDOL.instance.locations[i][j]);
+                        return;
+                    }
+                }
+            }
+            //Work on getting the Particle System to stop when you select another character // probably also when the turn ends
+            if(DDOL.instance.currentObject.gameObject != gameObject)
+            {
+                gameObject.GetComponent<ParticleSystem>().Stop();
+            }
+        }
+        if (HP > MAX_HP)
+        {
+            MAX_HP = HP; //If the HP of a player or minion exceeds max, make the HP the new Max
+            healthSlider.maxValue = MAX_HP;
+            healthSlider.value = HP;
+        }
+       
+    }
     public void ResetV()
     {
         Moves = 0;
@@ -111,18 +114,22 @@ public class MouseDetect : MonoBehaviour
     public void DiminishMana(int ManaCost)
     {
         Mana -= ManaCost;
+        this.manaSlider.text = Mana.ToString();
     }
     public void IncrementMana(int ManaCost)
     {
         Mana += ManaCost;
+        this.manaSlider.text = Mana.ToString();
     }
     public void DamageHP(int DecHP)
     {
         HP -= DecHP;
+        this.healthSlider.value = HP;
     }
     public void HealHP(int IncHP)
     {
         HP += IncHP;
+        this.healthSlider.value = HP;
     }
     public void OnMouseOver()
     {
@@ -171,7 +178,7 @@ public class MouseDetect : MonoBehaviour
                 }
                 else
                 {
-                    this.GetComponent<MouseDetect>().DamageHP(DDOL.instance.currentObject.GetComponent<MouseDetect>().DMG);
+                    DamageHP(DDOL.instance.currentObject.GetComponent<MouseDetect>().DMG);
                     DDOL.instance.currentObject.GetComponent<MouseDetect>().Attacks++;
                 }
                 DDOL.instance.option = "";
@@ -209,7 +216,12 @@ public class MouseDetect : MonoBehaviour
     }
     public void Move()
     {
-            List<GameObject> spaces = new List<GameObject>();
+        DDOL.instance.summon = null;
+        DDOL.instance.option = "";
+        DDOL.instance.spell = "";
+        DDOL.instance.UnShowSpaces();
+        DDOL.instance.spaces.Clear();
+        List<GameObject> spaces = new List<GameObject>();
             DDOL.instance.option = "move";
             spaces = DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
             if (spaces.Count <= 0 || DDOL.instance.currentObject.GetComponent<MouseDetect>().Moves >= DDOL.instance.currentObject.GetComponent<MouseDetect>().Movement_c)
@@ -219,15 +231,16 @@ public class MouseDetect : MonoBehaviour
             }
             else
             {
-            foreach (GameObject c in spaces)
-                {
-                    Renderer R = c.GetComponent<Renderer>();
-                    R.enabled = true; 
-                }
+            DDOL.instance.ShowSpaces();
             }
     }
     public void Attack()
     {
+        DDOL.instance.summon = null;
+        DDOL.instance.option = "";
+        DDOL.instance.spell = "";
+        DDOL.instance.UnShowSpaces();
+        DDOL.instance.spaces.Clear();
         Debug.Log("ATTACK STARTS");
         List<GameObject> spaces = new List<GameObject>();
         DDOL.instance.option = "attack";
@@ -240,11 +253,7 @@ public class MouseDetect : MonoBehaviour
         }
         else
         {
-            foreach (GameObject c in spaces)
-            {
-                Renderer R = c.GetComponent<Renderer>();
-                R.enabled = true;
-            }
+            DDOL.instance.ShowSpaces();
         }
     }
 }

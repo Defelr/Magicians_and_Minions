@@ -16,6 +16,7 @@ public class BlockChoice : MonoBehaviour
     private void Update()
     {
 
+
     }
     private void OnCollisionEnter()
     {
@@ -172,6 +173,10 @@ public class BlockChoice : MonoBehaviour
         }
         else
         {
+            DDOL.instance.option = "";
+            DDOL.instance.spell = "";
+            DDOL.instance.summon = null;
+            DDOL.instance.ClearSpaces();
         }
     }
 }
