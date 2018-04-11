@@ -18,8 +18,8 @@ public class MouseDetect : MonoBehaviour
     public int Moves;//Amount of times moved/attacked
     public int Attacks;
 
-    private Slider healthSlider = null;
-    private Text manaSlider = null;
+    public Slider healthSlider = null;
+    public Text manaSlider = null;
     // Use this for initialization
     void Start()
     {
@@ -76,7 +76,6 @@ public class MouseDetect : MonoBehaviour
                 {
                     if (DDOL.instance.Coords[i][j].G == this.gameObject)
                     {
-                        DDOL.instance.Coords[i][j] = new Coordinates(-1, 0, -1, null, DDOL.instance.locations[i][j]);
                         if (this.gameObject == DDOL.instance.IC.gameObject)
                         {
                             HotseatWin.winVar = 2;
@@ -88,6 +87,7 @@ public class MouseDetect : MonoBehaviour
                             Debug.Log("PLAYER 1 WON");
                         }
                         Destroy(this.gameObject);
+                        DDOL.instance.Coords[i][j] = new Coordinates(-1, 0, -1, null, DDOL.instance.locations[i][j]);
                         return;
                     }
                 }

@@ -43,17 +43,38 @@ public class Magician_N : MonoBehaviour
         DDOL.instance.ShowSpaces();
     }
 
-    public void ManaMechanic()//CURRENTLY HAS PLACEHOLDER VALUES
+    public int ManaMechanic()//CURRENTLY HAS PLACEHOLDER VALUES
     {
         int mana = 0;
         if(tag == "Necro")
         {
-            mana = 5;
+            int Skeletons = 0;
+            if(DDOL.instance.player == 0)
+            {
+                foreach(Transform ske in DDOL.instance.SC2)
+                {
+                    if(ske.tag == "Skeleton")
+                    {
+                        Skeletons++;
+                    }
+                }
+            }
+            else
+            {
+                foreach (Transform ske in DDOL.instance.SC)
+                {
+                    if (ske.tag == "Skeleton")
+                    {
+                        Skeletons++;
+                    }
+                }
+            }
+            mana = ((10 - Skeletons) / 2) + 1;
         }else if(tag == "Paladin")
         {
             mana = 1;
         }
-        this.GetComponent<MouseDetect>().IncrementMana(mana);
+        return mana;
 
     }
     //MINIONS SECTION

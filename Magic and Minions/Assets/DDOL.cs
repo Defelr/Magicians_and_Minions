@@ -66,17 +66,90 @@ public class DDOL : MonoBehaviour
     public int TempHP;
 
     public GameObject ICS; 
+    public void ResetCharacters(Transform ParentPlayer) { 
+        foreach(Transform T in ParentPlayer)
+        {
+            T.gameObject.GetComponent<MouseDetect>().ResetV();
+        }
+    }
+    //Clears the system UI, meaning nothing should be showing
+    public void ClearUI()
+    {
+        SystemEvent.GetComponent<Switch_Canvas>().Clear();
+    }
+    //We setup the gameboard, and player 1 and 2
+    public void Start()
+    {
+      //  SystemEvent.GetComponent<Quit>().ResetWC();
+        currentObject = null;
+        ClearSpaces();
+        locations = PossibleSpaces(GameObject.Find("Grid_Board"));
+        Coords = new List<List<Coordinates>>();
+        for (int i = 0; i < x; i++)
+        {
+            Coords.Add(new List<Coordinates>());
+        }
+        for (int i = 0; i < x; i++)
+        {
+            for (int j = 0; j < x; j++)
+            {
+                Coord = new Coordinates(-1, 0, -1, null, locations[i][j]);
+                Coords[i].Add(Coord);
+            }
+        }
 
+        //PLAYER 1 INFO
+        StartingC.transform.localScale = new Vector3(1F, 1F, 1F);
+        GameObject new_p = Coords[0][0].location;
+        Vector3 vx = new Vector3(new_p.transform.position.x, 5.5F, new_p.transform.position.z);
+        StartingC.gameObject.layer = LayerMask.NameToLayer("Player1");
+        IC = (GameObject)Instantiate(StartingC, vx, new_p.transform.rotation);
+        Coords[0][0] = new Coordinates(IC.GetInstanceID(), 1, 0, IC, Coords[0][0].location);
+        IC.transform.parent = SC.gameObject.transform;
+
+        //PLAYER 2 INFO
+        StartingC2.transform.localScale = new Vector3(1F, 1F, 1F);
+        new_p = Coords[x-1][x-1].location;
+        vx = new Vector3(new_p.transform.position.x, 5.5F, new_p.transform.position.z);
+        StartingC2.gameObject.layer = LayerMask.NameToLayer("Player2");
+        IC2 = (GameObject)Instantiate(StartingC2, vx, new_p.transform.rotation);
+        //IC2.transform.rotation.Set(new_p.transform.rotation.x, new_p.transform.rotation.y + 180, new_p.transform.rotation.z, new_p.transform.rotation.w);
+        IC2.transform.Rotate(Vector3.up * 180f);
+        Coords[x-1][x-1] = new Coordinates(IC2.GetInstanceID(), 1, 1, IC2, Coords[x-1][x-1].location);
+        IC2.transform.parent = SC2.gameObject.transform;
+    }
+
+    //Updates so that we know which player to be refering to 0 == player 1 while 1 == player2
+    public void Update()
+    {
+        player = turn % 2;
+    }
+
+    public void Awake()
+    {
+        source = GetComponent<AudioSource>();
+        if (instance == null)
+            instance = this;
+        else if (instance != this)
+            DontDestroyOnLoad(gameObject);
+    }
+    /*
+ * End Turn will enable the right cameras, clears the board, clears the UI, and abilities
+ * Clear all options, and essentially resets it so that the player can make a move
+ * 
+ */
     public void End_Turn()
     {
-        if (turn % 2 == 0)
+        int mana = 0;
+        if (player == 0)
         {
             Second.enabled = true;
             First.enabled = false;
             currentCamera = Second;
             if (IC)
             {
-                IC.GetComponent<Magician_N>().ManaMechanic();
+                mana = IC2.GetComponent<Magician_N>().ManaMechanic();
+                IC2.GetComponent<MouseDetect>().IncrementMana(mana);
                 ResetCharacters(SC);
             }
             else
@@ -91,7 +164,8 @@ public class DDOL : MonoBehaviour
             currentCamera = First;
             if (IC2)
             {
-                IC2.GetComponent<Magician_N>().ManaMechanic();
+                mana = IC.GetComponent<Magician_N>().ManaMechanic();
+                IC.GetComponent<MouseDetect>().IncrementMana(mana);
                 ResetCharacters(SC2);
             }
             else
@@ -113,66 +187,7 @@ public class DDOL : MonoBehaviour
         TempHP = 0;
 
     }
-    public void ResetCharacters(Transform ParentPlayer) { 
-        foreach(Transform T in ParentPlayer)
-        {
-            T.gameObject.GetComponent<MouseDetect>().ResetV();
-        }
-    }
-    public void ClearUI()
-    {
-        SystemEvent.GetComponent<Switch_Canvas>().Clear();
-    }
-    public void Start()
-    {
-      //  SystemEvent.GetComponent<Quit>().ResetWC();
-        currentObject = null;
-        ClearSpaces();
-        locations = PossibleSpaces(GameObject.Find("Grid_Board"));
-        Coords = new List<List<Coordinates>>();
-        for (int i = 0; i < x; i++)
-        {
-            Coords.Add(new List<Coordinates>());
-        }
-        for (int i = 0; i < x; i++)
-        {
-            for (int j = 0; j < x; j++)
-            {
-                Coord = new Coordinates(-1, 0, -1, null, locations[i][j]);
-                Coords[i].Add(Coord);
-            }
-        }
-        StartingC.transform.localScale = new Vector3(1F, 1F, 1F);
-        GameObject new_p = Coords[0][0].location;
-        Vector3 vx = new Vector3(new_p.transform.position.x, 5.5F, new_p.transform.position.z);
-        StartingC.gameObject.layer = LayerMask.NameToLayer("Player1");
-        IC = (GameObject)Instantiate(StartingC, vx, new_p.transform.rotation);
-        Coords[0][0] = new Coordinates(IC.GetInstanceID(), 1, 0, IC, Coords[0][0].location);
-        IC.transform.parent = SC.gameObject.transform;
-
-        StartingC2.transform.localScale = new Vector3(1F, 1F, 1F);
-        new_p = Coords[x-1][x-1].location;
-        vx = new Vector3(new_p.transform.position.x, 5.5F, new_p.transform.position.z);
-        StartingC2.gameObject.layer = LayerMask.NameToLayer("Player2");
-       
-        IC2 = (GameObject)Instantiate(StartingC2, vx, new_p.transform.rotation);
-        //IC2.transform.rotation.Set(new_p.transform.rotation.x, new_p.transform.rotation.y + 180, new_p.transform.rotation.z, new_p.transform.rotation.w);
-        IC2.transform.Rotate(Vector3.up * 180f);
-        Coords[x-1][x-1] = new Coordinates(IC2.GetInstanceID(), 1, 1, IC2, Coords[x-1][x-1].location);
-        IC2.transform.parent = SC2.gameObject.transform;
-    }
-    public void Update()
-    {
-        player = turn % 2;
-    }
-    public void Awake()
-    {
-        source = GetComponent<AudioSource>();
-        if (instance == null)
-            instance = this;
-        else if (instance != this)
-            DontDestroyOnLoad(gameObject);
-    }
+    //Gives you the currentplayer based on turn
     public GameObject GetCurrentPlayer()
     {
         if(player == 0)
@@ -181,6 +196,15 @@ public class DDOL : MonoBehaviour
         }
         return IC2;
     }
+    public GameObject GetOtherPlayer()
+    {
+        if (player == 0)
+        {
+            return IC2;
+        }
+        return IC;
+    }
+    //Sets the right player
     public void SetCurrentPlayer()
     {
         if(player == 0)
@@ -189,6 +213,7 @@ public class DDOL : MonoBehaviour
         }
         currentObject = IC2;
     }
+    //Sets what the currentObject is, as well as it's location
     public void SetObject(int ID, int Status, GameObject CO, GameObject COL)
     {
         if(currentObject != null)
