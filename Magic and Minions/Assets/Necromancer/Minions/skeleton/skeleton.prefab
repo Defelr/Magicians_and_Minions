@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 136043227514003692}
   - component: {fileID: 114826547346036266}
   - component: {fileID: 198270133693365904}
+  - component: {fileID: 114846744116633456}
   - component: {fileID: 199603696050556026}
   m_Layer: 8
   m_Name: skeleton
@@ -207,8 +208,23 @@ MonoBehaviour:
   Attack_c: 1
   Moves: 1
   Attacks: 1
+<<<<<<< HEAD
   healthSlider: {fileID: 0}
   manaSlider: {fileID: 0}
+=======
+--- !u!114 &114846744116633456
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1436106047229184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7d0deccfb283534e8550cb30e0e2241, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pieceHPTxt: 
+>>>>>>> dev_Rob
 --- !u!136 &136043227514003692
 CapsuleCollider:
   m_ObjectHideFlags: 1
