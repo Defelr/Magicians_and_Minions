@@ -9,22 +9,19 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1293979279537624}
+  m_RootGameObject: {fileID: 1889733164516224}
   m_IsPrefabParent: 1
---- !u!1 &1293979279537624
+--- !u!1 &1889733164516224
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4660649476496068}
-  - component: {fileID: 114168419195124922}
-  - component: {fileID: 114967557509718360}
-  - component: {fileID: 114834350320566092}
-  - component: {fileID: 114003502120253726}
-  - component: {fileID: 114286504503509920}
-  - component: {fileID: 114825779444739778}
+  - component: {fileID: 4882339172995536}
+  - component: {fileID: 114326856521224430}
+  - component: {fileID: 114407477016228560}
+  - component: {fileID: 114248877486710816}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -32,12 +29,12 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4660649476496068
+--- !u!4 &4882339172995536
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1293979279537624}
+  m_GameObject: {fileID: 1889733164516224}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -45,27 +42,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114003502120253726
+--- !u!114 &114248877486710816
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1293979279537624}
+  m_GameObject: {fileID: 1889733164516224}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7a7b328f9ccbd543b25f0494ebf3876, type: 3}
+  m_Script: {fileID: 11500000, guid: aaedee28e2277a245bf15c38101b27a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  winPnl: {fileID: 0}
-  player1Pnl: {fileID: 0}
-  player2Pnl: {fileID: 0}
-  interfacePnl: {fileID: 0}
---- !u!114 &114168419195124922
+  necroCanvas: {fileID: 0}
+  minionCanvas: {fileID: 0}
+--- !u!114 &114326856521224430
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1293979279537624}
+  m_GameObject: {fileID: 1889733164516224}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -619905303, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
@@ -74,61 +69,12 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 5
---- !u!114 &114286504503509920
+--- !u!114 &114407477016228560
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1293979279537624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79b7bf4a9ad5eb34695f4ee2abbfea0b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interfacePnl: {fileID: 0}
-  infoPnl: {fileID: 0}
---- !u!114 &114825779444739778
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1293979279537624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a03821c4f37b02c4ca1e79650419c876, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  P1: {fileID: 0}
-  P2: {fileID: 0}
-  winPnl: {fileID: 0}
---- !u!114 &114834350320566092
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1293979279537624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaedee28e2277a245bf15c38101b27a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  necroInterface: {fileID: 0}
-  minionInterface: {fileID: 0}
-  wraithImage: {fileID: 0}
-  skelImage: {fileID: 0}
-  MenuCanvasPanel: {fileID: 0}
-  player1:
-    serializedVersion: 2
-    m_Bits: 256
-  player2:
-    serializedVersion: 2
-    m_Bits: 512
---- !u!114 &114967557509718360
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1293979279537624}
+  m_GameObject: {fileID: 1889733164516224}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 1077351063, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
