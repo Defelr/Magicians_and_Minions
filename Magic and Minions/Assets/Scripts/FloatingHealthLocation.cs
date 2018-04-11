@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FloatingHealthLocation : MonoBehaviour {
 
-    float yPos = 50;
+    float yPos = 15;
 	
 	// Update is called once per frame
 	void Update () {

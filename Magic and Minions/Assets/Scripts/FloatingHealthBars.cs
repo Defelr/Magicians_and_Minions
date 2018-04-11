@@ -3,31 +3,59 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FloatingHealthBars : MonoBehaviour {
+public class FloatingHealthBars : MonoBehaviour
+{
 
-    GameObject healthBarPanel;
+    private GameObject healthBarPanel;
+    private Image panelImage;
 
-    public Text health;
+    private GameObject healthTxt;
+    private Text healthT;
+    private GameObject healthNum;
+    private Text numText;
 
-    public static int pieceHP;
+    private Color panelC;
+    private Color textC;
 
-    string pieceHPTxt;
+    public string pieceHPTxt;
 
     private void Start()
     {
         healthBarPanel = GameObject.Find("FloatingHealth_Pnl");
+        healthTxt = GameObject.Find("Health_Txt");
+        healthNum = GameObject.Find("HealthNumber");
+        panelImage = healthBarPanel.GetComponent<Image>();
+        healthT = healthTxt.GetComponent<Text>();
+        numText = healthNum.GetComponent<Text>();
+
+        panelC = panelImage.color;
+        textC = healthT.color;
+        panelC.a = 0;
+        textC.a = 0;
+        panelImage.color = panelC;
+        healthT.color = textC;
+        numText.color = textC;
     }
 
     private void OnMouseEnter()
     {
-        healthBarPanel.SetActive(true);
-        pieceHPTxt = pieceHP.ToString();
-        health.text = pieceHPTxt;
+        panelC.a = 255;
+        textC.a = 255;
+        panelImage.color = panelC;
+        healthT.color = textC;
+        numText.color = textC;
+
+        pieceHPTxt = this.GetComponent<MouseDetect>().HP.ToString();
+        numText.text = pieceHPTxt;
     }
 
     private void OnMouseExit()
     {
-        healthBarPanel.SetActive(false);
+        panelC.a = 0;
+        textC.a = 0;
+        panelImage.color = panelC;
+        healthT.color = textC;
+        numText.color = textC;
     }
 
 }
