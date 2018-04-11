@@ -124,10 +124,7 @@ public class MouseDetect : MonoBehaviour
     public void DamageHP(int DecHP)
     {
         HP -= DecHP;
-<<<<<<< HEAD
         this.healthSlider.value = HP;
-=======
->>>>>>> dev_Rob
     }
     public void HealHP(int IncHP)
     {
