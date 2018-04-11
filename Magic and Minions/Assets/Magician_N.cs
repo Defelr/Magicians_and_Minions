@@ -29,58 +29,28 @@ public class Magician_N : MonoBehaviour
         }
         return false;
     }
-    private void CheckPrevious()
-    {
-        DDOL.instance.summon = null;
-        DDOL.instance.option = "";
-        DDOL.instance.spell = "";
-        DDOL.instance.UnShowSpaces();
-        DDOL.instance.spaces.Clear();
-    }
     public void Range(int range)
     {
         DDOL.instance.SpaceLocation(range, DDOL.instance.currentObject.GetInstanceID());
         DDOL.instance.ShowSpaces();
     }
 
-    public int ManaMechanic()//CURRENTLY HAS PLACEHOLDER VALUES
+    public void ManaMechanic()//CURRENTLY HAS PLACEHOLDER VALUES
     {
         int mana = 0;
         if(tag == "Necro")
         {
-            int Skeletons = 0;
-            if(DDOL.instance.player == 0)
-            {
-                foreach(Transform ske in DDOL.instance.SC2)
-                {
-                    if(ske.tag == "Skeleton")
-                    {
-                        Skeletons++;
-                    }
-                }
-            }
-            else
-            {
-                foreach (Transform ske in DDOL.instance.SC)
-                {
-                    if (ske.tag == "Skeleton")
-                    {
-                        Skeletons++;
-                    }
-                }
-            }
-            mana = ((10 - Skeletons) / 2) + 1;
+            mana = 5;
         }else if(tag == "Paladin")
         {
             mana = 1;
         }
-        return mana;
+        this.GetComponent<MouseDetect>().IncrementMana(mana);
 
     }
     //MINIONS SECTION
     public void SummonSkeleton()
     {
-        CheckPrevious();
         if (CheckSummon(Skeleton.GetComponent<MouseDetect>().Cost))
         {
             DDOL.instance.option = "summon";
@@ -92,7 +62,6 @@ public class Magician_N : MonoBehaviour
     }
     public void SummonWraith()
     {
-        CheckPrevious();
         if (CheckSummon(Wraith.GetComponent<MouseDetect>().Cost))
         {
             DDOL.instance.option = "summon";
@@ -103,7 +72,6 @@ public class Magician_N : MonoBehaviour
     }
     public void SummonGreatSpirit()
     {
-        CheckPrevious();
         if (CheckSummon(GreatSpirit.GetComponent<MouseDetect>().Cost))
         {
             DDOL.instance.option = "summon";
@@ -139,7 +107,6 @@ public class Magician_N : MonoBehaviour
     }
     public void UnLifeBlast()
     {
-        CheckPrevious();
         if (CheckSummon(2))//Cost of spell
         {
             DDOL.instance.option = "attack";
@@ -151,7 +118,6 @@ public class Magician_N : MonoBehaviour
     }
     public void Swarm()
     {
-        CheckPrevious();
         if (CheckSummon(2))
         {
             DDOL.instance.option = "summon";
@@ -164,10 +130,10 @@ public class Magician_N : MonoBehaviour
     }
     public void LifeDrain()
     {
-        CheckPrevious();
         if (CheckSummon(4))
         {
             DDOL.instance.option = "all";
+            DDOL.instance.summon = Skeleton;
             DDOL.instance.spell = "LifeDrain";
             DDOL.instance.currentCost = 4;
             Debug.Log("Life Drain");
