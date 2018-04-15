@@ -125,6 +125,10 @@ public class MouseDetect : MonoBehaviour
     {
         HP -= DecHP;
         this.healthSlider.value = HP;
+        if (HP <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
     public void HealHP(int IncHP)
     {

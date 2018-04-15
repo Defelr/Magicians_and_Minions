@@ -103,15 +103,7 @@ public class BlockChoice : MonoBehaviour
                                 if (Summon)
                                 {
                                     Summon = false;
-                                    if (DDOL.instance.player == 0)
-                                    {
-                                        DDOL.instance.summon = DDOL.instance.IC.GetComponent<Magician_N>().Skeleton;
-                                    }
-                                    else
-                                    {
-                                        DDOL.instance.summon = DDOL.instance.IC2.GetComponent<Magician_N>().Skeleton;
-                                    }
-
+                                    DDOL.instance.summon = DDOL.instance.IC.GetComponent<Magician_N>().Skeleton;
                                     DDOL.instance.SummonPawn(SummonPos);
                                 }
 

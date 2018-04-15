@@ -99,7 +99,7 @@ public class DDOL : MonoBehaviour
         }
 
         //PLAYER 1 INFO
-        StartingC.transform.localScale = new Vector3(1F, 1F, 1F);
+        StartingC.transform.localScale = new Vector3(15F, 15F, 15F);
         GameObject new_p = Coords[0][0].location;
         Vector3 vx = new Vector3(new_p.transform.position.x, 5.5F, new_p.transform.position.z);
         StartingC.gameObject.layer = LayerMask.NameToLayer("Player1");
@@ -108,7 +108,7 @@ public class DDOL : MonoBehaviour
         IC.transform.parent = SC.gameObject.transform;
 
         //PLAYER 2 INFO
-        StartingC2.transform.localScale = new Vector3(1F, 1F, 1F);
+        StartingC2.transform.localScale = new Vector3(15F, 15F, 15F);
         new_p = Coords[x-1][x-1].location;
         vx = new Vector3(new_p.transform.position.x, 5.5F, new_p.transform.position.z);
         StartingC2.gameObject.layer = LayerMask.NameToLayer("Player2");
@@ -393,22 +393,7 @@ public class DDOL : MonoBehaviour
     }
     public void SummonPawn(Transform new_p)
     {
-        Vector3 vx = new Vector3(new_p.transform.position.x, new_p.transform.position.y, new_p.transform.position.z);
-
-        if (summon.gameObject.tag == "Wraith")
-        {
-            vx = new Vector3(new_p.transform.position.x, 6.48F, new_p.transform.position.z);
-            //summon.transform.localScale = new Vector3(10F, 10F, 10F);
-        }
-        else if (summon.gameObject.tag == "Skeleton")
-        {
-            vx = new Vector3(new_p.transform.position.x, new_p.transform.position.y-.45F, new_p.transform.position.z);
-            //summon.transform.localScale = new Vector3(10F, 10F, 10F)
-        }
-        else if (summon.gameObject.tag == "GreatSpirit")
-        {
-            vx = new Vector3(new_p.transform.position.x, 6.019F, new_p.transform.position.z);
-        }
+        Vector3 vx = new Vector3(new_p.transform.position.x, new_p.transform.position.y - .40F, new_p.transform.position.z);
         int i_x = 0;
         int j_y = 0;
         for (int i = 0; i < x; i++)
