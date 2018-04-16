@@ -113,6 +113,8 @@ public class Magician_N : MonoBehaviour
         }
     }
     //SPELLS SECTION
+
+    //NECROMANCER
     public bool UnLifeBlastCheck()
     {
         if (CheckSummon(2))
@@ -174,4 +176,80 @@ public class Magician_N : MonoBehaviour
             Range(1); //Changed ranged from 4 to 1
         }
     }
+    //Priest
+    public bool ImplosionCheck()
+    {
+        if (CheckSummon(2))
+        {
+            return true;
+        }
+        return false;
+    }
+    public bool GroupHealingCheck()
+    {
+        if (CheckSummon(2))
+        {
+            return true;
+        }
+        return false;
+    }
+    public bool HolyFireCheck()
+    {
+        if (CheckSummon(4))
+        {
+            return true;
+        }
+        return false;
+    }
+    public void Implosion()
+    {
+        CheckPrevious();
+        if (CheckSummon(2))//Cost of spell
+        {
+            DDOL.instance.option = "allE";
+            //DDOL.instance.spell = "Implosion"; NO NEED BECAUSE ATTACK IS IMMEDIATE
+            DDOL.instance.currentCost = 2;
+            Debug.Log("Implosion");
+            DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
+            foreach(GameObject T in DDOL.instance.spaces)
+            {
+                for(int i = 0; i < DDOL.instance.x; i++)
+                {
+                    for(int j = 0; j < DDOL.instance.x; j++)
+                    {
+                        if(DDOL.instance.Coords[i][j].location == T)
+                        {
+                            DDOL.instance.Coords[i][j].G.GetComponent<MouseDetect>().DamageHP(1);
+                        }
+                    }
+                }
+            }
+            DDOL.instance.option = "";
+        }
+    }
+/*    public void Swarm()
+    {
+        CheckPrevious();
+        if (CheckSummon(2))
+        {
+            DDOL.instance.option = "summon";
+            DDOL.instance.summon = Skeleton;
+            DDOL.instance.spell = "Swarm";
+            DDOL.instance.currentCost = 2;
+            Debug.Log("Swarm");
+            Range(1);
+        }
+    }
+    public void LifeDrain()
+    {
+        CheckPrevious();
+        if (CheckSummon(4))
+        {
+            DDOL.instance.option = "all";
+            DDOL.instance.spell = "LifeDrain";
+            DDOL.instance.currentCost = 4;
+            Debug.Log("Life Drain");
+            Range(1); //Changed ranged from 4 to 1
+        }
+    }*/
 }

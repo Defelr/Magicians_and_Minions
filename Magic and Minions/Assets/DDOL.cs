@@ -322,6 +322,20 @@ public class DDOL : MonoBehaviour
         }
         return null;
     }
+    public Coordinates FindCurrentLocation(GameObject Loc)
+    {
+        for (int i = 0; i < x; i++)
+        {
+            for (int j = 0; j < x; j++)
+            {
+                if (Coords[i][j].G.gameObject == Loc.gameObject)
+                {
+                    return Coords[i][j];
+                }
+            }
+        }
+        return Coords[0][0]; //Just a random position
+    }
     //MOVEMENT
     public List<GameObject> SpaceLocation(int r, int ID)
     {
@@ -374,6 +388,13 @@ public class DDOL : MonoBehaviour
                                     spaces.Add(Coords[n_row][n_col].location);
                                 }
                             }
+                        }
+                    }
+                    else if(option == "allE")
+                    {
+                        if (Coords[n_row][n_col].status == 1 && Coords[n_row][n_col].G != currentObject)
+                        {
+                            spaces.Add(Coords[n_row][n_col].location);
                         }
                     }
                     else if (option == "all")

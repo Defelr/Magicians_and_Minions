@@ -125,9 +125,21 @@ public class MouseDetect : MonoBehaviour
     {
         HP -= DecHP;
         this.healthSlider.value = HP;
+                    //new Coordinates(-1, 0, -1, null, DDOL.instance.locations[i][j]);
         if (HP <= 0)
         {
-            Destroy(this.gameObject);
+            for (int i = 0; i < DDOL.instance.x; i++)
+            {
+                for (int j = 0; j < DDOL.instance.x; j++)
+                {
+                    if (DDOL.instance.Coords[i][j].G == this.gameObject)
+                    {
+                        DDOL.instance.Coords[i][j] = new Coordinates(-1, 0, -1, null, DDOL.instance.locations[i][j]);
+                        Destroy(this.gameObject);
+                        return;
+                    }
+                }
+            }
         }
     }
     public void HealHP(int IncHP)

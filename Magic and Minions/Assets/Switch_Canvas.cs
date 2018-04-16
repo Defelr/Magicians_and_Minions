@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Switch_Canvas : MonoBehaviour {
 
+    public GameObject paladinInterface;
     public GameObject necroInterface;
     public GameObject minionInterface;
     public GameObject wraithImage;
@@ -114,7 +115,66 @@ public class Switch_Canvas : MonoBehaviour {
             }
             else if (tempCO.tag == "Paladin")
             {
+                foreach (Transform C in paladinInterface.transform)
+                {
+                    if (C.gameObject.name == "Move_Btn")
+                    {
+                        if (tempCO.GetComponent<MouseDetect>().Moves >= tempCO.GetComponent<MouseDetect>().Movement_c)
+                        {
+                            C.gameObject.GetComponent<Button>().interactable = false;
+                        }
+                        else
+                        {
+                            C.gameObject.GetComponent<Button>().interactable = true;
+                        }
+                    }
+                    else if (C.gameObject.name == "Ability_Btn (2)")
+                    {
+                        if (tempCO.GetComponent<MouseDetect>().Mana < tempCO.GetComponent<Magician_N>().GreatSpirit.GetComponent<MouseDetect>().Cost)
+                        {
+                            C.gameObject.GetComponent<Button>().interactable = false;
 
+                        }
+                        else
+                        {
+                            C.gameObject.GetComponent<Button>().interactable = true;
+                        }
+                    }
+                    else if (C.gameObject.name == "Ability_Btn (3)")
+                    {
+                        if (tempCO.GetComponent<MouseDetect>().Mana < tempCO.GetComponent<Magician_N>().GreatSpirit.GetComponent<MouseDetect>().Cost)
+                        {
+                            C.gameObject.GetComponent<Button>().interactable = false;
+
+                        }
+                        else
+                        {
+                            C.gameObject.GetComponent<Button>().interactable = true;
+                        }
+                    }
+                    else if (C.gameObject.name == "Ability_Btn")
+                    {
+                        if (!tempCO.GetComponent<Magician_N>().ImplosionCheck())
+                        {
+                            C.gameObject.GetComponent<Button>().interactable = false;
+                        }
+                        else
+                        {
+                            C.gameObject.GetComponent<Button>().interactable = true;
+                        }
+                    }
+                    else if (C.gameObject.name == "Ability_Btn (1)")
+                    {
+                        if (!tempCO.GetComponent<Magician_N>().LifeDrainCheck())
+                        {
+                            C.gameObject.GetComponent<Button>().interactable = false;
+                        }
+                        else
+                        {
+                            C.gameObject.GetComponent<Button>().interactable = true;
+                        }
+                    }
+                }
             }
             else //ELSE SHOULD ALWAYS HANDLE MINIONS
             {
