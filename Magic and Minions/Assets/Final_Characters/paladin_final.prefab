@@ -501,7 +501,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Wraith: {fileID: 0}
   Skeleton: {fileID: 0}
-  GreatSpirit: {fileID: 0}
+  GreatSpirit: {fileID: 1897325446849376, guid: d43115f65f1c20649aad8b1d3cd9b7cf,
+    type: 2}
 --- !u!114 &114985439765905632
 MonoBehaviour:
   m_ObjectHideFlags: 1
