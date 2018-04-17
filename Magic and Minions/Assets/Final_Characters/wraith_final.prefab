@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 5
-  MAX_HP: 0
+  MAX_HP: 5
   DMG: 2
   Mana: -1
   Cost: 3

@@ -130,7 +130,7 @@ public class Switch_Canvas : MonoBehaviour {
                     }
                     else if (C.gameObject.name == "Ability_Btn (2)")
                     {
-                        if (tempCO.GetComponent<MouseDetect>().Mana < tempCO.GetComponent<Magician_N>().GreatSpirit.GetComponent<MouseDetect>().Cost)
+                        if (!tempCO.GetComponent<Magician_N>().HolyFireCheck())
                         {
                             C.gameObject.GetComponent<Button>().interactable = false;
 
@@ -165,7 +165,7 @@ public class Switch_Canvas : MonoBehaviour {
                     }
                     else if (C.gameObject.name == "Ability_Btn (1)")
                     {
-                        if (!tempCO.GetComponent<Magician_N>().LifeDrainCheck())
+                        if (!tempCO.GetComponent<Magician_N>().GroupHealingCheck())
                         {
                             C.gameObject.GetComponent<Button>().interactable = false;
                         }
@@ -283,6 +283,15 @@ public class Switch_Canvas : MonoBehaviour {
                         minionInterface.SetActive(true);
                         wraithImage.SetActive(false);
                         skelImage.SetActive(true);
+                    }
+                    else if (hitInfo.transform.gameObject.tag == "GreatSpirit" && DDOL.instance.currentObject.tag == "GreatSpirit")
+                    {
+                        paladinInterface.SetActive(false);
+                        minionInterface.SetActive(true);
+                        wraithImage.SetActive(false);
+                        skelImage.SetActive(false);
+                        //greatSpiritImage.SetActive(true); THIS IS STILL NEEDED
+                         
                     }
                     else if (hitInfo.transform.gameObject.tag == "Paladin")
                     {

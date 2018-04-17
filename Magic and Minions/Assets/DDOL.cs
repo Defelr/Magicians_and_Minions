@@ -213,6 +213,7 @@ public class DDOL : MonoBehaviour
         }
         currentObject = IC2;
     }
+    public Material XXX;
     //Sets what the currentObject is, as well as it's location
     public void SetObject(int ID, int Status, GameObject CO, GameObject COL)
     {
@@ -222,6 +223,7 @@ public class DDOL : MonoBehaviour
         }
         currentObject = CO;
         currentObjectL = COL;
+       // currentObject.GetComponent<ParticleSystemRenderer>().material = XXX; this is how to change material
         currentObject.gameObject.GetComponent<ParticleSystem>().Play();
     }
     public void MouseDown()
@@ -352,8 +354,24 @@ public class DDOL : MonoBehaviour
         }
         return null;
     }
-    private List<GameObject> Spaces(int r, int y, int t)
+    public List<GameObject> SpaceLocation(int r, GameObject L)
     {
+        spaces.Clear();
+        for (int i = 0; i < x; i++)
+        {
+            for (int j = 0; j < x; j++)
+            {
+                if (Coords[i][j].location == L)
+                {
+                    return Spaces(i, j, r);
+                }
+            }
+        }
+        return null;
+    }
+    public List<GameObject> Spaces(int r, int y, int t)
+    {
+        spaces.Clear();
         spaces = new List<GameObject>();
         int n_row = r - t;
         int n_col = y - t;
@@ -390,6 +408,32 @@ public class DDOL : MonoBehaviour
                             }
                         }
                     }
+                    else if(option == "friendly")
+                    {
+                        if (Coords[n_row][n_col].status == 1)
+                        {
+                            if (player == 0)
+                            {
+                                if (Coords[n_row][n_col].G.gameObject.layer == LayerMask.NameToLayer("Player1"))
+                                {
+                                    spaces.Add(Coords[n_row][n_col].location);
+                                }
+                            }
+                            else
+                            {
+                                if (Coords[n_row][n_col].G.gameObject.layer == LayerMask.NameToLayer("Player2"))
+                                {
+                                    spaces.Add(Coords[n_row][n_col].location);
+                                }
+                            }
+                        }
+                    }else if(option == "AllE")
+                    {
+                        if ((Coords[n_row][n_col].status == 1 || Coords[n_row][n_col].status == 0 ) && Coords[n_row][n_col].G != currentObject)
+                        {
+                            spaces.Add(Coords[n_row][n_col].location);
+                        }
+                    }
                     else if(option == "allE")
                     {
                         if (Coords[n_row][n_col].status == 1 && Coords[n_row][n_col].G != currentObject)
@@ -411,6 +455,32 @@ public class DDOL : MonoBehaviour
             n_col = y - t;
         }
         return spaces;
+    }
+    public void AOE()
+    {
+        foreach (GameObject T in DDOL.instance.spaces)
+        {
+            for (int i = 0; i < DDOL.instance.x; i++)
+            {
+                for (int j = 0; j < DDOL.instance.x; j++)
+                {
+                    if (DDOL.instance.Coords[i][j].location == T)
+                    {
+                        if(DDOL.instance.spell == "GroupHealing")
+                        {
+                            DDOL.instance.Coords[i][j].G.GetComponent<MouseDetect>().HealHP(5);
+                        } else if (DDOL.instance.spell == "HolyFire")
+                        {
+                            DDOL.instance.Coords[i][j].G.GetComponent<MouseDetect>().DamageHP(2);
+                        }
+                    }
+                }
+            }
+        }
+        option = "";
+        spell = "";
+        DDOL.instance.currentObject.GetComponent<MouseDetect>().DiminishMana(currentCost);
+        DDOL.instance.ClearSpaces();
     }
     public void SummonPawn(Transform new_p)
     {

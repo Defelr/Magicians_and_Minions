@@ -100,9 +100,7 @@ public class MouseDetect : MonoBehaviour
         }
         if (HP > MAX_HP)
         {
-            MAX_HP = HP; //If the HP of a player or minion exceeds max, make the HP the new Max
-            healthSlider.maxValue = MAX_HP;
-            healthSlider.value = HP;
+            HP = MAX_HP; //Makes sure HP doesn't exceed MAX_HP when healing
         }
        
     }

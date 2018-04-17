@@ -122,7 +122,7 @@ public class BlockChoice : MonoBehaviour
                     }
                 }
             }
-            else if (DDOL.instance.option == "all")
+            else if (DDOL.instance.option == "all" || DDOL.instance.option == "allE" || DDOL.instance.option == "AllE")
             {
                 for (int i = 0; i < DDOL.instance.x; i++)
                 {
@@ -152,6 +152,13 @@ public class BlockChoice : MonoBehaviour
                                 DDOL.instance.Coords[i][j].G.GetComponent<MouseDetect>().HealHP(DDOL.instance.TempHP);
                                 DDOL.instance.spell = "";
                                 DDOL.instance.TempHP = 0;
+                            }else if (DDOL.instance.spell == "HolyFire")
+                            {
+                                DDOL.instance.ClearSpaces();
+                                DDOL.instance.option = "all";
+                                DDOL.instance.SpaceLocation(1, this.gameObject);
+                                //ADD THE DAMAGE IT WILL DEAL TO SPACES HERE
+                                DDOL.instance.AOE();
                             }
                             if(DDOL.instance.spell == "")
                             {

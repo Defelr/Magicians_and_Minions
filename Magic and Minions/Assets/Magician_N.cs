@@ -113,7 +113,15 @@ public class Magician_N : MonoBehaviour
         }
     }
     //SPELLS SECTION
+    /*
+     *  Way it works is that, we have a list of boolean values, checking if the summoner is able to 
+     *  cast a spell. These are used in Switch_Canvas, in order to check if we should disable the button
+     *  based on how much mana a player has
+     * 
+     *  The mana is hardcoded, as is the damage / healing amount
+     */
 
+        
     //NECROMANCER
     public bool UnLifeBlastCheck()
     {
@@ -187,7 +195,7 @@ public class Magician_N : MonoBehaviour
     }
     public bool GroupHealingCheck()
     {
-        if (CheckSummon(2))
+        if (CheckSummon(3))
         {
             return true;
         }
@@ -211,45 +219,33 @@ public class Magician_N : MonoBehaviour
             DDOL.instance.currentCost = 2;
             Debug.Log("Implosion");
             DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
-            foreach(GameObject T in DDOL.instance.spaces)
-            {
-                for(int i = 0; i < DDOL.instance.x; i++)
-                {
-                    for(int j = 0; j < DDOL.instance.x; j++)
-                    {
-                        if(DDOL.instance.Coords[i][j].location == T)
-                        {
-                            DDOL.instance.Coords[i][j].G.GetComponent<MouseDetect>().DamageHP(1);
-                        }
-                    }
-                }
-            }
-            DDOL.instance.option = "";
+            DDOL.instance.AOE();
         }
     }
-/*    public void Swarm()
+    public void GroupHealing()
     {
         CheckPrevious();
-        if (CheckSummon(2))
+        if (CheckSummon(3))
         {
-            DDOL.instance.option = "summon";
-            DDOL.instance.summon = Skeleton;
-            DDOL.instance.spell = "Swarm";
-            DDOL.instance.currentCost = 2;
-            Debug.Log("Swarm");
-            Range(1);
+            DDOL.instance.option = "friendly";
+            //DDOL.instance.spell = "GroupHealing"; NOT NEEDED CAUSE SHOULD AUTOMATICALLY ACTIVATE
+            DDOL.instance.currentCost = 3;
+            DDOL.instance.spell = "GroupHealing";
+            Debug.Log("GroupHealing");
+            DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
+            DDOL.instance.AOE();
         }
     }
-    public void LifeDrain()
+    public void HolyFire()
     {
         CheckPrevious();
         if (CheckSummon(4))
         {
-            DDOL.instance.option = "all";
-            DDOL.instance.spell = "LifeDrain";
+            DDOL.instance.option = "AllE";
+            DDOL.instance.spell = "HolyFire";
             DDOL.instance.currentCost = 4;
-            Debug.Log("Life Drain");
-            Range(1); //Changed ranged from 4 to 1
+            Debug.Log("Holy Fire");
+            Range(2); //Changed ranged from 4 to 1
         }
-    }*/
+    }
 }
