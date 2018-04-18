@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 20
+  MAX_HP: 0
   DMG: 0
   Mana: 10
   Cost: -1

@@ -6,6 +6,7 @@ public class KillerAI_Necromancer : MonoBehaviour {
     public GameObject Skeleton;
     public GameObject Wraith;
     public IList<GameObject> minions = new List<GameObject>();
+    public IList<GameObject> justSummoned = new List<GameObject>();
     private GameObject ai;
 
     // Use this for initialization
@@ -32,15 +33,35 @@ public class KillerAI_Necromancer : MonoBehaviour {
 
     public void PlayTurn()
     {
-        print("Let Toriel say the f-word");
         DDOL.instance.currentObject = DDOL.instance.IC2;
         ai = DDOL.instance.IC2;
-        //If less than 7 minions, summon minion, preference for wraiths
-        //TODO: probably put in some consideration about summoning skeletons for mana
-        if (minions.Count < 7)
-       {
+        foreach (GameObject m in justSummoned)
+        {
+            minions.Add(m);
+        }
+        //If less than 5 minions, summon minion, preference for wraiths
+        if (minions.Count < 5)
+        {
             Debug.Log("Summon minion");
-            if (!SummonWraith())
+            if (Random.Range(0, 1) < 0.7)
+            {
+                SummonWraith();
+            }
+            else
+            {
+                SummonSkeleton();
+            }
+        }
+        //If at least 12 mana, summon 2nd minion, regardless
+        //add a short wait here, too
+        if (DDOL.instance.currentObject.GetComponent<MouseDetect>().Mana >= 12)
+        {
+            Debug.Log("Summon 2nd minion");
+            if (Random.Range(0, 1) < 0.7)
+            {
+                SummonWraith();
+            }
+            else
             {
                 SummonSkeleton();
             }
@@ -48,12 +69,23 @@ public class KillerAI_Necromancer : MonoBehaviour {
         //wait between summoning and moving
         //yield return new WaitForSeconds(2f);
         //move minion
-        GameObject m = MinionToMove();
-        MoveMinion(m);
+        foreach(GameObject m in minions)
+        {
+            DDOL.instance.currentObject = m;
+            MoveMinion(m);
+            DDOL.instance.currentObject = ai;
+        }
         //wait between moving and attacking
         //if there is anything within attack radius, attack
-        //MinionAttack(m);
-        //wait between attacking and casting spells
+        foreach(GameObject m in minions)
+        {
+            DDOL.instance.currentObject = m;
+            MinionAttack(m);
+            DDOL.instance.currentObject = ai;
+        }
+        //wait between attacking and moving self
+        MoveSelf();
+        //wait between moving self and casting spells
         if (!UnLifeBlast())
         {
             if (!Swarm())
@@ -64,7 +96,7 @@ public class KillerAI_Necromancer : MonoBehaviour {
         DDOL.instance.End_Turn();
     }
 
-    //Summons skeleton
+    //Summons skeleton to random location
     public bool SummonSkeleton()
     {
         Debug.Log("Summon skeleton attempt");
@@ -87,7 +119,8 @@ public class KillerAI_Necromancer : MonoBehaviour {
                 return false;
             }
             //Add instance to minions list for later referencing
-            minions.Add(DDOL.instance.ICS);
+            justSummoned.Add(DDOL.instance.ICS);
+            DDOL.instance.currentObject.gameObject.GetComponent<MouseDetect>().DiminishMana(Skeleton.GetComponent<MouseDetect>().Cost);
             return true;
         } else
         {
@@ -97,7 +130,7 @@ public class KillerAI_Necromancer : MonoBehaviour {
         }
     }
 
-    //Summon wraith
+    //Summon wraith to random location
     public bool SummonWraith()
     {
         Debug.Log("Summon wraith attempt");
@@ -120,7 +153,8 @@ public class KillerAI_Necromancer : MonoBehaviour {
                 return false;
             }
             //Add instance to minions list for later referencing
-            minions.Add(DDOL.instance.ICS);
+            justSummoned.Add(DDOL.instance.ICS);
+            DDOL.instance.currentObject.gameObject.GetComponent<MouseDetect>().DiminishMana(Wraith.GetComponent<MouseDetect>().Cost);
             return true;
         } else
         {
@@ -130,28 +164,7 @@ public class KillerAI_Necromancer : MonoBehaviour {
         }
     }
 
-    //TODO: weight so that it's not always same minion being moved
-    public GameObject MinionToMove()
-    {
-        //Get player
-        GameObject p = GameObject.FindGameObjectWithTag("Player");
-        Debug.Log("player: " + p.transform.position);
-        //Find closest minion by comparing each minion distance
-        GameObject minion = minions[0];
-        float min = Vector3.Distance(p.transform.position, minions[0].transform.position);
-        foreach(GameObject m in minions)
-        {
-            if (Vector3.Distance(p.transform.position, m.transform.position) < min)
-            {
-                min = Vector3.Distance(p.transform.position, m.transform.position);
-                minion = m;
-            }
-        }
-        //Return closest minion
-        return minion;
-    }
-
-    //TODO: move minion towards player, not randomly
+    //Moves minions closer to enemy player
     public void MoveMinion(GameObject m)
     {
         //Set DDOL flags to move minion
@@ -161,16 +174,58 @@ public class KillerAI_Necromancer : MonoBehaviour {
         List<GameObject> loc = DDOL.instance.SpaceLocation(1, m.GetInstanceID());
         if (loc.Count != 0)
         {
-            //For now, moves randomly WILL BE CHANGED
-            print("first test");
-            DDOL.instance.MoveCharacter(loc[Random.Range(0, loc.Count - 1)].transform);
-            print("test");
+           //get location of other player
+            GameObject p=GameObject.FindGameObjectWithTag("Player");
+            //get smallest distance between it and possible locations
+            GameObject moveTo = loc[0];
+            float min = Vector3.Distance(p.transform.position, loc[0].transform.position);
+            foreach (GameObject l in loc)
+            {
+                if (Vector3.Distance(p.transform.position, l.transform.position) < min)
+                {
+                    min = Vector3.Distance(p.transform.position, l.transform.position);
+                    moveTo = l;
+                }
+            }
+            //compare against current location
+            if (min < Vector3.Distance(p.transform.position, m.transform.position))
+            {
+                //if closer, move and wait
+                DDOL.instance.MoveCharacter(moveTo.transform);
+            }
         }
         Debug.Log("after: " + m.transform.position);
     }
 
-    //TODO: look through all minions to see if any have something to attack
-    //      if multiple, attack with one closest to ai's piece
+    public void MoveSelf()
+    {
+        //Set DDOL flags to move
+        DDOL.instance.option = "move";
+        //Get locations can move to
+        List<GameObject> loc = DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
+        //get location of other player
+        GameObject p = GameObject.FindGameObjectWithTag("Player");
+        //get smallest distance between it and possible locations
+        GameObject moveTo = loc[0];
+        float min = Vector3.Distance(p.transform.position, loc[0].transform.position);
+        foreach (GameObject l in loc)
+        {
+            if (Vector3.Distance(p.transform.position, l.transform.position) < min)
+            {
+                min = Vector3.Distance(p.transform.position, l.transform.position);
+                moveTo = l;
+            }
+        }
+        //compare against current location
+        if (min < Vector3.Distance(p.transform.position, DDOL.instance.currentObject.transform.position))
+        {
+            //if closer, move and wait
+            DDOL.instance.MoveCharacter(moveTo.transform);
+        }
+    }
+
+    //Minions attack enemies in range with prefernce for the player,
+    //then lowest health enemy minions
     public void MinionAttack(GameObject m)
     {
         //Set DDOL flags to attack
@@ -179,15 +234,31 @@ public class KillerAI_Necromancer : MonoBehaviour {
         List<GameObject> loc = DDOL.instance.SpaceLocation(1, m.GetInstanceID());
         if (loc.Count != 0)
         {
-            //Pick one of those at random
-            GameObject l = loc[Random.Range(0, loc.Count - 1)];
-            //Get the actual object at chosen location
-            GameObject victim = DDOL.instance.FindCurrentObject(l);
-            //attack
-            victim.GetComponent<MouseDetect>().DamageHP(DDOL.instance.currentObject.GetComponent<MouseDetect>().DMG);
+            //check for player
+            foreach(GameObject l in loc)
+            {
+                if (DDOL.instance.FindCurrentObject(l).tag == "Player")
+                {
+                    DDOL.instance.FindCurrentObject(l).GetComponent<MouseDetect>().DamageHP(DDOL.instance.currentObject.GetComponent<MouseDetect>().DMG);
+                    return;
+                }
+            }
+            //otherwise, attack whatever has the lowest health
+            GameObject v = DDOL.instance.FindCurrentObject(loc[0]);
+            foreach(GameObject l in loc)
+            {
+                if(DDOL.instance.FindCurrentObject(l).GetComponent<MouseDetect>().HP<
+                    v.GetComponent<MouseDetect>().HP)
+                {
+                    v = DDOL.instance.FindCurrentObject(l);
+                }
+            }
+            v.GetComponent<MouseDetect>().DamageHP(DDOL.instance.currentObject.GetComponent<MouseDetect>().DMG);
+            return;
         }
     }
 
+    //Cast UnLifeBlast on player if possible, otherwise on minion with most health
     public bool UnLifeBlast()
     {
         if (DDOL.instance.currentObject.GetComponent<MouseDetect>().Mana >= 2)
@@ -198,15 +269,37 @@ public class KillerAI_Necromancer : MonoBehaviour {
             List<GameObject> loc = DDOL.instance.SpaceLocation(3, DDOL.instance.currentObject.GetInstanceID());
             if (loc.Count != 0)
             {
-                //DDOL.instance.SummonPawn(loc[Random.Range(0, loc.Count - 1)].transform);
+                //check for player
+                foreach (GameObject l in loc)
+                {
+                    if (DDOL.instance.FindCurrentObject(l).tag == "Player")
+                    {
+                        //VALUES HARDCODED- MAY NEED TO BE CHECKED
+                        DDOL.instance.FindCurrentObject(l).GetComponent<MouseDetect>().DamageHP(2);
+                        DDOL.instance.currentObject.GetComponent<MouseDetect>().DiminishMana(2);
+                        return true;
+                    }
+                }
+                //otherwise, attack whatever has the most health
+                GameObject v = DDOL.instance.FindCurrentObject(loc[0]);
+                foreach (GameObject l in loc)
+                {
+                    if (DDOL.instance.FindCurrentObject(l).GetComponent<MouseDetect>().HP >
+                        v.GetComponent<MouseDetect>().HP)
+                    {
+                        v = DDOL.instance.FindCurrentObject(l);
+                    }
+                }
+                v.GetComponent<MouseDetect>().DamageHP(2);
+                DDOL.instance.currentObject.GetComponent<MouseDetect>().DiminishMana(2);
+                return true;
             }
-            return true;
-        } else
-        {
             return false;
         }
+        return false;
     }
 
+    //Cast Swarm if 3 enough spots to summon minions into
     public bool Swarm()
     {
         if (DDOL.instance.currentObject.GetComponent<MouseDetect>().Mana >= 2)
@@ -216,10 +309,19 @@ public class KillerAI_Necromancer : MonoBehaviour {
             DDOL.instance.spell = "Swarm";
             DDOL.instance.currentCost = 2;
             List<GameObject> loc = DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
-            if (loc.Count != 0)
+            if (loc.Count >= 3)
             {
-                //DDOL.instance.SummonPawn(loc[Random.Range(0, loc.Count - 1)].transform);
+                DDOL.instance.SummonPawn(loc[Random.Range(0, loc.Count - 1)].transform);
+                justSummoned.Add(DDOL.instance.ICS);
+                loc = DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
+                DDOL.instance.SummonPawn(loc[Random.Range(0, loc.Count - 1)].transform);
+                justSummoned.Add(DDOL.instance.ICS);
+                loc = DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
+                DDOL.instance.SummonPawn(loc[Random.Range(0, loc.Count - 1)].transform);
+                justSummoned.Add(DDOL.instance.ICS);
             }
+            //MANA VALUE HARDCODED
+            DDOL.instance.currentObject.gameObject.GetComponent<MouseDetect>().DiminishMana(2);
             return true;
         }
         else
@@ -228,19 +330,36 @@ public class KillerAI_Necromancer : MonoBehaviour {
         }
     }
 
+    //Cast LifeDrain, preference to attack player and restore self
+    //If health is low, attack anything to restore self
     public bool LifeDrain()
     {
         if (DDOL.instance.currentObject.GetComponent<MouseDetect>().Mana >= 4)
         {
             DDOL.instance.option = "all";
-            DDOL.instance.summon = Skeleton;
             DDOL.instance.spell = "LifeDrain";
             DDOL.instance.currentCost = 4;
             List<GameObject> loc = DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
             if (loc.Count != 0)
             {
-                //DDOL.instance.SummonPawn(loc[Random.Range(0, loc.Count - 1)].transform);
+                //check for player
+                foreach (GameObject l in loc)
+                {
+                    if (DDOL.instance.FindCurrentObject(l).tag == "Player")
+                    {
+                        //VALUES HARDCODED- MAY NEED TO BE CHECKED
+                        DDOL.instance.FindCurrentObject(l).GetComponent<MouseDetect>().DamageHP(4);
+                        DDOL.instance.currentObject.GetComponent<MouseDetect>().HealHP(4);
+                        return true;
+                    }
+                }
+                if (DDOL.instance.currentObject.GetComponent<MouseDetect>().HP < 10)
+                {
+                    DDOL.instance.FindCurrentObject(loc[Random.Range(0, loc.Count - 1)]).GetComponent<MouseDetect>().DamageHP(4);
+                    DDOL.instance.currentObject.GetComponent<MouseDetect>().HealHP(4);
+                }
             }
+            DDOL.instance.currentObject.GetComponent<MouseDetect>().DiminishMana(4);
             return true;
         }
         else
