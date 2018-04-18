@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KillerAI_Necromancer : MonoBehaviour
+public class SurvivorAI_Necromancer : MonoBehaviour
 {
     public GameObject Skeleton;
     public GameObject Wraith;
@@ -42,7 +42,7 @@ public class KillerAI_Necromancer : MonoBehaviour
         {
             minions.Add(m);
         }
-        justSummoned = new List<GameObject>();
+        justSummoned.Clear();
         //If less than 5 minions, summon minion, preference for wraiths
         if (minions.Count < 5)
         {

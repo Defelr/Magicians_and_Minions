@@ -39,7 +39,12 @@ public class KillerAI_Necromancer : MonoBehaviour {
         {
             minions.Add(m);
         }
-        justSummoned = new List<GameObject>();
+        justSummoned.Clear();
+        foreach(GameObject m in minions)
+        {
+            if (m == null) { minions.RemoveAt(minions.IndexOf(m)); }
+        }
+
         //If less than 5 minions, summon minion, preference for wraiths
         if (minions.Count < 5)
         {
