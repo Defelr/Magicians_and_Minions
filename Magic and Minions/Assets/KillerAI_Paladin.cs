@@ -41,6 +41,7 @@ public class KillerAI_Paladin : MonoBehaviour
         {
             minions.Add(m);
         }
+        justSummoned = new List<GameObject>();
         //If less than 5 minions, summon minion, preference for wraiths
         if (minions.Count < 5)
         {
@@ -77,6 +78,7 @@ public class KillerAI_Paladin : MonoBehaviour
         {
             LifeDrain();                
         }
+        //short wait here
         DDOL.instance.End_Turn();
     }
 

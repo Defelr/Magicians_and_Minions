@@ -2,24 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KillerAI_Necromancer : MonoBehaviour {
-    public GameObject Skeleton;
-    public GameObject Wraith;
+public class KillerAI_Paladin : MonoBehaviour
+{
+    public GameObject GreatSpirit;
     public IList<GameObject> minions = new List<GameObject>();
     public IList<GameObject> justSummoned = new List<GameObject>();
     private GameObject ai;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         //StartCoroutine(PlayTurn());
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    }
 
-   // public void PlayTurnButton()
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    // public void PlayTurnButton()
     //{
     //    StartCoroutine("PlayTurn");
     //}
@@ -44,33 +46,18 @@ public class KillerAI_Necromancer : MonoBehaviour {
         if (minions.Count < 5)
         {
             Debug.Log("Summon minion");
-            if (Random.Range(0, 1) < 0.7)
-            {
-                SummonWraith();
-            }
-            else
-            {
-                SummonSkeleton();
-            }
+            SummonSpirit();
         }
         //If at least 12 mana, summon 2nd minion, regardless
         //add a short wait here, too
-        if (DDOL.instance.currentObject.GetComponent<MouseDetect>().Mana >= 12)
+        if (DDOL.instance.currentObject.GetComponent<MouseDetect>().Mana >= 10)
         {
-            Debug.Log("Summon 2nd minion");
-            if (Random.Range(0, 1) < 0.7)
-            {
-                SummonWraith();
-            }
-            else
-            {
-                SummonSkeleton();
-            }
+            SummonSpirit();
         }
         //wait between summoning and moving
         //yield return new WaitForSeconds(2f);
         //move minion
-        foreach(GameObject m in minions)
+        foreach (GameObject m in minions)
         {
             DDOL.instance.currentObject = m;
             MoveMinion(m);
@@ -78,90 +65,56 @@ public class KillerAI_Necromancer : MonoBehaviour {
         }
         //wait between moving and attacking
         //if there is anything within attack radius, attack
-        foreach(GameObject m in minions)
+        foreach (GameObject m in minions)
         {
             DDOL.instance.currentObject = m;
             MinionAttack(m);
             DDOL.instance.currentObject = ai;
         }
-        //wait between attacking and moving self
-        MoveSelf();
-        //wait between moving self and casting spells
+        //wait between attacking and casting spells
         if (!UnLifeBlast())
         {
-            if (!Swarm())
-            {
-                LifeDrain();
-            }
+            LifeDrain();
         }
+        //wait between attacking and moving self
+        MoveSelf();
         //short wait here
         DDOL.instance.End_Turn();
     }
 
-    //Summons skeleton to random location
-    public bool SummonSkeleton()
+    //Summons great spirit to random location
+    public bool SummonSpirit()
     {
-        Debug.Log("Summon skeleton attempt");
+        Debug.Log("Summon spirit attempt");
         //If we have enough mana...
         if (DDOL.instance.currentObject.GetComponent<MouseDetect>().Mana >=
-            Skeleton.GetComponent<MouseDetect>().Cost) {
-            Debug.Log("Summon skeleton success");
+            GreatSpirit.GetComponent<MouseDetect>().Cost)
+        {
+            Debug.Log("Summon spirit success");
             //Set DDOL flags to summon skeleton
             DDOL.instance.option = "summon";
-            DDOL.instance.summon = Skeleton;
+            DDOL.instance.summon = GreatSpirit;
             //Generate list of possible spaces to summon skeleton in
             List<GameObject> loc = DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
             if (loc.Count != 0)
             {
                 //Summon randomly to one of those locations
                 DDOL.instance.SummonPawn(loc[Random.Range(0, loc.Count - 1)].transform);
-            } else
+            }
+            else
             {
                 //Return false if no place to summon minion to
                 return false;
             }
             //Add instance to minions list for later referencing
             justSummoned.Add(DDOL.instance.ICS);
-            DDOL.instance.currentObject.gameObject.GetComponent<MouseDetect>().DiminishMana(Skeleton.GetComponent<MouseDetect>().Cost);
+            DDOL.instance.currentObject.gameObject.GetComponent<MouseDetect>().DiminishMana(GreatSpirit.GetComponent<MouseDetect>().Cost);
             return true;
-        } else
+        }
+        else
         {
             //Return false if not enough mana
-            Debug.Log("Summon skeleton failure");
-            return false;
-        }
-    }
-
-    //Summon wraith to random location
-    public bool SummonWraith()
-    {
-        Debug.Log("Summon wraith attempt");
-        //If we have enough mana...
-        if (DDOL.instance.currentObject.GetComponent<MouseDetect>().Mana>=
-            Wraith.GetComponent<MouseDetect>().Cost) {
-            Debug.Log("Summon wraith success");
-            //Set DDOL flags to summon wraith
-            DDOL.instance.option = "summon";
-            DDOL.instance.summon = Wraith;
-            //Generate list of possible spaces to summon wraith in
-            List<GameObject> loc = DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
-            if (loc.Count != 0)
-            {
-                //Summon randomly to one of these locations
-                DDOL.instance.SummonPawn(loc[Random.Range(0, loc.Count - 1)].transform);
-            } else
-            {
-                //Return flase if no place to summon minion to
-                return false;
-            }
-            //Add instance to minions list for later referencing
-            justSummoned.Add(DDOL.instance.ICS);
-            DDOL.instance.currentObject.gameObject.GetComponent<MouseDetect>().DiminishMana(Wraith.GetComponent<MouseDetect>().Cost);
-            return true;
-        } else
-        {
-            //Return flase if not enough mana
-            Debug.Log("Summon wraith failure");
+            Debug.Log("Summon spirit failure");
             return false;
         }
     }
@@ -176,8 +129,8 @@ public class KillerAI_Necromancer : MonoBehaviour {
         List<GameObject> loc = DDOL.instance.SpaceLocation(1, m.GetInstanceID());
         if (loc.Count != 0)
         {
-           //get location of other player
-            GameObject p=GameObject.FindGameObjectWithTag("Player");
+            //get location of other player
+            GameObject p = GameObject.FindGameObjectWithTag("Player");
             //get smallest distance between it and possible locations
             GameObject moveTo = loc[0];
             float min = Vector3.Distance(p.transform.position, loc[0].transform.position);
@@ -237,7 +190,7 @@ public class KillerAI_Necromancer : MonoBehaviour {
         if (loc.Count != 0)
         {
             //check for player
-            foreach(GameObject l in loc)
+            foreach (GameObject l in loc)
             {
                 if (DDOL.instance.FindCurrentObject(l).tag == "Player")
                 {
@@ -247,9 +200,9 @@ public class KillerAI_Necromancer : MonoBehaviour {
             }
             //otherwise, attack whatever has the lowest health
             GameObject v = DDOL.instance.FindCurrentObject(loc[0]);
-            foreach(GameObject l in loc)
+            foreach (GameObject l in loc)
             {
-                if(DDOL.instance.FindCurrentObject(l).GetComponent<MouseDetect>().HP<
+                if (DDOL.instance.FindCurrentObject(l).GetComponent<MouseDetect>().HP <
                     v.GetComponent<MouseDetect>().HP)
                 {
                     v = DDOL.instance.FindCurrentObject(l);
@@ -299,37 +252,6 @@ public class KillerAI_Necromancer : MonoBehaviour {
             return false;
         }
         return false;
-    }
-
-    //Cast Swarm if 3 enough spots to summon minions into
-    public bool Swarm()
-    {
-        if (DDOL.instance.currentObject.GetComponent<MouseDetect>().Mana >= 2)
-        {
-            DDOL.instance.option = "summon";
-            DDOL.instance.summon = Skeleton;
-            DDOL.instance.spell = "Swarm";
-            DDOL.instance.currentCost = 2;
-            List<GameObject> loc = DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
-            if (loc.Count >= 3)
-            {
-                DDOL.instance.SummonPawn(loc[Random.Range(0, loc.Count - 1)].transform);
-                justSummoned.Add(DDOL.instance.ICS);
-                loc = DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
-                DDOL.instance.SummonPawn(loc[Random.Range(0, loc.Count - 1)].transform);
-                justSummoned.Add(DDOL.instance.ICS);
-                loc = DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
-                DDOL.instance.SummonPawn(loc[Random.Range(0, loc.Count - 1)].transform);
-                justSummoned.Add(DDOL.instance.ICS);
-            }
-            //MANA VALUE HARDCODED
-            DDOL.instance.currentObject.gameObject.GetComponent<MouseDetect>().DiminishMana(2);
-            return true;
-        }
-        else
-        {
-            return false;
-        }
     }
 
     //Cast LifeDrain, preference to attack player and restore self
