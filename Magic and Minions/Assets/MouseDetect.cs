@@ -34,7 +34,10 @@ public class MouseDetect : MonoBehaviour
             Moves = Movement_c;
             Attacks = Attack_c;
         }
-        gameObject.GetComponent<ParticleSystem>().Stop();
+        if (gameObject.GetComponent<ParticleSystem>())
+        {
+            gameObject.GetComponent<ParticleSystem>().Stop();
+        }
         foreach (Transform TPanel in DDOL.instance.SystemEvent.GetComponent<Switch_Canvas>().MenuCanvasPanel.transform)
         {
             if (TPanel.tag == this.tag)

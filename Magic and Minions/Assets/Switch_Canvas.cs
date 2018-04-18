@@ -5,11 +5,16 @@ using UnityEngine;
 
 public class Switch_Canvas : MonoBehaviour {
 
+    public Canvas Game;
+
     public GameObject paladinInterface;
     public GameObject necroInterface;
     public GameObject minionInterface;
     public GameObject wraithImage;
     public GameObject skelImage;
+
+    public GameObject PaladinSelectionPanel;
+    public GameObject NecroSelectionPanel;
 
     //public Text necroMana;
     //public Text necroHP;
@@ -24,8 +29,9 @@ public class Switch_Canvas : MonoBehaviour {
     private Slider healthSlider;
 	// Use this for initialization
 	void Start () {
-		
-	}
+        Game.GetComponent<CanvasGroup>().alpha = 0;
+        Game.GetComponent<CanvasGroup>().interactable = false;
+    }
 
     public void Clear()
     {
@@ -33,7 +39,7 @@ public class Switch_Canvas : MonoBehaviour {
         {
             TPanel.gameObject.SetActive(false);
         }
-    }
+   }
 	// Update is called once per frame
 	void Update () {
         if (DDOL.instance.currentObject)
@@ -217,8 +223,14 @@ public class Switch_Canvas : MonoBehaviour {
             }
             RaycastHit hitInfo = new RaycastHit();
 
-            if (Physics.Raycast(DDOL.instance.currentCamera.ScreenPointToRay(Input.mousePosition), out hitInfo, Mathf.Infinity, LM) && (DDOL.instance.option == "move" || DDOL.instance.option == "" || DDOL.instance.option == "summon" ))
+            if (Physics.Raycast(DDOL.instance.First.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition), out hitInfo, Mathf.Infinity, LM) && (DDOL.instance.option == "move" || DDOL.instance.option == "" || DDOL.instance.option == "summon" ))
             {
+                if(DDOL.instance.turn == 0)
+                {
+                    Game.GetComponent<CanvasGroup>().alpha = 1;
+                    Game.GetComponent<CanvasGroup>().interactable = true;
+                    DDOL.instance.First.GetComponent<Animator>().SetTrigger("CamB1");
+                }
                 if ((hitInfo.transform.gameObject.GetComponent<MouseDetect>().Movement_c != hitInfo.transform.gameObject.GetComponent<MouseDetect>().Moves) &&
                     hitInfo.transform.gameObject.GetComponent<MouseDetect>().Attack_c != hitInfo.transform.gameObject.GetComponent<MouseDetect>().Attacks)
                 {
