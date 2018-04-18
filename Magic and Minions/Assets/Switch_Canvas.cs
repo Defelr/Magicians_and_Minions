@@ -27,8 +27,10 @@ public class Switch_Canvas : MonoBehaviour {
     private GameObject CurrentInterafce;
 
     private Slider healthSlider;
-	// Use this for initialization
-	void Start () {
+
+    public Canvas Game;
+    // Use this for initialization
+    void Start () {
     }
 
     public void Clear()
@@ -209,7 +211,7 @@ public class Switch_Canvas : MonoBehaviour {
                 }
             }
         }
-		if (Input.GetMouseButtonDown(0))
+		if (Input.GetMouseButtonDown(0) && !DDOL.instance.ANIMATING)
         {
             if (DDOL.instance.turn % 2 == 0)
             {
@@ -225,7 +227,8 @@ public class Switch_Canvas : MonoBehaviour {
             {
                 if(DDOL.instance.turn == 0)
                 {
-                    DDOL.instance.First.GetComponent<Animator>().SetTrigger("CamB1");
+                    Game.GetComponent<CanvasGroup>().alpha = 1;
+                    Game.GetComponent<CanvasGroup>().interactable = true;
                 }
                 if ((hitInfo.transform.gameObject.GetComponent<MouseDetect>().Movement_c != hitInfo.transform.gameObject.GetComponent<MouseDetect>().Moves) &&
                     hitInfo.transform.gameObject.GetComponent<MouseDetect>().Attack_c != hitInfo.transform.gameObject.GetComponent<MouseDetect>().Attacks)

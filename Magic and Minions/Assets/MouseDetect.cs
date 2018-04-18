@@ -81,6 +81,7 @@ public class MouseDetect : MonoBehaviour
                     {
                         if (this.gameObject == DDOL.instance.IC.gameObject)
                         {
+
                             HotseatWin.winVar = 2;
                             Debug.Log("PLAYER 2 WON");
                         }

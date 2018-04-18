@@ -18,7 +18,7 @@ public struct Coordinates
 
 public class DDOL : MonoBehaviour
 {
-
+    public bool ANIMATING;
     public AudioClip moveSound;
     private AudioSource source;
 
@@ -63,7 +63,9 @@ public class DDOL : MonoBehaviour
 
     public int TempHP;
 
-    public GameObject ICS; 
+    public GameObject ICS;
+
+    public GameObject Dialogue;
     public void ResetCharacters(Transform ParentPlayer) { 
         foreach(Transform T in ParentPlayer)
         {
