@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class Switch_Canvas : MonoBehaviour {
 
-    public Canvas Game;
 
     public GameObject paladinInterface;
     public GameObject necroInterface;
     public GameObject minionInterface;
     public GameObject wraithImage;
     public GameObject skelImage;
+    public GameObject GrSpImage;
 
     public GameObject PaladinSelectionPanel;
     public GameObject NecroSelectionPanel;
@@ -29,8 +29,6 @@ public class Switch_Canvas : MonoBehaviour {
     private Slider healthSlider;
 	// Use this for initialization
 	void Start () {
-        Game.GetComponent<CanvasGroup>().alpha = 0;
-        Game.GetComponent<CanvasGroup>().interactable = false;
     }
 
     public void Clear()
@@ -227,8 +225,6 @@ public class Switch_Canvas : MonoBehaviour {
             {
                 if(DDOL.instance.turn == 0)
                 {
-                    Game.GetComponent<CanvasGroup>().alpha = 1;
-                    Game.GetComponent<CanvasGroup>().interactable = true;
                     DDOL.instance.First.GetComponent<Animator>().SetTrigger("CamB1");
                 }
                 if ((hitInfo.transform.gameObject.GetComponent<MouseDetect>().Movement_c != hitInfo.transform.gameObject.GetComponent<MouseDetect>().Moves) &&
@@ -287,6 +283,7 @@ public class Switch_Canvas : MonoBehaviour {
                         necroInterface.SetActive(false);
                         minionInterface.SetActive(true);
                         skelImage.SetActive(false);
+                        GrSpImage.SetActive(false);
                         wraithImage.SetActive(true);
                     }
                     else if (hitInfo.transform.gameObject.tag == "Skeleton" && DDOL.instance.currentObject.tag == "Skeleton")
@@ -294,6 +291,7 @@ public class Switch_Canvas : MonoBehaviour {
                         necroInterface.SetActive(false);
                         minionInterface.SetActive(true);
                         wraithImage.SetActive(false);
+                        GrSpImage.SetActive(false);
                         skelImage.SetActive(true);
                     }
                     else if (hitInfo.transform.gameObject.tag == "GreatSpirit" && DDOL.instance.currentObject.tag == "GreatSpirit")
@@ -302,8 +300,8 @@ public class Switch_Canvas : MonoBehaviour {
                         minionInterface.SetActive(true);
                         wraithImage.SetActive(false);
                         skelImage.SetActive(false);
-                        //greatSpiritImage.SetActive(true); THIS IS STILL NEEDED
-                         
+                        GrSpImage.SetActive(true);
+
                     }
                     else if (hitInfo.transform.gameObject.tag == "Paladin")
                     {

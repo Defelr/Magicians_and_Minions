@@ -5,10 +5,13 @@ using UnityEngine.UI;
 
 public class Match : MonoBehaviour {
     public GameObject EndTurn;
+    public GameObject P1;
+    public GameObject P2;
+    public GameObject D;
+
 	// Use this for initialization
 	void Start () {
-		
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -29,5 +32,11 @@ public class Match : MonoBehaviour {
     public void ReActivate()
     {
         EndTurn.GetComponent<Button>().interactable = true;
+    }
+    IEnumerator StartText()
+    {
+        D.GetComponent<DialogueManager>().StartGame();
+        yield return new WaitForSeconds(5F);
+        D.GetComponent<DialogueManager>().ClearBoth();
     }
 }

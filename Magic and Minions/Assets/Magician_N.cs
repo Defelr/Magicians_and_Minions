@@ -72,7 +72,7 @@ public class Magician_N : MonoBehaviour
             mana = ((10 - Skeletons) / 2) + 1;
         }else if(tag == "Paladin")
         {
-            mana = 1;
+            mana = 5;
         }
         return mana;
 

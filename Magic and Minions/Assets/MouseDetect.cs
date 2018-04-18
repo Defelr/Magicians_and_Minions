@@ -54,7 +54,7 @@ public class MouseDetect : MonoBehaviour
                     }
                 }
             }
-            else if (TPanel.tag == this.tag || this.tag == "Wraith" || this.tag == "Skeleton")
+            else if (TPanel.tag == this.tag || this.tag == "Wraith" || this.tag == "Skeleton" || this.tag == "GreatSpirit")
             {
                 foreach (Transform BPanel in TPanel)
                 {

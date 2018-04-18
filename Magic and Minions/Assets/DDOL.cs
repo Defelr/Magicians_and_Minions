@@ -138,11 +138,6 @@ public class DDOL : MonoBehaviour
         else if (instance != this)
             DontDestroyOnLoad(gameObject);
     }
-    IEnumerator StartMatch()
-    {
-        yield return new WaitForSeconds(First.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length + First.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime);
-
-    }
     /*
  * End Turn will enable the right cameras, clears the board, clears the UI, and abilities
  * Clear all options, and essentially resets it so that the player can make a move
