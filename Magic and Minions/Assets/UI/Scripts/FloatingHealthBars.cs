@@ -37,7 +37,7 @@ public class FloatingHealthBars : MonoBehaviour
         numText.color = textC;
     }
 
-    private void OnMouseEnter()
+    private void OnMouseOver()
     {
         panelC.a = 255;
         textC.a = 255;
