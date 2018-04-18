@@ -26,5 +26,6 @@ public class HotseatWin : MonoBehaviour {
             winPnl.SetActive(true);
             player2Pnl.SetActive(true);
         }
+        DDOL.instance.Dialogue.GetComponent<DialogueManager>().WinLose(winVar);
     }
 }

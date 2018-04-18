@@ -5,10 +5,16 @@ using UnityEngine;
 
 public class Switch_Canvas : MonoBehaviour {
 
+
+    public GameObject paladinInterface;
     public GameObject necroInterface;
     public GameObject minionInterface;
     public GameObject wraithImage;
     public GameObject skelImage;
+    public GameObject GrSpImage;
+
+    public GameObject PaladinSelectionPanel;
+    public GameObject NecroSelectionPanel;
 
     //public Text necroMana;
     //public Text necroHP;
@@ -21,10 +27,11 @@ public class Switch_Canvas : MonoBehaviour {
     private GameObject CurrentInterafce;
 
     private Slider healthSlider;
-	// Use this for initialization
-	void Start () {
-		
-	}
+
+    public Canvas Game;
+    // Use this for initialization
+    void Start () {
+    }
 
     public void Clear()
     {
@@ -32,7 +39,7 @@ public class Switch_Canvas : MonoBehaviour {
         {
             TPanel.gameObject.SetActive(false);
         }
-    }
+   }
 	// Update is called once per frame
 	void Update () {
         if (DDOL.instance.currentObject)
@@ -114,7 +121,66 @@ public class Switch_Canvas : MonoBehaviour {
             }
             else if (tempCO.tag == "Paladin")
             {
+                foreach (Transform C in paladinInterface.transform)
+                {
+                    if (C.gameObject.name == "Move_Btn")
+                    {
+                        if (tempCO.GetComponent<MouseDetect>().Moves >= tempCO.GetComponent<MouseDetect>().Movement_c)
+                        {
+                            C.gameObject.GetComponent<Button>().interactable = false;
+                        }
+                        else
+                        {
+                            C.gameObject.GetComponent<Button>().interactable = true;
+                        }
+                    }
+                    else if (C.gameObject.name == "Ability_Btn (2)")
+                    {
+                        if (!tempCO.GetComponent<Magician_N>().HolyFireCheck())
+                        {
+                            C.gameObject.GetComponent<Button>().interactable = false;
 
+                        }
+                        else
+                        {
+                            C.gameObject.GetComponent<Button>().interactable = true;
+                        }
+                    }
+                    else if (C.gameObject.name == "Ability_Btn (3)")
+                    {
+                        if (tempCO.GetComponent<MouseDetect>().Mana < tempCO.GetComponent<Magician_N>().GreatSpirit.GetComponent<MouseDetect>().Cost)
+                        {
+                            C.gameObject.GetComponent<Button>().interactable = false;
+
+                        }
+                        else
+                        {
+                            C.gameObject.GetComponent<Button>().interactable = true;
+                        }
+                    }
+                    else if (C.gameObject.name == "Ability_Btn")
+                    {
+                        if (!tempCO.GetComponent<Magician_N>().ImplosionCheck())
+                        {
+                            C.gameObject.GetComponent<Button>().interactable = false;
+                        }
+                        else
+                        {
+                            C.gameObject.GetComponent<Button>().interactable = true;
+                        }
+                    }
+                    else if (C.gameObject.name == "Ability_Btn (1)")
+                    {
+                        if (!tempCO.GetComponent<Magician_N>().GroupHealingCheck())
+                        {
+                            C.gameObject.GetComponent<Button>().interactable = false;
+                        }
+                        else
+                        {
+                            C.gameObject.GetComponent<Button>().interactable = true;
+                        }
+                    }
+                }
             }
             else //ELSE SHOULD ALWAYS HANDLE MINIONS
             {
@@ -145,7 +211,7 @@ public class Switch_Canvas : MonoBehaviour {
                 }
             }
         }
-		if (Input.GetMouseButtonDown(0))
+		if (Input.GetMouseButtonDown(0) && !DDOL.instance.ANIMATING)
         {
             if (DDOL.instance.turn % 2 == 0)
             {
@@ -157,10 +223,22 @@ public class Switch_Canvas : MonoBehaviour {
             }
             RaycastHit hitInfo = new RaycastHit();
 
+<<<<<<< HEAD:Magic and Minions/Assets/Scripts/Switch_Canvas.cs
             if (Physics.Raycast(DDOL.instance.currentCamera.ScreenPointToRay(Input.mousePosition), out hitInfo, Mathf.Infinity, LM) && (DDOL.instance.option == "move" || DDOL.instance.option == "" ))
             {
                 GameObject grid_B = GameObject.Find("Grid_Board");
                 if (DDOL.instance.spell != "Swarm")
+=======
+            if (Physics.Raycast(DDOL.instance.First.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition), out hitInfo, Mathf.Infinity, LM) && (DDOL.instance.option == "move" || DDOL.instance.option == "" || DDOL.instance.option == "summon" ))
+            {
+                if(DDOL.instance.turn == 0)
+                {
+                    Game.GetComponent<CanvasGroup>().alpha = 1;
+                    Game.GetComponent<CanvasGroup>().interactable = true;
+                }
+                if ((hitInfo.transform.gameObject.GetComponent<MouseDetect>().Movement_c != hitInfo.transform.gameObject.GetComponent<MouseDetect>().Moves) &&
+                    hitInfo.transform.gameObject.GetComponent<MouseDetect>().Attack_c != hitInfo.transform.gameObject.GetComponent<MouseDetect>().Attacks)
+>>>>>>> master:Magic and Minions/Assets/Switch_Canvas.cs
                 {
                     DDOL.instance.ClearSpaces();
                 }
@@ -201,7 +279,39 @@ public class Switch_Canvas : MonoBehaviour {
                         {
                             TPanel.gameObject.SetActive(false);
                         }
+<<<<<<< HEAD:Magic and Minions/Assets/Scripts/Switch_Canvas.cs
                         else
+=======
+                    }
+                    else if (hitInfo.transform.gameObject.tag == "Wraith" && DDOL.instance.currentObject.tag == "Wraith")
+                    {
+                        necroInterface.SetActive(false);
+                        minionInterface.SetActive(true);
+                        skelImage.SetActive(false);
+                        GrSpImage.SetActive(false);
+                        wraithImage.SetActive(true);
+                    }
+                    else if (hitInfo.transform.gameObject.tag == "Skeleton" && DDOL.instance.currentObject.tag == "Skeleton")
+                    {
+                        necroInterface.SetActive(false);
+                        minionInterface.SetActive(true);
+                        wraithImage.SetActive(false);
+                        GrSpImage.SetActive(false);
+                        skelImage.SetActive(true);
+                    }
+                    else if (hitInfo.transform.gameObject.tag == "GreatSpirit" && DDOL.instance.currentObject.tag == "GreatSpirit")
+                    {
+                        paladinInterface.SetActive(false);
+                        minionInterface.SetActive(true);
+                        wraithImage.SetActive(false);
+                        skelImage.SetActive(false);
+                        GrSpImage.SetActive(true);
+
+                    }
+                    else if (hitInfo.transform.gameObject.tag == "Paladin")
+                    {
+                        foreach (Transform TPanel in MenuCanvasPanel.transform)
+>>>>>>> master:Magic and Minions/Assets/Switch_Canvas.cs
                         {
                             TPanel.gameObject.SetActive(true);
                         }

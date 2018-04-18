@@ -13,6 +13,12 @@ ModelImporter:
     100010: pedestal:GEO
     100012: pedestal:pedestal
     100014: r_Eye
+    100016: body
+    100018: capeGEO
+    100020: necromancer_piece_GEO
+    100022: necromancer_piece_joint
+    100024: NecromancerGEO
+    100026: pedestal_geo
     400000: cape
     400002: hood
     400004: l_Eye
@@ -21,6 +27,12 @@ ModelImporter:
     400010: pedestal:GEO
     400012: pedestal:pedestal
     400014: r_Eye
+    400016: body
+    400018: capeGEO
+    400020: necromancer_piece_GEO
+    400022: necromancer_piece_joint
+    400024: NecromancerGEO
+    400026: pedestal_geo
     2100000: lambert2
     2100002: blinn3
     2100004: blinn2
@@ -29,24 +41,35 @@ ModelImporter:
     2100010: blinn4
     2100012: blinn1
     2100014: pedestal_blinn1
+    2100016: Necromancer_RIG_0014_lambert2
+    2100018: Necromancer_RIG_0014_blinn3
+    2100020: Necromancer_RIG_0014_blinn2
+    2100022: Necromancer_RIG_0014_CharacterMale_blinn1
+    2100024: Necromancer_RIG_0014_blinn4
     2300000: cape
     2300002: hood
     2300004: l_Eye
     2300006: Necromancer_body
     2300008: pedestal:pedestal
     2300010: r_Eye
+    2300012: body
+    2300014: pedestal_geo
     3300000: cape
     3300002: hood
     3300004: l_Eye
     3300006: Necromancer_body
     3300008: pedestal:pedestal
     3300010: r_Eye
+    3300012: body
+    3300014: pedestal_geo
     4300000: Necromancer_body
     4300002: l_Eye
     4300004: r_Eye
     4300006: cape
     4300008: hood
     4300010: pedestal:pedestal
+    4300012: pedestal_geo
+    4300014: body
   externalObjects: {}
   materials:
     importMaterials: 1

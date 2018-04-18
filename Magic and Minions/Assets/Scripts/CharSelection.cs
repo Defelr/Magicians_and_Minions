@@ -15,15 +15,26 @@ public class CharSelection : MonoBehaviour {
     public GameObject readyButton;
     public GameObject player1Panel;
     public GameObject player2Panel;
+    public GameObject StartGame;
     public GameObject errorPanel;
     public GameObject necromancer;
     public GameObject paladin;
-	
-	public void PickNecro () {
+
+    public Canvas SelectionScreen;
+    public GameObject SelectionStart;
+    public GameObject SelectionPaladin;
+    public GameObject SelectionNecro;
+
+    void Start()
+    {
+        SelectionScreen.GetComponent<CanvasGroup>().alpha = 1;
+    }
+
+    public void PickNecro () {
         if (select1 == false)
         {
             select1 = true;
-            player1 = necromancer;
+            DDOL.instance.SetPlayer1(necromancer);
             num = 1;
             player1Panel.SetActive(false);
             player2Panel.SetActive(true);
@@ -32,7 +43,7 @@ public class CharSelection : MonoBehaviour {
         }
         else
         {
-            player2 = necromancer;
+            DDOL.instance.SetPlayer2(necromancer);
             num = 2;
             player2Panel.SetActive(false);
             readyButton.SetActive(true);
@@ -45,7 +56,7 @@ public class CharSelection : MonoBehaviour {
         if (select1 == false)
         {
             select1 = true;
-            player1 = paladin;
+            DDOL.instance.SetPlayer1(paladin);
             num = 1;
             player1Panel.SetActive(false);
             player2Panel.SetActive(true);
@@ -54,7 +65,7 @@ public class CharSelection : MonoBehaviour {
         }
         else
         {
-            player2 = paladin;
+            DDOL.instance.SetPlayer2(paladin);
             num = 2;
             player2Panel.SetActive(false);
             readyButton.SetActive(true);
@@ -81,12 +92,21 @@ public class CharSelection : MonoBehaviour {
             Debug.Log("Undo Player 2");
         }
     }
+    IEnumerator StartMatch()
+    {
+        yield return new WaitForSeconds(SelectionStart.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length + SelectionStart.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime);
 
+    }
     public void Change ()
     {
         if(num == 2)
         {
-            SceneManager.LoadScene(2);
+            SelectionStart.GetComponent<Animator>().SetTrigger("Begin");
+            StartMatch();    
+            SelectionScreen.GetComponent<CanvasGroup>().alpha = 0;
+            SelectionScreen.GetComponent<CanvasGroup>().interactable = false;
+            Destroy(SelectionPaladin);
+            Destroy(SelectionNecro);
         }
         else
         {

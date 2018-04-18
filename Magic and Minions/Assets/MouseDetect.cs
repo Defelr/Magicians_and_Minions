@@ -34,7 +34,43 @@ public class MouseDetect : MonoBehaviour
             Moves = Movement_c;
             Attacks = Attack_c;
         }
+<<<<<<< HEAD
         gameObject.GetComponent<ParticleSystem>().Stop();
+=======
+        if (gameObject.GetComponent<ParticleSystem>())
+        {
+            gameObject.GetComponent<ParticleSystem>().Stop();
+        }
+        foreach (Transform TPanel in DDOL.instance.SystemEvent.GetComponent<Switch_Canvas>().MenuCanvasPanel.transform)
+        {
+            if (TPanel.tag == this.tag)
+            {
+                foreach (Transform BPanel in TPanel)
+                {
+                    if (BPanel.tag == this.tag)
+                    {
+                        healthSlider = BPanel.Find("Health_Sldr").gameObject.GetComponent<Slider>();
+                        healthSlider.maxValue = GetComponent<MouseDetect>().MAX_HP;
+                        healthSlider.value = GetComponent<MouseDetect>().HP;
+                        manaSlider = BPanel.Find("Mana").gameObject.GetComponent<Text>();
+                        manaSlider.text = GetComponent<MouseDetect>().Mana.ToString();
+                    }
+                }
+            }
+            else if (TPanel.tag == this.tag || this.tag == "Wraith" || this.tag == "Skeleton" || this.tag == "GreatSpirit")
+            {
+                foreach (Transform BPanel in TPanel)
+                {
+                    if (BPanel.tag == this.tag)
+                    {
+                        healthSlider = BPanel.Find("Health_Sldr").gameObject.GetComponent<Slider>();
+                        healthSlider.maxValue = GetComponent<MouseDetect>().MAX_HP;
+                        healthSlider.value = GetComponent<MouseDetect>().HP;
+                    }
+                }
+            }
+        }
+>>>>>>> master
     }
     // Update is called once per frame
     void Update()
@@ -50,6 +86,7 @@ public class MouseDetect : MonoBehaviour
                         DDOL.instance.Coords[i][j] = new Coordinates(-1, 0, -1, null, DDOL.instance.locations[i][j]);
                         if (this.gameObject == DDOL.instance.IC.gameObject)
                         {
+
                             HotseatWin.winVar = 2;
                             Debug.Log("PLAYER 2 WON");
                         }
@@ -71,7 +108,11 @@ public class MouseDetect : MonoBehaviour
         }
         if (HP > MAX_HP)
         {
+<<<<<<< HEAD
             MAX_HP = HP; //If the HP of a player or minion exceeds max, make the HP the new Max
+=======
+            HP = MAX_HP; //Makes sure HP doesn't exceed MAX_HP when healing
+>>>>>>> master
         }
        foreach(Transform TPanel in DDOL.instance.SystemEvent.GetComponent<Switch_Canvas>().MenuCanvasPanel.transform)
         {
@@ -119,6 +160,26 @@ public class MouseDetect : MonoBehaviour
     public void DamageHP(int DecHP)
     {
         HP -= DecHP;
+<<<<<<< HEAD
+=======
+        this.healthSlider.value = HP;
+                    //new Coordinates(-1, 0, -1, null, DDOL.instance.locations[i][j]);
+        if (HP <= 0)
+        {
+            for (int i = 0; i < DDOL.instance.x; i++)
+            {
+                for (int j = 0; j < DDOL.instance.x; j++)
+                {
+                    if (DDOL.instance.Coords[i][j].G == this.gameObject)
+                    {
+                        DDOL.instance.Coords[i][j] = new Coordinates(-1, 0, -1, null, DDOL.instance.locations[i][j]);
+                        Destroy(this.gameObject);
+                        return;
+                    }
+                }
+            }
+        }
+>>>>>>> master
     }
     public void HealHP(int IncHP)
     {

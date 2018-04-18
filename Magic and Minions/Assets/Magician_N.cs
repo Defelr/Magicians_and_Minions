@@ -43,7 +43,7 @@ public class Magician_N : MonoBehaviour
             mana = 5;
         }else if(tag == "Paladin")
         {
-            mana = 1;
+            mana = 5;
         }
         this.GetComponent<MouseDetect>().IncrementMana(mana);
 
@@ -81,6 +81,16 @@ public class Magician_N : MonoBehaviour
         }
     }
     //SPELLS SECTION
+    /*
+     *  Way it works is that, we have a list of boolean values, checking if the summoner is able to 
+     *  cast a spell. These are used in Switch_Canvas, in order to check if we should disable the button
+     *  based on how much mana a player has
+     * 
+     *  The mana is hardcoded, as is the damage / healing amount
+     */
+
+        
+    //NECROMANCER
     public bool UnLifeBlastCheck()
     {
         if (CheckSummon(2))
@@ -91,7 +101,7 @@ public class Magician_N : MonoBehaviour
     }
     public bool SwarmCheck()
     {
-        if (CheckSummon(2))
+        if (CheckSummon(8))
         {
             return true;
         }
@@ -118,7 +128,12 @@ public class Magician_N : MonoBehaviour
     }
     public void Swarm()
     {
+<<<<<<< HEAD
         if (CheckSummon(2))
+=======
+        CheckPrevious();
+        if (CheckSummon(8))
+>>>>>>> master
         {
             DDOL.instance.option = "summon";
             DDOL.instance.summon = Skeleton;
@@ -138,6 +153,70 @@ public class Magician_N : MonoBehaviour
             DDOL.instance.currentCost = 4;
             Debug.Log("Life Drain");
             Range(1); //Changed ranged from 4 to 1
+        }
+    }
+    //Priest
+    public bool ImplosionCheck()
+    {
+        if (CheckSummon(2))
+        {
+            return true;
+        }
+        return false;
+    }
+    public bool GroupHealingCheck()
+    {
+        if (CheckSummon(3))
+        {
+            return true;
+        }
+        return false;
+    }
+    public bool HolyFireCheck()
+    {
+        if (CheckSummon(4))
+        {
+            return true;
+        }
+        return false;
+    }
+    public void Implosion()
+    {
+        CheckPrevious();
+        if (CheckSummon(2))//Cost of spell
+        {
+            DDOL.instance.option = "allE";
+            //DDOL.instance.spell = "Implosion"; NO NEED BECAUSE ATTACK IS IMMEDIATE
+            DDOL.instance.currentCost = 2;
+            Debug.Log("Implosion");
+            DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
+            DDOL.instance.AOE();
+        }
+    }
+    public void GroupHealing()
+    {
+        CheckPrevious();
+        if (CheckSummon(3))
+        {
+            DDOL.instance.option = "friendly";
+            //DDOL.instance.spell = "GroupHealing"; NOT NEEDED CAUSE SHOULD AUTOMATICALLY ACTIVATE
+            DDOL.instance.currentCost = 3;
+            DDOL.instance.spell = "GroupHealing";
+            Debug.Log("GroupHealing");
+            DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
+            DDOL.instance.AOE();
+        }
+    }
+    public void HolyFire()
+    {
+        CheckPrevious();
+        if (CheckSummon(4))
+        {
+            DDOL.instance.option = "AllE";
+            DDOL.instance.spell = "HolyFire";
+            DDOL.instance.currentCost = 4;
+            Debug.Log("Holy Fire");
+            Range(2); //Changed ranged from 4 to 1
         }
     }
 }

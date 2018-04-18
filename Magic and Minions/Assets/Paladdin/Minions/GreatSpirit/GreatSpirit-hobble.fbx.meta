@@ -1,0 +1,246 @@
+fileFormatVersion: 2
+guid: 6b70ec2d94899074a9dadb0602f04d23
+timeCreated: 1524074106
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: all_joint
+    100002: //RootNode
+    100004: GreatSpirit_CTRL
+    100006: GreatSpirit_GEO:GreatSpirit_GEO
+    100008: GreatSpirit_GEO:greatSpirit_hat
+    100010: GreatSpirit_GEO:greatSpirit_mesh
+    100012: head
+    100014: head_top
+    100016: jaw
+    100018: l_clavicle
+    100020: l_elbow
+    100022: l_eye
+    100024: l_middle_knuckle
+    100026: l_middle_mid
+    100028: l_middle_tips
+    100030: l_middle_tips1
+    100032: l_palm
+    100034: l_pinky_knuckle
+    100036: l_pinky_mid
+    100038: l_pinky_tip
+    100040: l_pinky_tip1
+    100042: l_pointer_end
+    100044: l_pointer_knuckle
+    100046: l_pointer_mid
+    100048: l_pointer_tip
+    100050: l_ring_knuckle
+    100052: l_ring_mid
+    100054: l_ring_tip
+    100056: l_ring_tip1
+    100058: l_shoulder
+    100060: l_thumb_knuckle
+    100062: l_thumb_mid
+    100064: l_thumb_tip
+    100066: l_wrist
+    100068: neck
+    100070: pedestal:GEO
+    100072: pedestal:pedestal
+    100074: pelvis
+    100076: r_clavicle
+    100078: r_elbow
+    100080: r_eye
+    100082: r_middle_knuckle
+    100084: r_middle_mid
+    100086: r_middle_tips
+    100088: r_middle_tips1
+    100090: r_palm
+    100092: r_pinky_knuckle
+    100094: r_pinky_mid
+    100096: r_pinky_tip
+    100098: r_pinky_tip1
+    100100: r_pointer_end
+    100102: r_pointer_knuckle
+    100104: r_pointer_mid
+    100106: r_pointer_tip
+    100108: r_ring_knuckle
+    100110: r_ring_mid
+    100112: r_ring_tip
+    100114: r_ring_tip1
+    100116: r_shoulder
+    100118: r_thumb_knuckle
+    100120: r_thumb_mid
+    100122: r_thumb_tip
+    100124: r_wrist
+    100126: root
+    100128: spine1
+    100130: spine2
+    100132: spine3
+    100134: spine4
+    100136: tail1
+    100138: tail2
+    100140: tail3
+    100142: tail4
+    400000: all_joint
+    400002: //RootNode
+    400004: GreatSpirit_CTRL
+    400006: GreatSpirit_GEO:GreatSpirit_GEO
+    400008: GreatSpirit_GEO:greatSpirit_hat
+    400010: GreatSpirit_GEO:greatSpirit_mesh
+    400012: head
+    400014: head_top
+    400016: jaw
+    400018: l_clavicle
+    400020: l_elbow
+    400022: l_eye
+    400024: l_middle_knuckle
+    400026: l_middle_mid
+    400028: l_middle_tips
+    400030: l_middle_tips1
+    400032: l_palm
+    400034: l_pinky_knuckle
+    400036: l_pinky_mid
+    400038: l_pinky_tip
+    400040: l_pinky_tip1
+    400042: l_pointer_end
+    400044: l_pointer_knuckle
+    400046: l_pointer_mid
+    400048: l_pointer_tip
+    400050: l_ring_knuckle
+    400052: l_ring_mid
+    400054: l_ring_tip
+    400056: l_ring_tip1
+    400058: l_shoulder
+    400060: l_thumb_knuckle
+    400062: l_thumb_mid
+    400064: l_thumb_tip
+    400066: l_wrist
+    400068: neck
+    400070: pedestal:GEO
+    400072: pedestal:pedestal
+    400074: pelvis
+    400076: r_clavicle
+    400078: r_elbow
+    400080: r_eye
+    400082: r_middle_knuckle
+    400084: r_middle_mid
+    400086: r_middle_tips
+    400088: r_middle_tips1
+    400090: r_palm
+    400092: r_pinky_knuckle
+    400094: r_pinky_mid
+    400096: r_pinky_tip
+    400098: r_pinky_tip1
+    400100: r_pointer_end
+    400102: r_pointer_knuckle
+    400104: r_pointer_mid
+    400106: r_pointer_tip
+    400108: r_ring_knuckle
+    400110: r_ring_mid
+    400112: r_ring_tip
+    400114: r_ring_tip1
+    400116: r_shoulder
+    400118: r_thumb_knuckle
+    400120: r_thumb_mid
+    400122: r_thumb_tip
+    400124: r_wrist
+    400126: root
+    400128: spine1
+    400130: spine2
+    400132: spine3
+    400134: spine4
+    400136: tail1
+    400138: tail2
+    400140: tail3
+    400142: tail4
+    2100000: GreatSpirit_GEO_lambert2
+    2100002: GreatSpirit_GEO_lambert3
+    2100004: GreatSpirit_GEO_blinn2
+    2100006: GreatSpirit_GEO_blinn1
+    2100008: GreatSpirit_GEO_Priest_GEO_0001_blinn1
+    2100010: GreatSpirit_GEO_blinn3
+    2100012: pedestal_blinn1
+    4300000: GreatSpirit_GEO:greatSpirit_mesh
+    4300002: GreatSpirit_GEO:greatSpirit_hat
+    4300004: pedestal:pedestal
+    7400000: GreatSpirit-hobble
+    9500000: //RootNode
+    13700000: GreatSpirit_GEO:greatSpirit_hat
+    13700002: GreatSpirit_GEO:greatSpirit_mesh
+    13700004: pedestal:pedestal
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

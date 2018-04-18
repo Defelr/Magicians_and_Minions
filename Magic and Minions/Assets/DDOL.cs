@@ -18,13 +18,11 @@ public struct Coordinates
 
 public class DDOL : MonoBehaviour
 {
-
+    public bool ANIMATING;
     public AudioClip moveSound;
     private AudioSource source;
 
-    public Camera currentCamera;
-    public Camera First;
-    public Camera Second;
+    public GameObject First;
 
 
     public static DDOL instance = null;
@@ -65,6 +63,7 @@ public class DDOL : MonoBehaviour
 
     public int TempHP;
 
+<<<<<<< HEAD
     public GameObject ICS; 
 
     public void End_Turn()
@@ -109,6 +108,11 @@ public class DDOL : MonoBehaviour
         TempHP = 0;
 
     }
+=======
+    public GameObject ICS;
+
+    public GameObject Dialogue;
+>>>>>>> master
     public void ResetCharacters(Transform ParentPlayer) { 
         foreach(Transform T in ParentPlayer)
         {
@@ -119,6 +123,37 @@ public class DDOL : MonoBehaviour
     {
         SystemEvent.GetComponent<Switch_Canvas>().Clear();
     }
+<<<<<<< HEAD
+=======
+    public void SetPlayer1(GameObject P)
+    {
+        StartingC = P;
+        //PLAYER 1 INFO
+        StartingC.transform.localScale = new Vector3(15F, 15F, 15F);
+        GameObject new_p = Coords[0][0].location;
+        Vector3 vx = new Vector3(new_p.transform.position.x, 5.5F, new_p.transform.position.z);
+        StartingC.gameObject.layer = LayerMask.NameToLayer("Player1");
+        IC = (GameObject)Instantiate(StartingC, vx, new_p.transform.rotation);
+        Coords[0][0] = new Coordinates(IC.GetInstanceID(), 1, 0, IC, Coords[0][0].location);
+        IC.transform.parent = SC.gameObject.transform;
+
+    }
+    public void SetPlayer2(GameObject P)
+    {
+        StartingC2 = P;
+        //PLAYER 2 INFO
+        StartingC2.transform.localScale = new Vector3(15F, 15F, 15F);
+        GameObject new_p = Coords[x - 1][x - 1].location;
+        Vector3 vx = new Vector3(new_p.transform.position.x, 5.5F, new_p.transform.position.z);
+        StartingC2.gameObject.layer = LayerMask.NameToLayer("Player2");
+        IC2 = (GameObject)Instantiate(StartingC2, vx, new_p.transform.rotation);
+        //IC2.transform.rotation.Set(new_p.transform.rotation.x, new_p.transform.rotation.y + 180, new_p.transform.rotation.z, new_p.transform.rotation.w);
+        IC2.transform.Rotate(Vector3.up * 180f);
+        Coords[x - 1][x - 1] = new Coordinates(IC2.GetInstanceID(), 1, 1, IC2, Coords[x - 1][x - 1].location);
+        IC2.transform.parent = SC2.gameObject.transform;
+    }
+    //We setup the gameboard, and player 1 and 2
+>>>>>>> master
     public void Start()
     {
       //  SystemEvent.GetComponent<Quit>().ResetWC();
@@ -138,6 +173,7 @@ public class DDOL : MonoBehaviour
                 Coords[i].Add(Coord);
             }
         }
+<<<<<<< HEAD
         StartingC.transform.localScale = new Vector3(1F, 1F, 1F);
         GameObject new_p = Coords[0][0].location;
         Vector3 vx = new Vector3(new_p.transform.position.x, 5.5F, new_p.transform.position.z);
@@ -155,6 +191,8 @@ public class DDOL : MonoBehaviour
         IC2 = (GameObject)Instantiate(StartingC2, vx, new_p.transform.rotation);
         Coords[x-1][x-1] = new Coordinates(IC2.GetInstanceID(), 1, 1, IC2, Coords[x-1][x-1].location);
         IC2.transform.parent = SC2.gameObject.transform;
+=======
+>>>>>>> master
     }
     public void Update()
     {
@@ -168,6 +206,60 @@ public class DDOL : MonoBehaviour
         else if (instance != this)
             DontDestroyOnLoad(gameObject);
     }
+<<<<<<< HEAD
+=======
+    /*
+ * End Turn will enable the right cameras, clears the board, clears the UI, and abilities
+ * Clear all options, and essentially resets it so that the player can make a move
+ * 
+ */
+    public void End_Turn()
+    {
+        int mana = 0;
+        if (player == 0)
+        {
+            First.GetComponent<Animator>().SetTrigger("Player2");
+            if (IC)
+            {
+                mana = IC2.GetComponent<Magician_N>().ManaMechanic();
+                IC2.GetComponent<MouseDetect>().IncrementMana(mana);
+                ResetCharacters(SC);
+            }
+            else
+            {
+                Debug.Log("GG");
+            }
+        }
+        else
+        {
+            First.GetComponent<Animator>().SetTrigger("Player1");
+            if (IC2)
+            {
+                mana = IC.GetComponent<Magician_N>().ManaMechanic();
+                IC.GetComponent<MouseDetect>().IncrementMana(mana);
+                ResetCharacters(SC2);
+            }
+            else
+            {
+                Debug.Log("GG");
+            }
+        }
+        UnShowSpaces();
+        turn++;
+        ClearUI();
+        spell = ""; //We can play with this as to add a warning before the player ends their turn ? for now it's set to this because by ending your turn no spell should be active at the start of the nex players turn
+        option = "";
+        if (currentObject != null)
+        {
+            currentObject.gameObject.GetComponent<ParticleSystem>().Stop();
+        }
+        currentObject = null;
+        summon = null;
+        TempHP = 0;
+
+    }
+    //Gives you the currentplayer based on turn
+>>>>>>> master
     public GameObject GetCurrentPlayer()
     {
         if(player == 0)
@@ -184,11 +276,17 @@ public class DDOL : MonoBehaviour
         }
         currentObject = IC2;
     }
+<<<<<<< HEAD
+=======
+    public Material XXX;
+    //Sets what the currentObject is, as well as it's location
+>>>>>>> master
     public void SetObject(int ID, int Status, GameObject CO, GameObject COL)
     {
 
         currentObject = CO;
         currentObjectL = COL;
+       // currentObject.GetComponent<ParticleSystemRenderer>().material = XXX; this is how to change material
         currentObject.gameObject.GetComponent<ParticleSystem>().Play();
     }
     public void MouseDown()
@@ -290,6 +388,20 @@ public class DDOL : MonoBehaviour
         }
         return null;
     }
+    public Coordinates FindCurrentLocation(GameObject Loc)
+    {
+        for (int i = 0; i < x; i++)
+        {
+            for (int j = 0; j < x; j++)
+            {
+                if (Coords[i][j].G.gameObject == Loc.gameObject)
+                {
+                    return Coords[i][j];
+                }
+            }
+        }
+        return Coords[0][0]; //Just a random position
+    }
     //MOVEMENT
     public List<GameObject> SpaceLocation(int r, int ID)
     {
@@ -305,8 +417,24 @@ public class DDOL : MonoBehaviour
         }
         return null;
     }
-    private List<GameObject> Spaces(int r, int y, int t)
+    public List<GameObject> SpaceLocation(int r, GameObject L)
     {
+        spaces.Clear();
+        for (int i = 0; i < x; i++)
+        {
+            for (int j = 0; j < x; j++)
+            {
+                if (Coords[i][j].location == L)
+                {
+                    return Spaces(i, j, r);
+                }
+            }
+        }
+        return null;
+    }
+    public List<GameObject> Spaces(int r, int y, int t)
+    {
+        spaces.Clear();
         spaces = new List<GameObject>();
         int n_row = r - t;
         int n_col = y - t;
@@ -343,6 +471,39 @@ public class DDOL : MonoBehaviour
                             }
                         }
                     }
+                    else if(option == "friendly")
+                    {
+                        if (Coords[n_row][n_col].status == 1)
+                        {
+                            if (player == 0)
+                            {
+                                if (Coords[n_row][n_col].G.gameObject.layer == LayerMask.NameToLayer("Player1"))
+                                {
+                                    spaces.Add(Coords[n_row][n_col].location);
+                                }
+                            }
+                            else
+                            {
+                                if (Coords[n_row][n_col].G.gameObject.layer == LayerMask.NameToLayer("Player2"))
+                                {
+                                    spaces.Add(Coords[n_row][n_col].location);
+                                }
+                            }
+                        }
+                    }else if(option == "AllE")
+                    {
+                        if ((Coords[n_row][n_col].status == 1 || Coords[n_row][n_col].status == 0 ) && Coords[n_row][n_col].G != currentObject)
+                        {
+                            spaces.Add(Coords[n_row][n_col].location);
+                        }
+                    }
+                    else if(option == "allE")
+                    {
+                        if (Coords[n_row][n_col].status == 1 && Coords[n_row][n_col].G != currentObject)
+                        {
+                            spaces.Add(Coords[n_row][n_col].location);
+                        }
+                    }
                     else if (option == "all")
                     {
                         if (Coords[n_row][n_col].status == 1)
@@ -358,24 +519,35 @@ public class DDOL : MonoBehaviour
         }
         return spaces;
     }
+    public void AOE()
+    {
+        foreach (GameObject T in DDOL.instance.spaces)
+        {
+            for (int i = 0; i < DDOL.instance.x; i++)
+            {
+                for (int j = 0; j < DDOL.instance.x; j++)
+                {
+                    if (DDOL.instance.Coords[i][j].location == T)
+                    {
+                        if(DDOL.instance.spell == "GroupHealing")
+                        {
+                            DDOL.instance.Coords[i][j].G.GetComponent<MouseDetect>().HealHP(5);
+                        } else if (DDOL.instance.spell == "HolyFire")
+                        {
+                            DDOL.instance.Coords[i][j].G.GetComponent<MouseDetect>().DamageHP(2);
+                        }
+                    }
+                }
+            }
+        }
+        option = "";
+        spell = "";
+        DDOL.instance.currentObject.GetComponent<MouseDetect>().DiminishMana(currentCost);
+        DDOL.instance.ClearSpaces();
+    }
     public void SummonPawn(Transform new_p)
     {
-        Vector3 vx = new Vector3(new_p.transform.position.x, new_p.transform.position.y, new_p.transform.position.z);
-
-        if (summon.gameObject.tag == "Wraith")
-        {
-            vx = new Vector3(new_p.transform.position.x, 6.48F, new_p.transform.position.z);
-            //summon.transform.localScale = new Vector3(10F, 10F, 10F);
-        }
-        else if (summon.gameObject.tag == "Skeleton")
-        {
-            vx = new Vector3(new_p.transform.position.x, new_p.transform.position.y-.45F, new_p.transform.position.z);
-            //summon.transform.localScale = new Vector3(10F, 10F, 10F)
-        }
-        else if (summon.gameObject.tag == "GreatSpirit")
-        {
-            vx = new Vector3(new_p.transform.position.x, 6.019F, new_p.transform.position.z);
-        }
+        Vector3 vx = new Vector3(new_p.transform.position.x, new_p.transform.position.y - .40F, new_p.transform.position.z);
         int i_x = 0;
         int j_y = 0;
         for (int i = 0; i < x; i++)
