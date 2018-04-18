@@ -1,0 +1,131 @@
+fileFormatVersion: 2
+guid: 2f49b48738ba32c47a1d7b8223bed976
+timeCreated: 1523751247
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: body
+    100002: cape
+    100004: capeGEO
+    100006: hood
+    100008: l_Eye
+    100010: //RootNode
+    100012: NecromancerGEO
+    100014: pedestal_geo
+    100016: r_Eye
+    400000: body
+    400002: cape
+    400004: capeGEO
+    400006: hood
+    400008: l_Eye
+    400010: //RootNode
+    400012: NecromancerGEO
+    400014: pedestal_geo
+    400016: r_Eye
+    2100000: pedestal_blinn1
+    2100002: Necromancer_RIG_0014_lambert2
+    2100004: Necromancer_RIG_0014_blinn3
+    2100006: Necromancer_RIG_0014_blinn2
+    2100008: Necromancer_RIG_0014_CharacterMale_blinn1
+    2100010: lambert1
+    2100012: Necromancer_RIG_0014_blinn4
+    2300000: body
+    2300002: cape
+    2300004: hood
+    2300006: l_Eye
+    2300008: pedestal_geo
+    2300010: r_Eye
+    3300000: body
+    3300002: cape
+    3300004: hood
+    3300006: l_Eye
+    3300008: pedestal_geo
+    3300010: r_Eye
+    4300000: pedestal_geo
+    4300002: body
+    4300004: l_Eye
+    4300006: r_Eye
+    4300008: cape
+    4300010: hood
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -13,6 +13,10 @@ ModelImporter:
     100010: wraith_joint
     100012: pedestal:GEO
     100014: pedestal:pedestal
+    100016: pedestal_geo
+    100018: wraith_geo
+    100020: wraith_minion_GEO
+    100022: wraith_minion_joint
     400000: cloak_GEO
     400002: GEO
     400004: //RootNode
@@ -21,19 +25,32 @@ ModelImporter:
     400010: wraith_joint
     400012: pedestal:GEO
     400014: pedestal:pedestal
+    400016: pedestal_geo
+    400018: wraith_geo
+    400020: wraith_minion_GEO
+    400022: wraith_minion_joint
     2100000: wraith_body_MAT
     2100002: wraith_eyes_MAT
     2100004: cloak_MAT
     2100006: pedestal_blinn1
+    2100008: wraith_w_Cloak_0002_cloak_MAT
+    2100010: wraith_w_Cloak_0002_wraith_body_MAT
+    2100012: wraith_w_Cloak_0002_wraith_eyes_MAT
     2300000: cloak_GEO
     2300002: pedestal:pedestal
     2300004: wraith_GEO
+    2300006: pedestal_geo
+    2300008: wraith_geo
     3300000: cloak_GEO
     3300002: pedestal:pedestal
     3300004: wraith_GEO
+    3300006: pedestal_geo
+    3300008: wraith_geo
     4300000: wraith_GEO
     4300002: cloak_GEO
     4300004: pedestal:pedestal
+    4300006: wraith_geo
+    4300008: pedestal_geo
     9500000: //RootNode
     13700000: wraith_GEO
   externalObjects: {}

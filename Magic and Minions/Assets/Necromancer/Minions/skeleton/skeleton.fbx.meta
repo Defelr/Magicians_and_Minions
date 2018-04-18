@@ -8,17 +8,33 @@ ModelImporter:
     100000: pedestal
     100002: //RootNode
     100004: skeleton_GEO:skeleton_GEO
+    100006: pedestal_geo
+    100008: skeleton_geo
+    100010: skeleton_minion_GEO
+    100012: skeleton_minion_joint
     400000: pedestal
     400002: //RootNode
     400004: skeleton_GEO:skeleton_GEO
+    400006: pedestal_geo
+    400008: skeleton_geo
+    400010: skeleton_minion_GEO
+    400012: skeleton_minion_joint
     2100000: blinn2
     2100002: blinn1
+    2100004: pedestal_blinn1
+    2100006: lambert1
     2300000: pedestal
     2300002: skeleton_GEO:skeleton_GEO
+    2300004: pedestal_geo
+    2300006: skeleton_geo
     3300000: pedestal
     3300002: skeleton_GEO:skeleton_GEO
+    3300004: pedestal_geo
+    3300006: skeleton_geo
     4300000: skeleton_GEO:skeleton_GEO
     4300002: pedestal
+    4300004: pedestal_geo
+    4300006: skeleton_geo
   externalObjects: {}
   materials:
     importMaterials: 1

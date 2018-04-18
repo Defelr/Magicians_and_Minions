@@ -9,11 +9,13 @@ public class BlockChoice : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+       gameObject.GetComponent<ParticleSystem>().Stop();
     }
 
     // Update is called once per frame
     private void Update()
     {
+
 
     }
     private void OnCollisionEnter()
@@ -33,8 +35,6 @@ public class BlockChoice : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        Renderer Re = null;
-        GameObject temp = null;
         Renderer R = this.gameObject.GetComponent<Renderer>();
         Collider C = GetComponent<Collider>();
         List<GameObject> tempList = new List<GameObject>();
@@ -103,15 +103,7 @@ public class BlockChoice : MonoBehaviour
                                 if (Summon)
                                 {
                                     Summon = false;
-                                    if (DDOL.instance.player == 0)
-                                    {
-                                        DDOL.instance.summon = DDOL.instance.IC.GetComponent<Magician_N>().Skeleton;
-                                    }
-                                    else
-                                    {
-                                        DDOL.instance.summon = DDOL.instance.IC2.GetComponent<Magician_N>().Skeleton;
-                                    }
-
+                                    DDOL.instance.summon = DDOL.instance.IC.GetComponent<Magician_N>().Skeleton;
                                     DDOL.instance.SummonPawn(SummonPos);
                                 }
 
@@ -130,7 +122,7 @@ public class BlockChoice : MonoBehaviour
                     }
                 }
             }
-            else if (DDOL.instance.option == "all")
+            else if (DDOL.instance.option == "all" || DDOL.instance.option == "allE" || DDOL.instance.option == "AllE")
             {
                 for (int i = 0; i < DDOL.instance.x; i++)
                 {
@@ -160,6 +152,13 @@ public class BlockChoice : MonoBehaviour
                                 DDOL.instance.Coords[i][j].G.GetComponent<MouseDetect>().HealHP(DDOL.instance.TempHP);
                                 DDOL.instance.spell = "";
                                 DDOL.instance.TempHP = 0;
+                            }else if (DDOL.instance.spell == "HolyFire")
+                            {
+                                DDOL.instance.ClearSpaces();
+                                DDOL.instance.option = "all";
+                                DDOL.instance.SpaceLocation(1, this.gameObject);
+                                //ADD THE DAMAGE IT WILL DEAL TO SPACES HERE
+                                DDOL.instance.AOE();
                             }
                             if(DDOL.instance.spell == "")
                             {
@@ -170,6 +169,13 @@ public class BlockChoice : MonoBehaviour
                     }
                 }
             }
+        }
+        else
+        {
+            DDOL.instance.option = "";
+            DDOL.instance.spell = "";
+            DDOL.instance.summon = null;
+            DDOL.instance.ClearSpaces();
         }
     }
 }
