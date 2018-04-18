@@ -133,7 +133,7 @@ public class Magician_N : MonoBehaviour
     }
     public bool SwarmCheck()
     {
-        if (CheckSummon(2))
+        if (CheckSummon(8))
         {
             return true;
         }
@@ -162,7 +162,7 @@ public class Magician_N : MonoBehaviour
     public void Swarm()
     {
         CheckPrevious();
-        if (CheckSummon(2))
+        if (CheckSummon(8))
         {
             DDOL.instance.option = "summon";
             DDOL.instance.summon = Skeleton;

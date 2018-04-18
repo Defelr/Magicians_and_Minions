@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 136340741309621124}
   - component: {fileID: 198723884032543814}
   - component: {fileID: 199228694988605006}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: skeleton_final
   m_TagString: Skeleton
   m_Icon: {fileID: 0}
@@ -231,9 +231,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HP: 3
   MAX_HP: 3
-  DMG: 1
+  DMG: 3
   Mana: -1
-  Cost: 2
+  Cost: 3
   Movement_c: 1
   Attack_c: 1
   Moves: 1

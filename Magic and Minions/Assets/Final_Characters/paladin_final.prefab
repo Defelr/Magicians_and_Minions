@@ -480,7 +480,7 @@ MonoBehaviour:
   HP: 20
   MAX_HP: 20
   DMG: 0
-  Mana: 3
+  Mana: 7
   Cost: -1
   Movement_c: 1
   Attack_c: 1
