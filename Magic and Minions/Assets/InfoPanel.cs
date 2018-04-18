@@ -6,6 +6,8 @@ public class InfoPanel : MonoBehaviour {
 
     public GameObject interfacePnl;
     public GameObject infoPnl;
+    public GameObject NecroTxt;
+    public GameObject PalTxt;
 
     bool active = false;
 	
