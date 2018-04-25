@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 114300042934134688}
   - component: {fileID: 114792237565613302}
   - component: {fileID: 114985439765905632}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: paladin_final
   m_TagString: Paladin
   m_Icon: {fileID: 0}
@@ -3938,7 +3938,7 @@ ParticleSystemRenderer:
   m_Pivot: {x: 0, y: 0, z: 0}
   m_UseCustomVertexStreams: 0
   m_VertexStreams: 00010304
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
