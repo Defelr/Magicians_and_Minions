@@ -11,7 +11,7 @@ public class KillerAI_Necromancer : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        //StartCoroutine(PlayTurn());
+        //StartCoroutine("PlayTurn");
 	}
 	
 	// Update is called once per frame
@@ -19,20 +19,14 @@ public class KillerAI_Necromancer : MonoBehaviour {
 		
 	}
 
-   // public void PlayTurnButton()
-    //{
-    //    StartCoroutine("PlayTurn");
-    //}
-
-    //TODO: look more into how spells work
-    //      may want to consider moving AI around to cast spells
-    //      potentially; for each location it can move into, save as temp
-    //      get the occupied tiles around it
-    //      if rather full, maybe step in to cast a spell
-    //      if not, perhaps don't move
-
-    public void PlayTurn()
+    public void PlayTurnButton()
     {
+        StartCoroutine("PlayTurn");
+    }
+
+    IEnumerator PlayTurn()
+    {
+        Debug.Log("start");
         DDOL.instance.currentObject = DDOL.instance.IC2;
         ai = DDOL.instance.IC2;
         foreach (GameObject m in justSummoned)
@@ -44,7 +38,7 @@ public class KillerAI_Necromancer : MonoBehaviour {
         {
             if (m == null) { minions.RemoveAt(minions.IndexOf(m)); }
         }
-
+        yield return new WaitForSeconds(1.0f);
         //If less than 5 minions, summon minion, preference for wraiths
         if (minions.Count < 5)
         {
@@ -59,9 +53,10 @@ public class KillerAI_Necromancer : MonoBehaviour {
             }
         }
         //If at least 12 mana, summon 2nd minion, regardless
-        //add a short wait here, too
+        //wait
         if (DDOL.instance.currentObject.GetComponent<MouseDetect>().Mana >= 12)
         {
+            yield return new WaitForSeconds(1.0f);
             Debug.Log("Summon 2nd minion");
             if (Random.Range(0, 1) < 0.7)
             {
@@ -73,25 +68,28 @@ public class KillerAI_Necromancer : MonoBehaviour {
             }
         }
         //wait between summoning and moving
-        //yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.0f);
         //move minion
-        foreach(GameObject m in minions)
+        foreach (GameObject m in minions)
         {
             DDOL.instance.currentObject = m;
             MoveMinion(m);
             DDOL.instance.currentObject = ai;
         }
         //wait between moving and attacking
+        yield return new WaitForSeconds(1.0f);
         //if there is anything within attack radius, attack
-        foreach(GameObject m in minions)
+        foreach (GameObject m in minions)
         {
             DDOL.instance.currentObject = m;
             MinionAttack(m);
             DDOL.instance.currentObject = ai;
         }
         //wait between attacking and moving self
+        yield return new WaitForSeconds(1.0f);
         MoveSelf();
         //wait between moving self and casting spells
+        yield return new WaitForSeconds(1.0f);
         if (!UnLifeBlast())
         {
             if (!Swarm())
@@ -100,6 +98,7 @@ public class KillerAI_Necromancer : MonoBehaviour {
             }
         }
         //short wait here
+        yield return new WaitForSeconds(1.0f);
         DDOL.instance.End_Turn();
     }
 
