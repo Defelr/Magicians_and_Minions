@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SurvivorAI_Necromancer : MonoBehaviour
 {
     public GameObject Skeleton;
     public GameObject Wraith;
+    public int map;
     public IList<GameObject> minions = new List<GameObject>();
     public IList<GameObject> justSummoned = new List<GameObject>();
     private GameObject ai;
@@ -22,19 +24,12 @@ public class SurvivorAI_Necromancer : MonoBehaviour
 
     }
 
-    // public void PlayTurnButton()
-    //{
-    //    StartCoroutine("PlayTurn");
-    //}
+    public void PlayTurnButton()
+    {
+        StartCoroutine("PlayTurn");
+    }
 
-    //TODO: look more into how spells work
-    //      may want to consider moving AI around to cast spells
-    //      potentially; for each location it can move into, save as temp
-    //      get the occupied tiles around it
-    //      if rather full, maybe step in to cast a spell
-    //      if not, perhaps don't move
-
-    public void PlayTurn()
+    IEnumerator PlayTurn()
     {
         DDOL.instance.currentObject = DDOL.instance.IC2;
         ai = DDOL.instance.IC2;
@@ -43,6 +38,11 @@ public class SurvivorAI_Necromancer : MonoBehaviour
             minions.Add(m);
         }
         justSummoned.Clear();
+        foreach (GameObject m in minions)
+        {
+            if (m == null) { minions.RemoveAt(minions.IndexOf(m)); }
+        }
+        yield return new WaitForSeconds(2.5f);
         //If less than 5 minions, summon minion, preference for wraiths
         if (minions.Count < 5)
         {
@@ -60,6 +60,7 @@ public class SurvivorAI_Necromancer : MonoBehaviour
         //add a short wait here, too
         if (DDOL.instance.currentObject.GetComponent<MouseDetect>().Mana >= 10)
         {
+            yield return new WaitForSeconds(0.5f);
             Debug.Log("Summon 2nd minion");
             if (Random.Range(0, 1) < 0.7)
             {
@@ -71,23 +72,26 @@ public class SurvivorAI_Necromancer : MonoBehaviour
             }
         }
         //wait between summoning and moving
-        //yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.5f);
         //move minion
         foreach (GameObject m in minions)
         {
             DDOL.instance.currentObject = m;
             MoveMinion(m);
             DDOL.instance.currentObject = ai;
+            yield return new WaitForSeconds(0.25f);
         }
         //wait between moving and attacking
         //if there is anything within attack radius, attack
         foreach (GameObject m in minions)
         {
+            yield return new WaitForSeconds(0.25f);
             DDOL.instance.currentObject = m;
             MinionAttack(m);
             DDOL.instance.currentObject = ai;
         }
         //wait between attacking and casting spells
+        yield return new WaitForSeconds(0.5f);
         if (!UnLifeBlast())
         {
             if (!Swarm())
@@ -96,8 +100,10 @@ public class SurvivorAI_Necromancer : MonoBehaviour
             }
         }
         //wait between spells and moving self
+        yield return new WaitForSeconds(0.25f);
         MoveSelf();
         //short wait here
+        yield return new WaitForSeconds(0.25f);
         DDOL.instance.End_Turn();
     }
 
@@ -313,12 +319,12 @@ public class SurvivorAI_Necromancer : MonoBehaviour
     //Cast Swarm if 3 enough spots to summon minions into
     public bool Swarm()
     {
-        if (DDOL.instance.currentObject.GetComponent<MouseDetect>().Mana >= 2)
+        if (DDOL.instance.currentObject.GetComponent<MouseDetect>().Mana >= 8)
         {
             DDOL.instance.option = "summon";
             DDOL.instance.summon = Skeleton;
             DDOL.instance.spell = "Swarm";
-            DDOL.instance.currentCost = 2;
+            DDOL.instance.currentCost = 8;
             List<GameObject> loc = DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
             if (loc.Count >= 3)
             {
@@ -332,7 +338,7 @@ public class SurvivorAI_Necromancer : MonoBehaviour
                 justSummoned.Add(DDOL.instance.ICS);
             }
             //MANA VALUE HARDCODED
-            DDOL.instance.currentObject.gameObject.GetComponent<MouseDetect>().DiminishMana(2);
+            DDOL.instance.currentObject.gameObject.GetComponent<MouseDetect>().DiminishMana(8);
             return true;
         }
         else

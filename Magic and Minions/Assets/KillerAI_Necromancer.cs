@@ -1,14 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class KillerAI_Necromancer : MonoBehaviour {
     public GameObject Skeleton;
     public GameObject Wraith;
+    public int map;
     public IList<GameObject> minions = new List<GameObject>();
     public IList<GameObject> justSummoned = new List<GameObject>();
     private GameObject ai;
-
+   
     // Use this for initialization
     void Start () {
         //StartCoroutine("PlayTurn");
@@ -16,6 +18,7 @@ public class KillerAI_Necromancer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        
 		
 	}
 
@@ -310,12 +313,12 @@ public class KillerAI_Necromancer : MonoBehaviour {
     //Cast Swarm if 3 enough spots to summon minions into
     public bool Swarm()
     {
-        if (DDOL.instance.currentObject.GetComponent<MouseDetect>().Mana >= 2)
+        if (DDOL.instance.currentObject.GetComponent<MouseDetect>().Mana >= 8)
         {
             DDOL.instance.option = "summon";
             DDOL.instance.summon = Skeleton;
             DDOL.instance.spell = "Swarm";
-            DDOL.instance.currentCost = 2;
+            DDOL.instance.currentCost = 8;
             List<GameObject> loc = DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
             if (loc.Count >= 3)
             {
@@ -329,7 +332,7 @@ public class KillerAI_Necromancer : MonoBehaviour {
                 justSummoned.Add(DDOL.instance.ICS);
             }
             //MANA VALUE HARDCODED
-            DDOL.instance.currentObject.gameObject.GetComponent<MouseDetect>().DiminishMana(2);
+            DDOL.instance.currentObject.gameObject.GetComponent<MouseDetect>().DiminishMana(8);
             return true;
         }
         else

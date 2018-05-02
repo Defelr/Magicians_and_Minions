@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SurvivorAI_Paladin : MonoBehaviour
 {
     public GameObject GreatSpirit;
+    public int map;
     public IList<GameObject> minions = new List<GameObject>();
     public IList<GameObject> justSummoned = new List<GameObject>();
     private GameObject ai;
@@ -21,19 +23,12 @@ public class SurvivorAI_Paladin : MonoBehaviour
 
     }
 
-    // public void PlayTurnButton()
-    //{
-    //    StartCoroutine("PlayTurn");
-    //}
+    public void PlayTurnButton()
+    {
+        StartCoroutine("PlayTurn");
+    }
 
-    //TODO: look more into how spells work
-    //      may want to consider moving AI around to cast spells
-    //      potentially; for each location it can move into, save as temp
-    //      get the occupied tiles around it
-    //      if rather full, maybe step in to cast a spell
-    //      if not, perhaps don't move
-
-    public void PlayTurn()
+    IEnumerator PlayTurn()
     {
         DDOL.instance.currentObject = DDOL.instance.IC2;
         ai = DDOL.instance.IC2;
@@ -42,6 +37,11 @@ public class SurvivorAI_Paladin : MonoBehaviour
             minions.Add(m);
         }
         justSummoned.Clear();
+        foreach (GameObject m in minions)
+        {
+            if (m == null) { minions.RemoveAt(minions.IndexOf(m)); }
+        }
+        yield return new WaitForSeconds(2.5f);
         //If less than 5 minions, summon minion, preference for wraiths
         if (minions.Count < 5)
         {
@@ -52,33 +52,42 @@ public class SurvivorAI_Paladin : MonoBehaviour
         //add a short wait here, too
         if (DDOL.instance.currentObject.GetComponent<MouseDetect>().Mana >= 10)
         {
+            yield return new WaitForSeconds(0.5f);
             SummonSpirit();
         }
         //wait between summoning and moving
-        //yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.5f);
         //move minion
         foreach (GameObject m in minions)
         {
             DDOL.instance.currentObject = m;
             MoveMinion(m);
             DDOL.instance.currentObject = ai;
+            yield return new WaitForSeconds(0.25f);
         }
         //wait between moving and attacking
         //if there is anything within attack radius, attack
         foreach (GameObject m in minions)
         {
+            yield return new WaitForSeconds(0.25f);
             DDOL.instance.currentObject = m;
             MinionAttack(m);
             DDOL.instance.currentObject = ai;
         }
         //wait between attacking and casting spells
-        if (!UnLifeBlast())
+        yield return new WaitForSeconds(0.5f);
+        if (!GroupHealing())
         {
-            LifeDrain();
+            if (!HolyFire())
+            {
+                Implosion();
+            }
         }
         //wait between attacking and moving self
+        yield return new WaitForSeconds(0.25f);
         MoveSelf();
         //short wait here
+        yield return new WaitForSeconds(0.25f);
         DDOL.instance.End_Turn();
     }
 
@@ -213,82 +222,72 @@ public class SurvivorAI_Paladin : MonoBehaviour
         }
     }
 
-    //Cast UnLifeBlast on player if possible, otherwise on minion with most health
-    public bool UnLifeBlast()
+    //Cast implosion
+    public bool Implosion()
     {
+        //If enough mana
         if (DDOL.instance.currentObject.GetComponent<MouseDetect>().Mana >= 2)
         {
             DDOL.instance.option = "attack";
-            DDOL.instance.spell = "Unlife";
+            DDOL.instance.spell = "HolyFire";
             DDOL.instance.currentCost = 2;
-            List<GameObject> loc = DDOL.instance.SpaceLocation(3, DDOL.instance.currentObject.GetInstanceID());
-            if (loc.Count != 0)
+            //Get all locations
+            List<GameObject> loc = DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
+            foreach (GameObject l in loc)
             {
-                //check for player
-                foreach (GameObject l in loc)
-                {
-                    if (DDOL.instance.FindCurrentObject(l).tag == "Player")
-                    {
-                        //VALUES HARDCODED- MAY NEED TO BE CHECKED
-                        DDOL.instance.FindCurrentObject(l).GetComponent<MouseDetect>().DamageHP(2);
-                        DDOL.instance.currentObject.GetComponent<MouseDetect>().DiminishMana(2);
-                        return true;
-                    }
-                }
-                //otherwise, attack whatever has the most health
-                GameObject v = DDOL.instance.FindCurrentObject(loc[0]);
-                foreach (GameObject l in loc)
-                {
-                    if (DDOL.instance.FindCurrentObject(l).GetComponent<MouseDetect>().HP >
-                        v.GetComponent<MouseDetect>().HP)
-                    {
-                        v = DDOL.instance.FindCurrentObject(l);
-                    }
-                }
-                v.GetComponent<MouseDetect>().DamageHP(2);
-                DDOL.instance.currentObject.GetComponent<MouseDetect>().DiminishMana(2);
-                return true;
+                //Damage
+                DDOL.instance.FindCurrentObject(l).GetComponent<MouseDetect>().DamageHP(1);
             }
-            return false;
+            //Diminsh mana
+            DDOL.instance.currentObject.GetComponent<MouseDetect>().DiminishMana(2);
+            return true;
         }
         return false;
     }
 
-    //Cast LifeDrain, preference to attack player and restore self
-    //If health is low, attack anything to restore self
-    public bool LifeDrain()
+    //Cast holy fire
+    public bool HolyFire()
     {
-        if (DDOL.instance.currentObject.GetComponent<MouseDetect>().Mana >= 4)
+        //If enough mana
+        if (DDOL.instance.currentObject.GetComponent<MouseDetect>().Mana >= 6)
         {
-            DDOL.instance.option = "all";
-            DDOL.instance.spell = "LifeDrain";
-            DDOL.instance.currentCost = 4;
-            List<GameObject> loc = DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
-            if (loc.Count != 0)
+            DDOL.instance.option = "attack";
+            DDOL.instance.spell = "HolyFire";
+            DDOL.instance.currentCost = 6;
+            //Get all locations
+            List<GameObject> loc = DDOL.instance.SpaceLocation(3, DDOL.instance.currentObject.GetInstanceID());
+            foreach (GameObject l in loc)
             {
-                //check for player
-                foreach (GameObject l in loc)
-                {
-                    if (DDOL.instance.FindCurrentObject(l).tag == "Player")
-                    {
-                        //VALUES HARDCODED- MAY NEED TO BE CHECKED
-                        DDOL.instance.FindCurrentObject(l).GetComponent<MouseDetect>().DamageHP(4);
-                        DDOL.instance.currentObject.GetComponent<MouseDetect>().HealHP(4);
-                        return true;
-                    }
-                }
-                if (DDOL.instance.currentObject.GetComponent<MouseDetect>().HP < 10)
-                {
-                    DDOL.instance.FindCurrentObject(loc[Random.Range(0, loc.Count - 1)]).GetComponent<MouseDetect>().DamageHP(4);
-                    DDOL.instance.currentObject.GetComponent<MouseDetect>().HealHP(4);
-                }
+                //Damage
+                DDOL.instance.FindCurrentObject(l).GetComponent<MouseDetect>().DamageHP(1);
             }
-            DDOL.instance.currentObject.GetComponent<MouseDetect>().DiminishMana(4);
+            //Diminsh mana
+            DDOL.instance.currentObject.GetComponent<MouseDetect>().DiminishMana(6);
             return true;
         }
-        else
+        return false;
+    }
+
+    //cast group healing
+    public bool GroupHealing()
+    {
+        //if enough mana
+        if (DDOL.instance.currentObject.GetComponent<MouseDetect>().Mana >= 3)
         {
-            return false;
+            DDOL.instance.option = "friendly";
+            DDOL.instance.spell = "GroupHealing";
+            DDOL.instance.currentCost = 3;
+            //Get all locations
+            List<GameObject> loc = DDOL.instance.SpaceLocation(3, DDOL.instance.currentObject.GetInstanceID());
+            foreach (GameObject l in loc)
+            {
+                //Damage
+                DDOL.instance.FindCurrentObject(l).GetComponent<MouseDetect>().HealHP(5);
+            }
+            //Diminsh mana
+            DDOL.instance.currentObject.GetComponent<MouseDetect>().DiminishMana(3);
+            return true;
         }
+        return false;
     }
 }
