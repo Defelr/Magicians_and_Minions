@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 222820692476883660}
   - component: {fileID: 114608686300559854}
   - component: {fileID: 114590193608004320}
+  - component: {fileID: 82477165895376922}
   m_Layer: 5
   m_Name: Menu_Btn
   m_TagString: Untagged
@@ -597,6 +598,86 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!82 &82477165895376922
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1082369130568044}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 555a9d614fbe9ec4fa92e29498b930bc, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114011902902226722
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -699,7 +780,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: 8c8810e395299164aa6a4a85e4aacb37, type: 3}
   m_Type: 0
-  m_PreserveAspect: 1
+  m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -1086,11 +1167,8 @@ MonoBehaviour:
 
 
 
+
     Spells
-
-
-
-
 
 
 
@@ -1150,23 +1228,25 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 23
+    m_Font: {fileID: 12800000, guid: 402d477375391b74fa780314cc67700d, type: 3}
+    m_FontSize: 25
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 40
     m_Alignment: 2
-    m_AlignByGeometry: 0
+    m_AlignByGeometry: 1
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "20\n\nStarts with 7\nGains 1 mana per turn\n\n\n\nImplosion (2 Mana, 1
-    Range): \n\tDeals 1 damage to all characters within a 1 tile radius of the target\n\nGroup
-    Healing (3 Mana, 3 Range): \n\tRestores 5 health points to a friendly minion\n\nHoly
-    Fire (6 Mana, 3 Range): \n\tDeals 3 damage to all characters within a 1 tile radius
-    of the target\n\n\n\nGreat Spirit (5 Mana): \n\tHealth: 8\n\tDamage: 3"
+  m_Text: "20\n\n\n\n\n\n\n\nStarts with 7\n\n\nGains 1 mana per turn\n\n\n\n\n\n\n\n\n\n\n\nImplosion
+    (2 Mana, 1 Range): \n\n\n\tDeals 1 damage to all\n\n\n characters within a 1 tile\n\n\n
+    radius of the target\n\n\n\n\nGroup Healing (3 Mana, 1 Range): \n\n\n\tRestores
+    3 health points to \n\n\nminions around Paladin\n\n\n\n\nHoly Fire (6 Mana, 3
+    Range): \n\n\n\tDeals 3 damage to all characters \n\n\nwithin a 1 tile radius
+    of the target\n\n\n\n\n\n\n\n\n\n\nGreat Spirit (5 Mana): \n\n\n\n\tHealth: 8\n\n\n\tDamage:
+    3"
 --- !u!114 &114546567221979562
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1239,14 +1319,14 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 402d477375391b74fa780314cc67700d, type: 3}
     m_FontSize: 29
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
     m_Alignment: 4
-    m_AlignByGeometry: 0
+    m_AlignByGeometry: 1
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
@@ -1293,6 +1373,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_MethodName: Quit1
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 82477165895376922}
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1457,8 +1548,8 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 23
+    m_Font: {fileID: 12800000, guid: 402d477375391b74fa780314cc67700d, type: 3}
+    m_FontSize: 25
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
@@ -1469,12 +1560,13 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "20\n\nStarts with 5\nGains (10 - number of skeletons in play) / 2 per turn\n\n\nUn-life
-    Blast (2 Mana, 3 Range): Deals 2 damage. If the target dies, a friendly skeleton
-    is summoned on that tile\n\nSwarm (8 Mana): Summons 3 Skeletons around the Necromancer\n\nLife
-    Drain (4 Mana, 4 Range): Deals 4 damage to an enemy and then heals a friendly
-    minion for 4 health.\n\n\n\nSkeleton (3 mana):\n\tHealth: 3\n\tDamage: 3\n\nWraith
-    (5 mana):\n\tHealth: 4\n\tDamage: 4 "
+  m_Text: "20\n\n\n\n\n\n\nStarts with 5\n\n\nGains (10 - number of skeletons in\n\n\nplay)
+    / 2 per turn\n\n\n\n\n\n\n\n\nUn-life Blast (2 Mana, 3 Range): \n\n\nDeals 2 damage.
+    If the target dies,\n\n\na friendly skeleton is summoned on\n\n\nthat tile\n\n\n\nSwarm
+    (8 Mana): Summons 3\n\n\nSkeletons around the Necromancer\n\n\n\nLife Drain (4
+    Mana, 1 Range): \n\n\nDeals 4 damage to an enemy and \n\n\nthen heals a friendly
+    minion for 4 \n\n\nhealth.\n\n\n\n\n\n\n\n\n\n\n\n\nSkeleton (3 mana):\n\n\n\tHealth:
+    3\n\n\n\tDamage: 3\n\n\n\n\nWraith (5 mana):\n\n\n\tHealth: 4\n\n\n\tDamage: 4 "
 --- !u!114 &114694047720370254
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1577,7 +1669,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: e6c50f7cc3b2525419b5640dbf9bc6eb, type: 3}
   m_Type: 0
-  m_PreserveAspect: 1
+  m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -1663,14 +1755,14 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 79
+    m_Font: {fileID: 12800000, guid: 90a90e9c93a873c44a808b77b3263b7b, type: 3}
+    m_FontSize: 77
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 79
     m_Alignment: 4
-    m_AlignByGeometry: 0
+    m_AlignByGeometry: 1
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
@@ -1696,14 +1788,14 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 52
+    m_Font: {fileID: 12800000, guid: 90a90e9c93a873c44a808b77b3263b7b, type: 3}
+    m_FontSize: 58
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 4
-    m_MaxSize: 52
+    m_MaxSize: 58
     m_Alignment: 4
-    m_AlignByGeometry: 0
+    m_AlignByGeometry: 1
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
@@ -1756,12 +1848,12 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 52
+    m_Font: {fileID: 12800000, guid: 90a90e9c93a873c44a808b77b3263b7b, type: 3}
+    m_FontSize: 58
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 4
-    m_MaxSize: 52
+    m_MaxSize: 58
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -2180,8 +2272,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000012398, y: 0}
-  m_SizeDelta: {x: 2.85, y: -20}
+  m_AnchoredPosition: {x: 0.000012398, y: 1.33}
+  m_SizeDelta: {x: 2.85, y: -17.34}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224074769118829144
 RectTransform:
@@ -2195,7 +2287,7 @@ RectTransform:
   m_Children:
   - {fileID: 224694217633950870}
   m_Father: {fileID: 224460557836514566}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
@@ -2235,8 +2327,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.000030517578, y: -50.600098}
-  m_SizeDelta: {x: 960, y: 101.2}
+  m_AnchoredPosition: {x: -0.000030518, y: -50.600098}
+  m_SizeDelta: {x: 880, y: 101.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224227585630467272
 RectTransform:
@@ -2253,8 +2345,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -139.55, y: -74}
-  m_SizeDelta: {x: 279.1, y: 239.6}
+  m_AnchoredPosition: {x: -0.23999023, y: -50.6}
+  m_SizeDelta: {x: -9.48, y: -101.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224231301620389486
 RectTransform:
@@ -2328,8 +2420,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -20, y: -20}
+  m_AnchoredPosition: {x: 0, y: -2.4975004}
+  m_SizeDelta: {x: -20, y: -25.005001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224364306550896790
 RectTransform:
@@ -2347,8 +2439,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 8.399994, y: -79.805}
-  m_SizeDelta: {x: 176.8, y: 920.39}
+  m_AnchoredPosition: {x: -0.000030518, y: -79.805}
+  m_SizeDelta: {x: 160, y: 920.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224367595191788448
 RectTransform:
@@ -2381,7 +2473,6 @@ RectTransform:
   m_Children:
   - {fileID: 224227585630467272}
   - {fileID: 224857904693528514}
-  - {fileID: 224837079483922888}
   - {fileID: 224831361977238676}
   - {fileID: 224074769118829144}
   m_Father: {fileID: 224594115998976640}
@@ -2408,7 +2499,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 25, y: -25}
+  m_AnchoredPosition: {x: 26, y: -74.10004}
   m_SizeDelta: {x: 160.09998, y: 75.399994}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &224504222023238158
@@ -2468,8 +2559,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 51, y: -61}
-  m_SizeDelta: {x: 1121.8, y: 887.6}
+  m_AnchoredPosition: {x: -2.2625122, y: -50.6}
+  m_SizeDelta: {x: 875.53, y: 818.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224540941331504732
 RectTransform:
@@ -2486,8 +2577,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -31.8}
-  m_SizeDelta: {x: -400, y: -63.6}
+  m_AnchoredPosition: {x: 0, y: -5}
+  m_SizeDelta: {x: -400, y: -10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224576035278421200
 RectTransform:
@@ -2639,8 +2730,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -20, y: -20}
+  m_AnchoredPosition: {x: 0, y: -2.5}
+  m_SizeDelta: {x: -20, y: -25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224708764601864388
 RectTransform:
@@ -2672,7 +2763,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224460557836514566}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2689,13 +2780,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 224460557836514566}
-  m_RootOrder: 2
+  m_Father: {fileID: 224857904693528514}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.000091552734, y: -50.600098}
-  m_SizeDelta: {x: 960, y: 101.2}
+  m_AnchoredPosition: {x: 4.5, y: -50.600098}
+  m_SizeDelta: {x: 880, y: 101.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224857904693528514
 RectTransform:
@@ -2706,14 +2797,15 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 224837079483922888}
   m_Father: {fileID: 224460557836514566}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 4.5, y: 409.4}
-  m_SizeDelta: {x: 0, y: -818.8}
+  m_AnchoredPosition: {x: 0.000030517578, y: 409.4}
+  m_SizeDelta: {x: -0.000061035, y: -818.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224862232904259682
 RectTransform:

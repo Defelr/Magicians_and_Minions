@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 114645355866066260}
   - component: {fileID: 198536068570689698}
   - component: {fileID: 199845134839449528}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: greatSpirit_final
   m_TagString: GreatSpirit
   m_Icon: {fileID: 0}

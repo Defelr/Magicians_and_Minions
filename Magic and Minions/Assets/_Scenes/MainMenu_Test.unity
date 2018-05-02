@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -518,62 +518,6 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 751770449}
-    - target: {fileID: 114733842603124380, guid: e6a864e14744c3c499ea51d409853e88,
-        type: 2}
-      propertyPath: m_Color.r
-      value: 0.3019608
-      objectReference: {fileID: 0}
-    - target: {fileID: 114733842603124380, guid: e6a864e14744c3c499ea51d409853e88,
-        type: 2}
-      propertyPath: m_Color.g
-      value: 0.1137255
-      objectReference: {fileID: 0}
-    - target: {fileID: 114733842603124380, guid: e6a864e14744c3c499ea51d409853e88,
-        type: 2}
-      propertyPath: m_Color.b
-      value: 0.10980393
-      objectReference: {fileID: 0}
-    - target: {fileID: 114397137648372378, guid: e6a864e14744c3c499ea51d409853e88,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: f08fe54a928ef4c48bb13c991ca1d60a,
-        type: 3}
-    - target: {fileID: 114555177294727738, guid: e6a864e14744c3c499ea51d409853e88,
-        type: 2}
-      propertyPath: m_Color.r
-      value: 0.24264705
-      objectReference: {fileID: 0}
-    - target: {fileID: 114555177294727738, guid: e6a864e14744c3c499ea51d409853e88,
-        type: 2}
-      propertyPath: m_Color.g
-      value: 0.035683393
-      objectReference: {fileID: 0}
-    - target: {fileID: 114555177294727738, guid: e6a864e14744c3c499ea51d409853e88,
-        type: 2}
-      propertyPath: m_Color.b
-      value: 0.035683393
-      objectReference: {fileID: 0}
-    - target: {fileID: 114681127442856022, guid: e6a864e14744c3c499ea51d409853e88,
-        type: 2}
-      propertyPath: m_FontData.m_Font
-      value: 
-      objectReference: {fileID: 12800000, guid: 402d477375391b74fa780314cc67700d,
-        type: 3}
-    - target: {fileID: 224878078290092974, guid: e6a864e14744c3c499ea51d409853e88,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 224878078290092974, guid: e6a864e14744c3c499ea51d409853e88,
-        type: 2}
-      propertyPath: m_SizeDelta.y
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 1743081380328840, guid: e6a864e14744c3c499ea51d409853e88, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e6a864e14744c3c499ea51d409853e88, type: 2}
   m_IsPrefabParent: 0
@@ -719,6 +663,11 @@ Prefab:
       propertyPath: spreadCustomCurve.m_RotationOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114857667753345950, guid: 95261aafc074e2e47b733fbb34b8cf04,
+        type: 2}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 95261aafc074e2e47b733fbb34b8cf04, type: 2}
   m_IsPrefabParent: 0
@@ -853,6 +802,55 @@ Prefab:
         type: 2}
       propertyPath: m_FontData.m_MaxSize
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 114361318669814376, guid: e7a71ed2abe01a94ea4656b7f52e75b1,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 402d477375391b74fa780314cc67700d,
+        type: 3}
+    - target: {fileID: 114361318669814376, guid: e7a71ed2abe01a94ea4656b7f52e75b1,
+        type: 2}
+      propertyPath: m_FontData.m_Alignment
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 224093363994060182, guid: e7a71ed2abe01a94ea4656b7f52e75b1,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.000020027
+      objectReference: {fileID: 0}
+    - target: {fileID: 224093363994060182, guid: e7a71ed2abe01a94ea4656b7f52e75b1,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 0.000049591
+      objectReference: {fileID: 0}
+    - target: {fileID: 114361318669814376, guid: e7a71ed2abe01a94ea4656b7f52e75b1,
+        type: 2}
+      propertyPath: m_FontData.m_AlignByGeometry
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114636555101261164, guid: e7a71ed2abe01a94ea4656b7f52e75b1,
+        type: 2}
+      propertyPath: m_Text
+      value: 'Robert DeFelice: Project Manager, UI Designer
+
+        Josh Kammer: Writer, Composer, Gameplay Balance Developer
+
+        Liliana Campuzano: Artist
+
+        Rebecca Sheridan: AI Programmer, Campaign Programmer
+
+        Matthew Carlson: Gameplay Programmer'
+      objectReference: {fileID: 0}
+    - target: {fileID: 224550125256494234, guid: e7a71ed2abe01a94ea4656b7f52e75b1,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.00003051779
+      objectReference: {fileID: 0}
+    - target: {fileID: 224550125256494234, guid: e7a71ed2abe01a94ea4656b7f52e75b1,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 1920
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e7a71ed2abe01a94ea4656b7f52e75b1, type: 2}

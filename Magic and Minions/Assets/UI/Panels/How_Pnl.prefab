@@ -131,7 +131,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &82782913460749316
 AudioSource:
   m_ObjectHideFlags: 1
@@ -270,7 +270,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: cdd4e6f38545b5a4f94244d8dc1b99d8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f08fe54a928ef4c48bb13c991ca1d60a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -317,7 +317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.24264705, g: 0.035683393, b: 0.035683393, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -344,12 +344,12 @@ MonoBehaviour:
     clickling on the summon button of the minion you wish to summon, and then selecting
     a highlighted tile to summon the minion there. The mana cost of the minion is
     displayed above its button.\n\n- Cast a spell by selecting your Magician, selecting
-    the disired spell button, and selecting the tile you want to target. The mana
+    the desired spell button, and selecting the tile you want to target. The mana
     cost of the spell is displayed above its button.\n\n- Attack an enemy character
     by selecting a minion, clicking on the attack button, and then selecting an adjacent
     enemy character. Minions can only attack once per turn.\n\n\nFriendly pieces have
     a yellow pedestal, while enemy pieces have a blue pedestal. \nYou win the game
-    when the enemy Magician's helath reaches zero."
+    when the enemy Magician's health reaches zero."
 --- !u!114 &114681127442856022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -370,7 +370,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 402d477375391b74fa780314cc67700d, type: 3}
     m_FontSize: 31
     m_FontStyle: 0
     m_BestFit: 0
@@ -395,7 +395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.3019608, g: 0.1137255, b: 0.10980393, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -666,6 +666,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 6}
+  m_SizeDelta: {x: 0, y: 12}
   m_Pivot: {x: 0.5, y: 0.5}
