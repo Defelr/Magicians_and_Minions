@@ -1119,6 +1119,53 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: -160.78201, z: 0}
+--- !u!1001 &1478061337
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4423450384783300, guid: 8b5cca13e88b13648ac1be457bece155, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4423450384783300, guid: 8b5cca13e88b13648ac1be457bece155, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4423450384783300, guid: 8b5cca13e88b13648ac1be457bece155, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4423450384783300, guid: 8b5cca13e88b13648ac1be457bece155, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4423450384783300, guid: 8b5cca13e88b13648ac1be457bece155, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4423450384783300, guid: 8b5cca13e88b13648ac1be457bece155, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4423450384783300, guid: 8b5cca13e88b13648ac1be457bece155, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4423450384783300, guid: 8b5cca13e88b13648ac1be457bece155, type: 2}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 82196167639678650, guid: 8b5cca13e88b13648ac1be457bece155,
+        type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 36e96f862b8cd8a49a1615a1e4cb102a, type: 3}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8b5cca13e88b13648ac1be457bece155, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1665343472
 GameObject:
   m_ObjectHideFlags: 0
