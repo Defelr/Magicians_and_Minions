@@ -32,3 +32,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/NecroMap.unity
     guid: eac5ba5652dc1a04ab949bf232769314
+  - enabled: 1
+    path: Assets/_Scenes/PVSKillerN.unity
+    guid: e64b6d4bfdad9b54c913464c9396784d
