@@ -82,11 +82,11 @@ public class DDOL : MonoBehaviour
         StartingC = P;
         //PLAYER 1 INFO
         StartingC.transform.localScale = new Vector3(15F, 15F, 15F);
-        GameObject new_p = Coords[0][0].location;
+        GameObject new_p = Coords[3][3].location;
         Vector3 vx = new Vector3(new_p.transform.position.x, 5.5F, new_p.transform.position.z);
         StartingC.gameObject.layer = LayerMask.NameToLayer("Player1");
         IC = (GameObject)Instantiate(StartingC, vx, new_p.transform.rotation);
-        Coords[0][0] = new Coordinates(IC.GetInstanceID(), 1, 0, IC, Coords[0][0].location);
+        Coords[3][3] = new Coordinates(IC.GetInstanceID(), 1, 0, IC, Coords[3][3].location);
         IC.transform.parent = SC.gameObject.transform;
 
     }
@@ -95,13 +95,13 @@ public class DDOL : MonoBehaviour
         StartingC2 = P;
         //PLAYER 2 INFO
         StartingC2.transform.localScale = new Vector3(15F, 15F, 15F);
-        GameObject new_p = Coords[x - 1][x - 1].location;
+        GameObject new_p = Coords[4][4].location;
         Vector3 vx = new Vector3(new_p.transform.position.x, 5.5F, new_p.transform.position.z);
         StartingC2.gameObject.layer = LayerMask.NameToLayer("Player2");
         IC2 = (GameObject)Instantiate(StartingC2, vx, new_p.transform.rotation);
         //IC2.transform.rotation.Set(new_p.transform.rotation.x, new_p.transform.rotation.y + 180, new_p.transform.rotation.z, new_p.transform.rotation.w);
         IC2.transform.Rotate(Vector3.up * 180f);
-        Coords[x - 1][x - 1] = new Coordinates(IC2.GetInstanceID(), 1, 1, IC2, Coords[x - 1][x - 1].location);
+        Coords[4][4] = new Coordinates(IC2.GetInstanceID(), 1, 1, IC2, Coords[4][4].location);
         IC2.transform.parent = SC2.gameObject.transform;
     }
     //We setup the gameboard, and player 1 and 2
@@ -471,10 +471,13 @@ public class DDOL : MonoBehaviour
                     {
                         if(DDOL.instance.spell == "GroupHealing")
                         {
-                            DDOL.instance.Coords[i][j].G.GetComponent<MouseDetect>().HealHP(5);
+                            DDOL.instance.Coords[i][j].G.GetComponent<MouseDetect>().HealHP(2);
                         } else if (DDOL.instance.spell == "HolyFire")
                         {
-                            DDOL.instance.Coords[i][j].G.GetComponent<MouseDetect>().DamageHP(2);
+                            DDOL.instance.Coords[i][j].G.GetComponent<MouseDetect>().DamageHP(3);
+                        } else if (DDOL.instance.spell == "Implosion")
+                        {
+                            DDOL.instance.Coords[i][j].G.GetComponent<MouseDetect>().DamageHP(1);
                         }
                     }
                 }

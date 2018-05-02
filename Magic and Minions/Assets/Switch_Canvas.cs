@@ -230,8 +230,7 @@ public class Switch_Canvas : MonoBehaviour {
                     Game.GetComponent<CanvasGroup>().alpha = 1;
                     Game.GetComponent<CanvasGroup>().interactable = true;
                 }
-                if ((hitInfo.transform.gameObject.GetComponent<MouseDetect>().Movement_c != hitInfo.transform.gameObject.GetComponent<MouseDetect>().Moves) &&
-                    hitInfo.transform.gameObject.GetComponent<MouseDetect>().Attack_c != hitInfo.transform.gameObject.GetComponent<MouseDetect>().Attacks)
+                if (hitInfo.transform.gameObject.GetComponent<MouseDetect>().AMOUT_OF_TIME_ALIVE >= 1)
                 {
                     GameObject grid_B = GameObject.Find("Grid_Board");
                     if (DDOL.instance.spell != "Swarm")

@@ -92,21 +92,7 @@ public class BlockChoice : MonoBehaviour
                         {
                             if (DDOL.instance.spell == "Unlife")
                             {
-                                if (DDOL.instance.Coords[i][j].G.GetComponent<MouseDetect>().HP - 2 <= 0)
-                                {
-                                    Summon = true;
-                                    SummonPos = DDOL.instance.Coords[i][j].location.transform;
-                                }
-                                DDOL.instance.Coords[i][j].G.GetComponent<MouseDetect>().DamageHP(2);
-                                DDOL.instance.currentObject.GetComponent<MouseDetect>().DiminishMana(DDOL.instance.currentCost);
-                                DDOL.instance.currentCost = 0;
-                                if (Summon)
-                                {
-                                    Summon = false;
-                                    DDOL.instance.summon = DDOL.instance.IC.GetComponent<Magician_N>().Skeleton;
-                                    DDOL.instance.SummonPawn(SummonPos);
-                                }
-
+                                DDOL.instance.Coords[i][j].G.GetComponent<MouseDetect>().OnMouseDown();
                             }
                             else if (DDOL.instance.spell == "") 
                             {
@@ -116,7 +102,7 @@ public class BlockChoice : MonoBehaviour
                             DDOL.instance.option = "";
                             DDOL.instance.spell = "";
                             DDOL.instance.ClearSpaces();
-                            
+
                             return;
                         }
                     }

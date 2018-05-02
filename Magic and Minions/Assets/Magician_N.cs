@@ -215,7 +215,7 @@ public class Magician_N : MonoBehaviour
         if (CheckSummon(2))//Cost of spell
         {
             DDOL.instance.option = "allE";
-            //DDOL.instance.spell = "Implosion"; NO NEED BECAUSE ATTACK IS IMMEDIATE
+            DDOL.instance.spell = "Implosion";
             DDOL.instance.currentCost = 2;
             Debug.Log("Implosion");
             DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
