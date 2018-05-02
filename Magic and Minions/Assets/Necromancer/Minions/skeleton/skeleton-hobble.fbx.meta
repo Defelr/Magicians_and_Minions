@@ -8,9 +8,15 @@ ModelImporter:
     100000: pedestal_geo
     100002: //RootNode
     100004: skeleton_geo
+    100006: skeleton_minion_CTRL
+    100008: skeleton_minion_GEO
+    100010: skeleton_minion_joint
     400000: pedestal_geo
     400002: //RootNode
     400004: skeleton_geo
+    400006: skeleton_minion_CTRL
+    400008: skeleton_minion_GEO
+    400010: skeleton_minion_joint
     2100000: pedestal_blinn1
     2100002: lambert1
     2300000: pedestal_geo
@@ -19,7 +25,10 @@ ModelImporter:
     3300002: skeleton_geo
     4300000: pedestal_geo
     4300002: skeleton_geo
+    7400000: hobble
     9500000: //RootNode
+    13700000: pedestal_geo
+    13700002: skeleton_geo
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -46,7 +55,35 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: hobble
+      takeName: hobble
+      firstFrame: 5
+      lastFrame: 20
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
