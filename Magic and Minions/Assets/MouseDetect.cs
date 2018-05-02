@@ -77,6 +77,35 @@ public class MouseDetect : MonoBehaviour
             }
         }
     }
+    void CheckWin()
+    {
+        if (HP <= 0)
+        {
+            for (int i = 0; i < DDOL.instance.x; i++)
+            {
+                for (int j = 0; j < DDOL.instance.x; j++)
+                {
+                    if (DDOL.instance.Coords[i][j].G == this.gameObject)
+                    {
+                        if (this.gameObject == DDOL.instance.IC.gameObject)
+                        {
+
+                            HotseatWin.winVar = 2;
+                            Debug.Log("PLAYER 2 WON");
+                        }
+                        else if (this.gameObject == DDOL.instance.IC2.gameObject)
+                        {
+                            HotseatWin.winVar = 1;
+                            Debug.Log("PLAYER 1 WON");
+                        }
+                        Destroy(this.gameObject);
+                        DDOL.instance.Coords[i][j] = new Coordinates(-1, 0, -1, null, DDOL.instance.locations[i][j]);
+                        return;
+                    }
+                }
+            }
+        }
+    }
     // Update is called once per frame
     void Update()
     {
@@ -186,6 +215,7 @@ public class MouseDetect : MonoBehaviour
 
                     if (HP <= 0)
                     {
+                        CheckWin();
                         Destroy(this.gameObject);
                         DDOL.instance.summon = DDOL.instance.IC.GetComponent<Magician_N>().Skeleton;
                         for (int i = 0; i < DDOL.instance.x; i++)
@@ -208,6 +238,8 @@ public class MouseDetect : MonoBehaviour
                 }
                 DDOL.instance.option = "";
                 DDOL.instance.spell = "";
+                DDOL.instance.currentObject.GetComponent<MouseDetect>().DiminishMana(DDOL.instance.currentCost);
+                DDOL.instance.currentCost = 0;
                 DDOL.instance.ClearSpaces();
                 return;
             }

@@ -66,6 +66,7 @@ public class DDOL : MonoBehaviour
     public GameObject ICS;
 
     public GameObject Dialogue;
+
     public void ResetCharacters(Transform ParentPlayer) { 
         foreach(Transform T in ParentPlayer)
         {
@@ -133,6 +134,30 @@ public class DDOL : MonoBehaviour
     public void Update()
     {
         player = turn % 2;
+        //When player clicks away, it cancels the action they are taking
+        if (Input.GetMouseButtonDown(0))
+        {
+            RaycastHit hit = new RaycastHit();
+            if(Physics.Raycast(DDOL.instance.First.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition), out hit))
+            {
+                if (hit.transform.tag == "untagged" )
+                {
+                    ClearSpaces();
+                    option = "";
+                    spell = "";
+                    summon = null;
+                    currentCost = 0;
+                }
+            }
+            else
+            {
+                ClearSpaces();
+                option = "";
+                spell = "";
+                summon = null;
+                currentCost = 0;
+            }
+        }
     }
 
     public void Awake()
