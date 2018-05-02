@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/_Scenes/Test_InGame.unity
     guid: 6a41bcac7d8a9a84da229ef3e4007c6a
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/MainMenu_Test.unity
     guid: fc749e05e97299e498f1bfc99a6dc571
   - enabled: 1
@@ -20,7 +20,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/_Scenes/Sprint1.unity
     guid: bce43d642e0a65a43a45de89e95ff601
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/Sprint2.unity
     guid: d16374893e552964c80f78b28f4a09c3
   - enabled: 0
