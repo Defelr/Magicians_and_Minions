@@ -1,4 +1,4 @@
-﻿/*using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class OnePCharSelect : MonoBehaviour {
 
     GameObject player1;
+    bool necr;
 
     public GameObject undoButton;
     public GameObject readyButton;
@@ -27,67 +28,36 @@ public class OnePCharSelect : MonoBehaviour {
 
     public void PickNecro()
     {
-        select1 = true;
         DDOL.instance.SetPlayer1(necromancer);
-        num = 1;
         player1Panel.SetActive(false);
-        undoButton.SetActive(true);
+        readyButton.SetActive(true);
         Debug.Log("Player 1 is necromancer");
+        necr = true;
     }
 
     public void PickPald()
     {
-        select1 = true;
         DDOL.instance.SetPlayer1(paladin);
-        num = 1;
         player1Panel.SetActive(false);
-        undoButton.SetActive(true);
+        readyButton.SetActive(true);
         Debug.Log("Player 1 is Paladin");
+        necr = false;
     }
 
-    public void Undo()
+    public void Ready()
     {
-        if (num == 1)
+        if (necr)
         {
-            select1 = false;
-            num = 0;
-            player2Panel.SetActive(false);
-            player1Panel.SetActive(true);
-            undoButton.SetActive(false);
-            Debug.Log("Undo Player 1");
-        }
-        if (num == 2)
+            SceneManager.LoadScene(4);
+        } else
         {
-            num = 1;
-            readyButton.SetActive(false);
-            player2Panel.SetActive(true);
-            Debug.Log("Undo Player 2");
+            SceneManager.LoadScene(3);
         }
     }
-    IEnumerator StartMatch()
-    {
-        yield return new WaitForSeconds(SelectionStart.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length + SelectionStart.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime);
-
-    }
-    public void Change()
-    {
-        if (num == 2)
-        {
-            SelectionStart.GetComponent<Animator>().SetTrigger("Begin");
-            StartMatch();
-            SelectionScreen.GetComponent<CanvasGroup>().alpha = 0;
-            SelectionScreen.GetComponent<CanvasGroup>().interactable = false;
-            Destroy(SelectionPaladin);
-            Destroy(SelectionNecro);
-        }
-        else
-        {
-            errorPanel.SetActive(true);
-        }
-    }
+    
 
     public void Error()
     {
         errorPanel.SetActive(false);
     }
-}*/
+}
