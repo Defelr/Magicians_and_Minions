@@ -20,10 +20,75 @@ public class CampaignBattleSelect : MonoBehaviour {
 		
 	}
 
+    //player paladin vs killer ai necr
     public void PvsKN()
     {
-        DDOL.instance.SetPlayer1(paladin);
-        DDOL.instance.SetPlayer1(necromancer);
         SceneManager.LoadScene(5);
+    }
+
+    //player necromancer vs killer ai necr
+    public void NvsKN()
+    {
+        SceneManager.LoadScene(6);
+    }
+
+    //player paladin vs survival ai necr
+    public void PvsSN()
+    {
+        SceneManager.LoadScene(7);
+    }
+
+    //player necromancer vs survival ai necr
+    public void NvsSN()
+    {
+        SceneManager.LoadScene(8);
+    }
+
+    //player paladin vs minion ai necr
+    public void PvsMN()
+    {
+        SceneManager.LoadScene(9);
+    }
+
+    //player necromancer vs minion ai necr
+    public void NvsMN()
+    {
+        SceneManager.LoadScene(10);
+    }
+
+    //player paladin vs killer ai pal
+    public void PvsKP()
+    {
+        SceneManager.LoadScene(11);
+    }
+
+    //player necromancer vs killer ai pal
+    public void NvsKP()
+    {
+        SceneManager.LoadScene(12);
+    }
+
+    //player paladin vs survival ai pal
+    public void PvsSP()
+    {
+        SceneManager.LoadScene(13);
+    }
+
+    //player necromancer vs survival ai pal
+    public void NvsSP()
+    {
+        SceneManager.LoadScene(14);
+    }
+
+    //player paladin vs minion ai pal
+    public void PvsMP()
+    {
+        SceneManager.LoadScene(15);
+    }
+
+    //player necromancer vs minion ai pal
+    public void NvsMP()
+    {
+        SceneManager.LoadScene(16);
     }
 }
