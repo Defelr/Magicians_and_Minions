@@ -72,7 +72,36 @@ public class OnePCharSelect : MonoBehaviour {
         SelectionScreen.GetComponent<CanvasGroup>().alpha = 0;
         SelectionScreen.GetComponent<CanvasGroup>().interactable = false;
     }
-    
+
+    public void NvsN()
+    {
+        DDOL.instance.SetPlayer1(necromancer);
+        DDOL.instance.SetPlayer2(necromancer);
+        SelectionStart.GetComponent<Animator>().SetTrigger("Begin");
+        StartMatch();
+        SelectionScreen.GetComponent<CanvasGroup>().alpha = 0;
+        SelectionScreen.GetComponent<CanvasGroup>().interactable = false;
+    }
+
+    public void PvsP()
+    {
+        DDOL.instance.SetPlayer1(paladin);
+        DDOL.instance.SetPlayer2(paladin);
+        SelectionStart.GetComponent<Animator>().SetTrigger("Begin");
+        StartMatch();
+        SelectionScreen.GetComponent<CanvasGroup>().alpha = 0;
+        SelectionScreen.GetComponent<CanvasGroup>().interactable = false;
+    }
+
+    public void NvsP()
+    {
+        DDOL.instance.SetPlayer1(necromancer);
+        DDOL.instance.SetPlayer2(paladin);
+        SelectionStart.GetComponent<Animator>().SetTrigger("Begin");
+        StartMatch();
+        SelectionScreen.GetComponent<CanvasGroup>().alpha = 0;
+        SelectionScreen.GetComponent<CanvasGroup>().interactable = false;
+    }
 
     public void Error()
     {

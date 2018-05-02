@@ -35,3 +35,36 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/PVSKillerN.unity
     guid: e64b6d4bfdad9b54c913464c9396784d
+  - enabled: 1
+    path: Assets/_Scenes/NVSKillerN.unity
+    guid: e58aba8d19b4dc242be140b89ab88534
+  - enabled: 1
+    path: Assets/_Scenes/PVSSurvivorN.unity
+    guid: 44d6880232a1f754f8f548db72f52f10
+  - enabled: 1
+    path: Assets/_Scenes/NVSSurvivorN.unity
+    guid: 836dd94e70401d14a8b3ee3416a349e5
+  - enabled: 1
+    path: Assets/_Scenes/PVSMinionN.unity
+    guid: e6fca6afd882cf144956f879429011a4
+  - enabled: 1
+    path: Assets/_Scenes/NVSMinionN.unity
+    guid: 5390cdf37d66e2a49928bcbcdf5d71c0
+  - enabled: 1
+    path: Assets/_Scenes/PVSKillerP.unity
+    guid: b876a4266fef2d1479eea4fc2bba4ef6
+  - enabled: 1
+    path: Assets/_Scenes/NVSKillerP.unity
+    guid: eebb3a84bd2003245af89d3fe5e93e95
+  - enabled: 1
+    path: Assets/_Scenes/PVSSurvivorP.unity
+    guid: 376a993ba5d2fd14c88f7c01c681aaf1
+  - enabled: 1
+    path: Assets/_Scenes/NVSSurvivorP.unity
+    guid: f88ca673d1edc394796cc0555fd41e20
+  - enabled: 1
+    path: Assets/_Scenes/PVSMinionP.unity
+    guid: 7c5dbac01d28b2d499ab558d437715bb
+  - enabled: 1
+    path: Assets/_Scenes/NVSMinionP.unity
+    guid: fb6b244a010b27141a4ec7ad7c1e8dce

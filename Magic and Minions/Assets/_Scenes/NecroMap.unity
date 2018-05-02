@@ -555,6 +555,90 @@ Prefab:
       propertyPath: m_AnchoredPosition.y
       value: 1073
       objectReference: {fileID: 0}
+    - target: {fileID: 1112573680640918, guid: 589213e218d87a84ab0628792cff9a3f, type: 2}
+      propertyPath: m_Name
+      value: vsKillerNecr
+      objectReference: {fileID: 0}
+    - target: {fileID: 114444918912716552, guid: 589213e218d87a84ab0628792cff9a3f,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1912012629}
+    - target: {fileID: 114444918912716552, guid: 589213e218d87a84ab0628792cff9a3f,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: NvsKN
+      objectReference: {fileID: 0}
+    - target: {fileID: 1501467808840988, guid: 589213e218d87a84ab0628792cff9a3f, type: 2}
+      propertyPath: m_Name
+      value: vsSurvivorNecr
+      objectReference: {fileID: 0}
+    - target: {fileID: 114787266073670244, guid: 589213e218d87a84ab0628792cff9a3f,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1912012629}
+    - target: {fileID: 114787266073670244, guid: 589213e218d87a84ab0628792cff9a3f,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: NvsSN
+      objectReference: {fileID: 0}
+    - target: {fileID: 1385872397863786, guid: 589213e218d87a84ab0628792cff9a3f, type: 2}
+      propertyPath: m_Name
+      value: vsMinionNecr
+      objectReference: {fileID: 0}
+    - target: {fileID: 114830345466402002, guid: 589213e218d87a84ab0628792cff9a3f,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1912012629}
+    - target: {fileID: 114830345466402002, guid: 589213e218d87a84ab0628792cff9a3f,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: NvsMN
+      objectReference: {fileID: 0}
+    - target: {fileID: 1577733052981282, guid: 589213e218d87a84ab0628792cff9a3f, type: 2}
+      propertyPath: m_Name
+      value: vsKillerPal
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001447423365596, guid: 589213e218d87a84ab0628792cff9a3f, type: 2}
+      propertyPath: m_Name
+      value: vsSurvivorPal
+      objectReference: {fileID: 0}
+    - target: {fileID: 1087798057296316, guid: 589213e218d87a84ab0628792cff9a3f, type: 2}
+      propertyPath: m_Name
+      value: vsMinionPal
+      objectReference: {fileID: 0}
+    - target: {fileID: 114977606795083336, guid: 589213e218d87a84ab0628792cff9a3f,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1912012629}
+    - target: {fileID: 114977606795083336, guid: 589213e218d87a84ab0628792cff9a3f,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: NvsKP
+      objectReference: {fileID: 0}
+    - target: {fileID: 114315530281665506, guid: 589213e218d87a84ab0628792cff9a3f,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1912012629}
+    - target: {fileID: 114315530281665506, guid: 589213e218d87a84ab0628792cff9a3f,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: NvsSP
+      objectReference: {fileID: 0}
+    - target: {fileID: 114273566351796006, guid: 589213e218d87a84ab0628792cff9a3f,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1912012629}
+    - target: {fileID: 114273566351796006, guid: 589213e218d87a84ab0628792cff9a3f,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: NvsMP
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 589213e218d87a84ab0628792cff9a3f, type: 2}
   m_IsPrefabParent: 0
@@ -563,3 +647,46 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224397235808052028, guid: 589213e218d87a84ab0628792cff9a3f,
     type: 2}
   m_PrefabInternal: {fileID: 1761331511}
+--- !u!1 &1912012628
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1912012630}
+  - component: {fileID: 1912012629}
+  m_Layer: 0
+  m_Name: BattleSelect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1912012629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1912012628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a76fe0a2c5d21ce4a856f39655234ddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  necromancer: {fileID: 1689941052513916, guid: 533fa561ff5b2a54bbe19ab1ed9049fc,
+    type: 2}
+  paladin: {fileID: 1852494394579474, guid: 62a492db9c1e98843a287b8f69418d49, type: 2}
+--- !u!4 &1912012630
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1912012628}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.7991676, y: 6.197652, z: -6.7872148}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
