@@ -11,6 +11,7 @@ public class MouseDetect : MonoBehaviour
     public int DMG;
     public int Mana;
     public int Cost;
+    public int AMOUT_OF_TIME_ALIVE;
 
     public int Movement_c; //AMOUNT OF TIMES THEY CAN MOVE
     public int Attack_c;  //AMOUNT OF TIMES THEY CAN ATTACK
@@ -23,6 +24,14 @@ public class MouseDetect : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        if (this.tag == "Wraith" || this.tag == "Skeleton" || this.tag == "GreatSpirit")
+        {
+            AMOUT_OF_TIME_ALIVE = 0;
+        }
+        else
+        {
+            AMOUT_OF_TIME_ALIVE = 1;
+        }
         //PLAYER 1 and PLAYER 2 can move, but anything the initially summon cannot until the next turn
         if (DDOL.instance.IC.gameObject == this.gameObject || DDOL.instance.IC2.gameObject == this.gameObject)
         {
@@ -68,6 +77,35 @@ public class MouseDetect : MonoBehaviour
             }
         }
     }
+    void CheckWin()
+    {
+        if (HP <= 0)
+        {
+            for (int i = 0; i < DDOL.instance.x; i++)
+            {
+                for (int j = 0; j < DDOL.instance.x; j++)
+                {
+                    if (DDOL.instance.Coords[i][j].G == this.gameObject)
+                    {
+                        if (this.gameObject == DDOL.instance.IC.gameObject)
+                        {
+
+                            HotseatWin.winVar = 2;
+                            Debug.Log("PLAYER 2 WON");
+                        }
+                        else if (this.gameObject == DDOL.instance.IC2.gameObject)
+                        {
+                            HotseatWin.winVar = 1;
+                            Debug.Log("PLAYER 1 WON");
+                        }
+                        Destroy(this.gameObject);
+                        DDOL.instance.Coords[i][j] = new Coordinates(-1, 0, -1, null, DDOL.instance.locations[i][j]);
+                        return;
+                    }
+                }
+            }
+        }
+    }
     // Update is called once per frame
     void Update()
     {
@@ -108,10 +146,13 @@ public class MouseDetect : MonoBehaviour
         }
        
     }
+    //Called for each character at end turn
     public void ResetV()
     {
         Moves = 0;
         Attacks = 0;
+
+        AMOUT_OF_TIME_ALIVE++;
     }
     public void DiminishMana(int ManaCost)
     {
@@ -127,22 +168,6 @@ public class MouseDetect : MonoBehaviour
     {
         HP -= DecHP;
         this.healthSlider.value = HP;
-                    //new Coordinates(-1, 0, -1, null, DDOL.instance.locations[i][j]);
-        if (HP <= 0)
-        {
-            for (int i = 0; i < DDOL.instance.x; i++)
-            {
-                for (int j = 0; j < DDOL.instance.x; j++)
-                {
-                    if (DDOL.instance.Coords[i][j].G == this.gameObject)
-                    {
-                        DDOL.instance.Coords[i][j] = new Coordinates(-1, 0, -1, null, DDOL.instance.locations[i][j]);
-                        Destroy(this.gameObject);
-                        return;
-                    }
-                }
-            }
-        }
     }
     public void HealHP(int IncHP)
     {
@@ -186,12 +211,24 @@ public class MouseDetect : MonoBehaviour
             {
                 if (DDOL.instance.spell == "Unlife")
                 {
-                    if(HP - 2 <= 0)
-                    {
-                        DDOL.instance.summon = DDOL.instance.IC.GetComponent<Magician_N>().Skeleton;
-                        DDOL.instance.SummonPawn(this.transform);
-                    }
                     DamageHP(2);
+
+                    if (HP <= 0)
+                    {
+                        CheckWin();
+                        Destroy(this.gameObject);
+                        DDOL.instance.summon = DDOL.instance.IC.GetComponent<Magician_N>().Skeleton;
+                        for (int i = 0; i < DDOL.instance.x; i++)
+                        {
+                            for (int j = 0; j < DDOL.instance.x; j++)
+                            {
+                                if (DDOL.instance.Coords[i][j].G == this.gameObject)
+                                {
+                                    DDOL.instance.SummonPawn(DDOL.instance.Coords[i][j].location.transform);
+                                }
+                            }
+                        }
+                    }
 
                 }
                 else
@@ -201,6 +238,8 @@ public class MouseDetect : MonoBehaviour
                 }
                 DDOL.instance.option = "";
                 DDOL.instance.spell = "";
+                DDOL.instance.currentObject.GetComponent<MouseDetect>().DiminishMana(DDOL.instance.currentCost);
+                DDOL.instance.currentCost = 0;
                 DDOL.instance.ClearSpaces();
                 return;
             }

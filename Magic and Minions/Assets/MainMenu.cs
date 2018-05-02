@@ -8,7 +8,7 @@ public class MainMenu : MonoBehaviour {
 	public void Singleplayer()
     {
         SceneManager.LoadScene(1);
-        Debug.Log("Singleplayer");
+        //Debug.Log("Singleplayer");
     }
 
     public void Multiplayer()
@@ -19,6 +19,6 @@ public class MainMenu : MonoBehaviour {
     public void Quit()
     {
         Application.Quit();
-        Debug.Log("Exit");
+        //Debug.Log("Exit");
     }
 }

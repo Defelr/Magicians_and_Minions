@@ -47,7 +47,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &1341236620825000
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
@@ -76,6 +76,23 @@ GameObject:
   - component: {fileID: 82782913460749316}
   m_Layer: 5
   m_Name: Back_Btn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1505929790216072
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 224738234864304142}
+  - component: {fileID: 222558322094573496}
+  - component: {fileID: 114397137648372378}
+  m_Layer: 5
+  m_Name: Help_Txt (2) frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -234,6 +251,33 @@ MonoBehaviour:
     your minions is a key to victory. \nFurthermore, you and your minions each have
     your own respective spells. \nBe sure to constantly keep an eye on all relevant
     health and mana values.\r\nBest of luck on the battlefield, Magician.\r\n"
+--- !u!114 &114397137648372378
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1505929790216072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: f08fe54a928ef4c48bb13c991ca1d60a, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
 --- !u!114 &114503166404074980
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -273,7 +317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.24264705, g: 0.035683393, b: 0.035683393, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -281,9 +325,9 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 90a90e9c93a873c44a808b77b3263b7b, type: 3}
     m_FontSize: 32
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
     m_MaxSize: 40
@@ -293,19 +337,19 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\n\n\n\nMagicians and Minions is a turn based game. On your turn, you can:\n\n-
+  m_Text: "\n\nMagicians and Minions is a turn based game. On your turn, you can:\n\n-
     Move any piece you control by selecting the piece you want to move, clicking on
     the move button, and selecting a highlighted tile to move to. You may only move
     each piece once per turn.\n\n- Summon friendly minions by selecting your magician,
     clickling on the summon button of the minion you wish to summon, and then selecting
     a highlighted tile to summon the minion there. The mana cost of the minion is
     displayed above its button.\n\n- Cast a spell by selecting your Magician, selecting
-    the disired spell button, and selecting the tile you want to target. The mana
+    the desired spell button, and selecting the tile you want to target. The mana
     cost of the spell is displayed above its button.\n\n- Attack an enemy character
     by selecting a minion, clicking on the attack button, and then selecting an adjacent
     enemy character. Minions can only attack once per turn.\n\n\nFriendly pieces have
     a yellow pedestal, while enemy pieces have a blue pedestal. \nYou win the game
-    when the enemy Magician's helath reaches zero."
+    when the enemy Magician's health reaches zero."
 --- !u!114 &114681127442856022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -326,7 +370,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 402d477375391b74fa780314cc67700d, type: 3}
     m_FontSize: 31
     m_FontStyle: 0
     m_BestFit: 0
@@ -351,7 +395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.3019608, g: 0.1137255, b: 0.10980393, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -359,8 +403,8 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 52
+    m_Font: {fileID: 12800000, guid: 402d477375391b74fa780314cc67700d, type: 3}
+    m_FontSize: 72
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
@@ -370,7 +414,7 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
+    m_LineSpacing: 3
   m_Text: 'How to Play Magicians and Minions:'
 --- !u!114 &114750397917357754
 MonoBehaviour:
@@ -463,6 +507,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1444870665708810}
+--- !u!222 &222558322094573496
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1505929790216072}
 --- !u!222 &222677723907212460
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -500,7 +550,7 @@ RectTransform:
   - {fileID: 224179067541189468}
   - {fileID: 224346457104107046}
   - {fileID: 224737380506560378}
-  - {fileID: 224095771010320666}
+  - {fileID: 224738234864304142}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -517,15 +567,15 @@ RectTransform:
   m_GameObject: {fileID: 1341236620825000}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9000001, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 224032290509544092}
-  m_RootOrder: 3
+  m_Father: {fileID: 224738234864304142}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -45.1}
-  m_SizeDelta: {x: 0, y: -221.8}
+  m_AnchoredPosition: {x: 0, y: 44.900032}
+  m_SizeDelta: {x: 70, y: 11.802307}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224179067541189468
 RectTransform:
@@ -542,8 +592,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 322.55}
-  m_SizeDelta: {x: 836.7, y: 122.9}
+  m_AnchoredPosition: {x: 0, y: 350}
+  m_SizeDelta: {x: 1500, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224346457104107046
 RectTransform:
@@ -582,6 +632,25 @@ RectTransform:
   m_AnchoredPosition: {x: 25, y: -25}
   m_SizeDelta: {x: 105.7, y: 50.7}
   m_Pivot: {x: 0, y: 1}
+--- !u!224 &224738234864304142
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1505929790216072}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 224095771010320666}
+  m_Father: {fileID: 224032290509544092}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -90}
+  m_SizeDelta: {x: 1850, y: 730}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224878078290092974
 RectTransform:
   m_ObjectHideFlags: 1
@@ -597,6 +666,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 6}
+  m_SizeDelta: {x: 0, y: 12}
   m_Pivot: {x: 0.5, y: 0.5}
