@@ -103,6 +103,9 @@ public class DDOL : MonoBehaviour
         IC2.transform.Rotate(Vector3.up * 180f);
         Coords[4][4] = new Coordinates(IC2.GetInstanceID(), 1, 1, IC2, Coords[4][4].location);
         IC2.transform.parent = SC2.gameObject.transform;
+
+        int mana = IC2.GetComponent<Magician_N>().ManaMechanic();
+        IC2.GetComponent<MouseDetect>().Mana -= mana;
     }
     //We setup the gameboard, and player 1 and 2
     public void Start()
