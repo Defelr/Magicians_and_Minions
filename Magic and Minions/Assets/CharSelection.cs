@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class CharSelection : MonoBehaviour {
 
     bool select1 = false;
+    bool select2 = true;
     float num = 0;
 
     GameObject player1;
@@ -31,45 +32,53 @@ public class CharSelection : MonoBehaviour {
     }
 
     public void PickNecro () {
-        if (select1 == false)
+        if (select2)
         {
-            select1 = true;
-            DDOL.instance.SetPlayer1(necromancer);
-            num = 1;
-            player1Panel.SetActive(false);
-            player2Panel.SetActive(true);
-            undoButton.SetActive(true);
-            Debug.Log("Player 1 is necromancer");
-        }
-        else
-        {
-            DDOL.instance.SetPlayer2(necromancer);
-            num = 2;
-            player2Panel.SetActive(false);
-            readyButton.SetActive(true);
-            Debug.Log("Player 2 is necromancer");
+            if (select1 == false)
+            {
+                select1 = true;
+                DDOL.instance.SetPlayer1(necromancer);
+                num = 1;
+                player1Panel.SetActive(false);
+                player2Panel.SetActive(true);
+                undoButton.SetActive(true);
+                Debug.Log("Player 1 is necromancer");
+            }
+            else
+            {
+                select2 = false;
+                DDOL.instance.SetPlayer2(necromancer);
+                num = 2;
+                player2Panel.SetActive(false);
+                readyButton.SetActive(true);
+                Debug.Log("Player 2 is necromancer");
+            }
         }
 	}
 
     public void PickPald ()
     {
-        if (select1 == false)
+        if (select2)
         {
-            select1 = true;
-            DDOL.instance.SetPlayer1(paladin);
-            num = 1;
-            player1Panel.SetActive(false);
-            player2Panel.SetActive(true);
-            undoButton.SetActive(true);
-            Debug.Log("Player 1 is Paladin");
-        }
-        else
-        {
-            DDOL.instance.SetPlayer2(paladin);
-            num = 2;
-            player2Panel.SetActive(false);
-            readyButton.SetActive(true);
-            Debug.Log("Player 2 is Paladin");
+            if (select1 == false)
+            {
+                select1 = true;
+                DDOL.instance.SetPlayer1(paladin);
+                num = 1;
+                player1Panel.SetActive(false);
+                player2Panel.SetActive(true);
+                undoButton.SetActive(true);
+                Debug.Log("Player 1 is Paladin");
+            }
+            else
+            {
+                select2 = false;
+                DDOL.instance.SetPlayer2(paladin);
+                num = 2;
+                player2Panel.SetActive(false);
+                readyButton.SetActive(true);
+                Debug.Log("Player 2 is Paladin");
+            }
         }
     }
 
