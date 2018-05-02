@@ -24,6 +24,12 @@ GameObject:
   - component: {fileID: 114248877486710816}
   - component: {fileID: 114261500597735826}
   - component: {fileID: 82175443872874484}
+  - component: {fileID: 114810057930305156}
+  - component: {fileID: 114049612017286764}
+  - component: {fileID: 114132324913208804}
+  - component: {fileID: 114266857126855512}
+  - component: {fileID: 114665224005953974}
+  - component: {fileID: 114773468996342566}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -111,7 +117,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -124,6 +130,33 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &114049612017286764
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1889733164516224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79b7bf4a9ad5eb34695f4ee2abbfea0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interfacePnl: {fileID: 0}
+  infoPnl: {fileID: 0}
+  NecroTxt: {fileID: 0}
+  PalTxt: {fileID: 0}
+  Class: {fileID: 0}
+--- !u!114 &114132324913208804
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1889733164516224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69c57655e9d857f46ad00d407e26eea2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114248877486710816
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -135,17 +168,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaedee28e2277a245bf15c38101b27a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  paladinInterface: {fileID: 0}
   necroInterface: {fileID: 0}
   minionInterface: {fileID: 0}
   wraithImage: {fileID: 0}
   skelImage: {fileID: 0}
+  GrSpImage: {fileID: 0}
+  PaladinSelectionPanel: {fileID: 0}
+  NecroSelectionPanel: {fileID: 0}
   MenuCanvasPanel: {fileID: 0}
   player1:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   player2:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
+  Game: {fileID: 0}
 --- !u!114 &114261500597735826
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -162,7 +200,31 @@ MonoBehaviour:
   TipsPnl: {fileID: 0}
   CharacterPnl: {fileID: 0}
   EndTurnBtn: {fileID: 0}
-  clickSound: {fileID: 0}
+  clickSound: {fileID: 8300000, guid: 555a9d614fbe9ec4fa92e29498b930bc, type: 3}
+--- !u!114 &114266857126855512
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1889733164516224}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bedbd8094a70864c8778e9ec9ea4dfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  undoButton: {fileID: 0}
+  readyButton: {fileID: 0}
+  player1Panel: {fileID: 0}
+  player2Panel: {fileID: 0}
+  StartGame: {fileID: 0}
+  errorPanel: {fileID: 0}
+  necromancer: {fileID: 1689941052513916, guid: 533fa561ff5b2a54bbe19ab1ed9049fc,
+    type: 2}
+  paladin: {fileID: 1852494394579474, guid: 62a492db9c1e98843a287b8f69418d49, type: 2}
+  SelectionScreen: {fileID: 0}
+  SelectionStart: {fileID: 0}
+  SelectionPaladin: {fileID: 0}
+  SelectionNecro: {fileID: 0}
 --- !u!114 &114326856521224430
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -195,3 +257,55 @@ MonoBehaviour:
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
   m_ForceModuleActive: 0
+--- !u!114 &114665224005953974
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1889733164516224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a03821c4f37b02c4ca1e79650419c876, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  P1: {fileID: 0}
+  P2: {fileID: 0}
+  winPnl: {fileID: 0}
+--- !u!114 &114773468996342566
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1889733164516224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d32843390e6edcb4e805b50b5652c08d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  undoButton: {fileID: 0}
+  readyButton: {fileID: 0}
+  player1Panel: {fileID: 0}
+  StartGame: {fileID: 0}
+  errorPanel: {fileID: 0}
+  necromancer: {fileID: 1689941052513916, guid: 533fa561ff5b2a54bbe19ab1ed9049fc,
+    type: 2}
+  paladin: {fileID: 1852494394579474, guid: 62a492db9c1e98843a287b8f69418d49, type: 2}
+  SelectionScreen: {fileID: 0}
+  SelectionStart: {fileID: 0}
+  SelectionPaladin: {fileID: 0}
+  SelectionNecro: {fileID: 0}
+--- !u!114 &114810057930305156
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1889733164516224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7a7b328f9ccbd543b25f0494ebf3876, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  winPnl: {fileID: 0}
+  player1Pnl: {fileID: 0}
+  player2Pnl: {fileID: 0}
+  interfacePnl: {fileID: 0}
