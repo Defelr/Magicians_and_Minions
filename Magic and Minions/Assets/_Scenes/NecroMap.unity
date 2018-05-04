@@ -435,6 +435,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1337330527}
     m_Modifications:
+    - target: {fileID: 114315530281665506, guid: 589213e218d87a84ab0628792cff9a3f,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 224397235808052028, guid: 589213e218d87a84ab0628792cff9a3f,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -584,6 +589,36 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: NvsKN
+      objectReference: {fileID: 0}
+    - target: {fileID: 114315530281665506, guid: 589213e218d87a84ab0628792cff9a3f,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1912012629}
+    - target: {fileID: 114315530281665506, guid: 589213e218d87a84ab0628792cff9a3f,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: NvsSP
+      objectReference: {fileID: 0}
+    - target: {fileID: 114315530281665506, guid: 589213e218d87a84ab0628792cff9a3f,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: NvsSP
+      objectReference: {fileID: 0}
+    - target: {fileID: 114315530281665506, guid: 589213e218d87a84ab0628792cff9a3f,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114315530281665506, guid: 589213e218d87a84ab0628792cff9a3f,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114315530281665506, guid: 589213e218d87a84ab0628792cff9a3f,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 589213e218d87a84ab0628792cff9a3f, type: 2}

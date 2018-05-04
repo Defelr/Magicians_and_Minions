@@ -31,11 +31,7 @@ public class MinionKillerAI_Necromancer : MonoBehaviour
 
     IEnumerator PlayTurn()
     {
-        if (DDOL.instance.currentObject.GetComponent<MouseDetect>().HP <= 0)
-        {
-            SceneManager.LoadScene(map);
-        }
-        DDOL.instance.currentObject = DDOL.instance.IC2;
+       DDOL.instance.currentObject = DDOL.instance.IC2;
         ai = DDOL.instance.IC2;
         foreach (GameObject m in justSummoned)
         {
@@ -219,17 +215,44 @@ public class MinionKillerAI_Necromancer : MonoBehaviour
         List<GameObject> loc = DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
         DDOL.instance.option = "move";
         //get smallest distance between it and possible locations
-        GameObject moveTo = loc[0];
-        float min = Vector3.Distance(DDOL.instance.currentObject.transform.position, loc[0].transform.position);
-        foreach (GameObject l in loc)
+        if (loc.Count > 0)
         {
-            if (Vector3.Distance(DDOL.instance.currentObject.transform.position, l.transform.position) < min)
+            GameObject moveTo = loc[0];
+            float min = Vector3.Distance(DDOL.instance.currentObject.transform.position, loc[0].transform.position);
+            foreach (GameObject l in loc)
             {
-                min = Vector3.Distance(DDOL.instance.currentObject.transform.position, l.transform.position);
-                moveTo = l;
+                if (Vector3.Distance(DDOL.instance.currentObject.transform.position, l.transform.position) < min)
+                {
+                    min = Vector3.Distance(DDOL.instance.currentObject.transform.position, l.transform.position);
+                    moveTo = l;
+                }
+            }
+            DDOL.instance.MoveCharacter(moveTo.transform);
+        }
+        else
+        {
+            //Get locations can move to
+            loc = DDOL.instance.SpaceLocation(1, DDOL.instance.currentObject.GetInstanceID());
+            //get location of other player
+            GameObject p = GameObject.FindGameObjectWithTag("Player");
+            //get smallest distance between it and possible locations
+            GameObject moveTo = loc[0];
+            float min = Vector3.Distance(p.transform.position, loc[0].transform.position);
+            foreach (GameObject l in loc)
+            {
+                if (Vector3.Distance(p.transform.position, l.transform.position) < min)
+                {
+                    min = Vector3.Distance(p.transform.position, l.transform.position);
+                    moveTo = l;
+                }
+            }
+            //compare against current location
+            if (min < Vector3.Distance(p.transform.position, DDOL.instance.currentObject.transform.position))
+            {
+                //if closer, move and wait
+                DDOL.instance.MoveCharacter(moveTo.transform);
             }
         }
-        DDOL.instance.MoveCharacter(moveTo.transform);
     }
 
     //Minions attack enemies in range with prefernce for lowest health enemy minions
