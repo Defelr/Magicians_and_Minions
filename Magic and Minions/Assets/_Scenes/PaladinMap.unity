@@ -632,6 +632,36 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1675654543}
+    - target: {fileID: 82808496494992508, guid: 589213e218d87a84ab0628792cff9a3f,
+        type: 2}
+      propertyPath: MaxDistance
+      value: 150.69275
+      objectReference: {fileID: 0}
+    - target: {fileID: 82315181685253248, guid: 589213e218d87a84ab0628792cff9a3f,
+        type: 2}
+      propertyPath: MaxDistance
+      value: 174.77307
+      objectReference: {fileID: 0}
+    - target: {fileID: 82164802163479230, guid: 589213e218d87a84ab0628792cff9a3f,
+        type: 2}
+      propertyPath: MaxDistance
+      value: 148.8147
+      objectReference: {fileID: 0}
+    - target: {fileID: 82872112796541758, guid: 589213e218d87a84ab0628792cff9a3f,
+        type: 2}
+      propertyPath: MaxDistance
+      value: 148.81464
+      objectReference: {fileID: 0}
+    - target: {fileID: 82227063540923556, guid: 589213e218d87a84ab0628792cff9a3f,
+        type: 2}
+      propertyPath: MaxDistance
+      value: 145.09845
+      objectReference: {fileID: 0}
+    - target: {fileID: 82927917373931570, guid: 589213e218d87a84ab0628792cff9a3f,
+        type: 2}
+      propertyPath: MaxDistance
+      value: 165.51419
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 589213e218d87a84ab0628792cff9a3f, type: 2}
   m_IsPrefabParent: 0

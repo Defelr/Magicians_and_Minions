@@ -668,6 +668,11 @@ Prefab:
       propertyPath: m_Interactable
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114156693405021430, guid: 95261aafc074e2e47b733fbb34b8cf04,
+        type: 2}
+      propertyPath: m_Text
+      value: Magicians and Minions
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 95261aafc074e2e47b733fbb34b8cf04, type: 2}
   m_IsPrefabParent: 0
