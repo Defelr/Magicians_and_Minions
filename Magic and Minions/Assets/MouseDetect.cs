@@ -156,7 +156,7 @@ public class MouseDetect : MonoBehaviour
         {
             HP = MAX_HP; //Makes sure HP doesn't exceed MAX_HP when healing
         }
-        this.healthSlider.value = HP;
+        //this.healthSlider.value = HP;
                 if(this.manaSlider)
                     this.manaSlider.text = Mana.ToString();
     }

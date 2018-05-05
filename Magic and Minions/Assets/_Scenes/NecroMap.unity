@@ -88,6 +88,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaDirect: 0.5
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
+    m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -259,8 +260,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1337330523}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 960, y: 540, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1761331512}
   m_Father: {fileID: 0}
@@ -334,6 +335,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -573,7 +575,7 @@ Prefab:
     - target: {fileID: 114273566351796006, guid: 589213e218d87a84ab0628792cff9a3f,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: NvsMP
+      value: NvsKP
       objectReference: {fileID: 0}
     - target: {fileID: 114787266073670244, guid: 589213e218d87a84ab0628792cff9a3f,
         type: 2}
@@ -583,7 +585,7 @@ Prefab:
     - target: {fileID: 114830345466402002, guid: 589213e218d87a84ab0628792cff9a3f,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: NvsMN
+      value: NvsKN
       objectReference: {fileID: 0}
     - target: {fileID: 114444918912716552, guid: 589213e218d87a84ab0628792cff9a3f,
         type: 2}

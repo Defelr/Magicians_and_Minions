@@ -167,7 +167,7 @@ public class Magician_N : MonoBehaviour
             DDOL.instance.option = "summon";
             DDOL.instance.summon = Skeleton;
             DDOL.instance.spell = "Swarm";
-            DDOL.instance.currentCost = 2;
+            DDOL.instance.currentCost = 8;
             Debug.Log("Swarm");
             Range(1);
         }
