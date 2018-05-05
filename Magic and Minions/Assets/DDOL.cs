@@ -92,11 +92,13 @@ public class DDOL : MonoBehaviour
         IC = (GameObject)Instantiate(StartingC, vx, new_p.transform.rotation);
         Coords[0][0] = new Coordinates(IC.GetInstanceID(), 1, 0, IC, Coords[0][0].location);
         IC.transform.parent = SC.gameObject.transform;
+        
 
     }
     public void SetPlayer2(GameObject P)
     {
         StartingC2 = P;
+        P.GetComponent<MouseDetect>().Mana -= P.GetComponent<Magician_N>().ManaMechanic();
         //PLAYER 2 INFO
         StartingC2.transform.localScale = new Vector3(15F, 15F, 15F);
         GameObject new_p = Coords[x-1][x-1].location;
@@ -107,9 +109,7 @@ public class DDOL : MonoBehaviour
         IC2.transform.Rotate(Vector3.up * 180f);
         Coords[x-1][x-1] = new Coordinates(IC2.GetInstanceID(), 1, 1, IC2, Coords[x-1][x-1].location);
         IC2.transform.parent = SC2.gameObject.transform;
-
-        int mana = IC2.GetComponent<Magician_N>().ManaMechanic();
-        IC2.GetComponent<MouseDetect>().Mana -= mana;
+        //IC2
         if(IC2.tag == "Necro")
         {
             GameObject pedestal = IC2.transform.GetChild(1).gameObject;
@@ -194,7 +194,8 @@ public class DDOL : MonoBehaviour
             if (IC)
             {
                 mana = IC2.GetComponent<Magician_N>().ManaMechanic();
-                IC2.GetComponent<MouseDetect>().IncrementMana(mana);
+                if(IC2.GetComponent<MouseDetect>().AMOUT_OF_TIME_ALIVE != 1)
+                    IC2.GetComponent<MouseDetect>().IncrementMana(mana);
                 ResetCharacters(SC);
             }
             else
@@ -514,7 +515,7 @@ public class DDOL : MonoBehaviour
                     {
                         if(DDOL.instance.spell == "GroupHealing")
                         {
-                            DDOL.instance.Coords[i][j].G.GetComponent<MouseDetect>().HealHP(2);
+                            DDOL.instance.Coords[i][j].G.GetComponent<MouseDetect>().HealHP(3);
                         } else if (DDOL.instance.spell == "HolyFire")
                         {
                             DDOL.instance.Coords[i][j].G.GetComponent<MouseDetect>().DamageHP(3);

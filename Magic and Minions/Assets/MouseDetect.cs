@@ -10,7 +10,7 @@ public class MouseDetect : MonoBehaviour
     public int MAX_HP;
     public int DMG;
     public int Mana;
-    public int Cost;
+    public int Cost ;
     public int AMOUT_OF_TIME_ALIVE;
 
     public int Movement_c; //AMOUNT OF TIMES THEY CAN MOVE
@@ -24,6 +24,8 @@ public class MouseDetect : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        if(this.tag=="Paladin") { Mana = 7; }
+        else if(this.tag=="Necro") { Mana = 5; }
         if (this.tag == "Wraith" || this.tag == "Skeleton" || this.tag == "GreatSpirit")
         {
             AMOUT_OF_TIME_ALIVE = 0;
@@ -49,29 +51,21 @@ public class MouseDetect : MonoBehaviour
         }
         foreach (Transform TPanel in DDOL.instance.SystemEvent.GetComponent<Switch_Canvas>().MenuCanvasPanel.transform)
         {
-            if (TPanel.tag == this.tag)
+            if (TPanel.tag == this.tag && (this.tag == "Paladin" || this.tag == "Necro"))
             {
                 foreach (Transform BPanel in TPanel)
                 {
                     if (BPanel.tag == this.tag)
                     {
-                        if (DDOL.instance.IC.gameObject == this.gameObject)
-                        {
                         healthSlider = BPanel.Find("Health_Sldr").gameObject.GetComponent<Slider>();
                         healthSlider.maxValue = GetComponent<MouseDetect>().MAX_HP;
                         healthSlider.value = GetComponent<MouseDetect>().HP;
                         manaSlider = BPanel.Find("Mana").gameObject.GetComponent<Text>();
-                        manaSlider.text = GetComponent<MouseDetect>().Mana.ToString(); Moves = 0;
-                        }
-                        else
-                        {
-
-                        }
-                        
+                        manaSlider.text = GetComponent<MouseDetect>().Mana.ToString();
                     }
                 }
             }
-            else if (TPanel.tag == this.tag || this.tag == "Wraith" || this.tag == "Skeleton" || this.tag == "GreatSpirit")
+            else if (TPanel.tag == this.tag &&( this.tag == "Wraith" || this.tag == "Skeleton" || this.tag == "GreatSpirit"))
             {
                 foreach (Transform BPanel in TPanel)
                 {
@@ -149,7 +143,6 @@ public class MouseDetect : MonoBehaviour
             }
             else
             {
-                
             }
         }
         if (HP > MAX_HP)
@@ -157,8 +150,6 @@ public class MouseDetect : MonoBehaviour
             HP = MAX_HP; //Makes sure HP doesn't exceed MAX_HP when healing
         }
         //this.healthSlider.value = HP;
-                if(this.manaSlider)
-                    this.manaSlider.text = Mana.ToString();
     }
     //Called for each character at end turn
     public void ResetV()
@@ -171,18 +162,22 @@ public class MouseDetect : MonoBehaviour
     public void DiminishMana(int ManaCost)
     {
         Mana -= ManaCost;
+        this.manaSlider.text = Mana.ToString();
     }
     public void IncrementMana(int ManaCost)
     {
         Mana += ManaCost;
+        this.manaSlider.text = Mana.ToString();
     }
     public void DamageHP(int DecHP)
     {
         HP -= DecHP;
+        healthSlider.value = HP;
     }
     public void HealHP(int IncHP)
     {
         HP += IncHP;
+        healthSlider.value = HP;
     }
     public void OnMouseOver()
     {

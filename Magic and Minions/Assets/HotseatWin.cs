@@ -11,7 +11,10 @@ public class HotseatWin : MonoBehaviour {
     public GameObject interfacePnl;
 
     public static int winVar = 0;
-
+    public void Start()
+    {
+        winPnl.SetActive(false);
+    }
     public void Update()
     {
         if (winVar == 1)

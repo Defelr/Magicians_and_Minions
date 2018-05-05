@@ -584,7 +584,7 @@ MonoBehaviour:
   HP: 20
   MAX_HP: 20
   DMG: 0
-  Mana: 5
+  Mana: -156
   Cost: -1
   AMOUT_OF_TIME_ALIVE: 0
   Movement_c: 1
