@@ -24,9 +24,13 @@ public class BlockChoice : MonoBehaviour
     }
     private void OnMouseOver()
     {
-        if (DDOL.instance.option == "attack" || DDOL.instance.option == "all")
+        if ( DDOL.instance.option == "all" || DDOL.instance.option == "summon")
+
         {
             this.gameObject.GetComponent<Renderer>().material = DDOL.instance.G_Color;
+        }else if(DDOL.instance.option == "attack")
+        {
+            this.gameObject.GetComponent<Renderer>().material = DDOL.instance.R_Color;
         }
     }
     private void OnMouseExit()
@@ -155,8 +159,7 @@ public class BlockChoice : MonoBehaviour
                     }
                 }
             }
-        }
-        else
+        }else if(DDOL.instance.spell != "Swarm")
         {
             DDOL.instance.option = "";
             DDOL.instance.spell = "";

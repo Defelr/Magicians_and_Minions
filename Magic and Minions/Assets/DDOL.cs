@@ -60,12 +60,15 @@ public class DDOL : MonoBehaviour
     //FOR BlockChoice
     public Material G_Color;
     public Material Gr_Color;
+    public Material R_Color;
 
     public int TempHP;
 
     public GameObject ICS;
 
     public GameObject Dialogue;
+
+    public Material P2Pedestal;
 
     public void ResetCharacters(Transform ParentPlayer) { 
         foreach(Transform T in ParentPlayer)
@@ -107,6 +110,15 @@ public class DDOL : MonoBehaviour
 
         int mana = IC2.GetComponent<Magician_N>().ManaMechanic();
         IC2.GetComponent<MouseDetect>().Mana -= mana;
+        if(IC2.tag == "Necro")
+        {
+            GameObject pedestal = IC2.transform.GetChild(1).gameObject;
+            pedestal.GetComponent<Renderer>().material = P2Pedestal;
+        }else if(IC2.tag == "Paladin")
+        {
+            GameObject pedestal = IC2.transform.GetChild(0).GetChild(2).GetChild(1).GetChild(0).gameObject;
+            pedestal.GetComponent<Renderer>().material = P2Pedestal;
+        }
     }
     //We setup the gameboard, and player 1 and 2
     public void Start()
@@ -385,6 +397,7 @@ public class DDOL : MonoBehaviour
         }
         return null;
     }
+    //uses gameobject as opposed to coordinates
     public List<GameObject> SpaceLocation(int r, GameObject L)
     {
         spaces.Clear();
@@ -458,6 +471,7 @@ public class DDOL : MonoBehaviour
                                 }
                             }
                         }
+                        //includes blank spaces
                     }else if(option == "AllE")
                     {
                         if ((Coords[n_row][n_col].status == 1 || Coords[n_row][n_col].status == 0 ) && Coords[n_row][n_col].G != currentObject)
@@ -472,6 +486,7 @@ public class DDOL : MonoBehaviour
                             spaces.Add(Coords[n_row][n_col].location);
                         }
                     }
+                    //inlcudes only playable characters
                     else if (option == "all")
                     {
                         if (Coords[n_row][n_col].status == 1)
@@ -551,6 +566,37 @@ public class DDOL : MonoBehaviour
             ICS.transform.Rotate(Vector3.up * 180f);
         }
         Coords[i_x][j_y] = new Coordinates(ICS.GetInstanceID(), 1, player, ICS, Coords[i_x][j_y].location);
+        //IF NOT PLAYER 1 this will change the color of the pedestal for minions
+        //Pedestals are place differently in each minion so I have to manually search for the gameobject
+        //to set the new color
+        if (player != 0)
+        {
+            if (ICS.tag == "Wraith")
+            {
+                GameObject pedestal = ICS.transform.GetChild(0).gameObject;
+                pedestal.GetComponent<Renderer>().material = P2Pedestal;
+            }
+            else if (ICS.tag == "Skeleton")
+            {
+                GameObject pedestal = ICS.transform.GetChild(0).GetChild(1).GetChild(0).gameObject;
+                pedestal.GetComponent<Renderer>().material = P2Pedestal;
+            }
+            else if (ICS.tag == "GreatSpirit")
+            {
+                GameObject pedestal = ICS.transform.GetChild(0).GetChild(3).GetChild(0).gameObject;
+                pedestal.GetComponent<Renderer>().material = P2Pedestal;
+            }
+        }
+        if (IC2.tag == "Necro")
+        {
+            GameObject pedestal = IC2.transform.GetChild(1).gameObject;
+            pedestal.GetComponent<Renderer>().material = P2Pedestal;
+        }
+        else if (IC2.tag == "Paladin")
+        {
+            GameObject pedestal = IC2.transform.GetChild(0).GetChild(2).GetChild(1).GetChild(0).gameObject;
+            pedestal.GetComponent<Renderer>().material = P2Pedestal;
+        }
         if (spell != "Swarm")//HERE IS A POINT WHERE THE COST IS DIMIINSHED BASED ON SWARM
         {
             currentObject.gameObject.GetComponent<MouseDetect>().DiminishMana(ICS.gameObject.GetComponent<MouseDetect>().Cost);

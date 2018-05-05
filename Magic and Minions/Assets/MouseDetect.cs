@@ -55,11 +55,19 @@ public class MouseDetect : MonoBehaviour
                 {
                     if (BPanel.tag == this.tag)
                     {
+                        if (DDOL.instance.IC.gameObject == this.gameObject)
+                        {
                         healthSlider = BPanel.Find("Health_Sldr").gameObject.GetComponent<Slider>();
                         healthSlider.maxValue = GetComponent<MouseDetect>().MAX_HP;
                         healthSlider.value = GetComponent<MouseDetect>().HP;
                         manaSlider = BPanel.Find("Mana").gameObject.GetComponent<Text>();
-                        manaSlider.text = GetComponent<MouseDetect>().Mana.ToString();
+                        manaSlider.text = GetComponent<MouseDetect>().Mana.ToString(); Moves = 0;
+                        }
+                        else
+                        {
+
+                        }
+                        
                     }
                 }
             }
@@ -139,12 +147,18 @@ public class MouseDetect : MonoBehaviour
             {
                 gameObject.GetComponent<ParticleSystem>().Stop();
             }
+            else
+            {
+                
+            }
         }
         if (HP > MAX_HP)
         {
             HP = MAX_HP; //Makes sure HP doesn't exceed MAX_HP when healing
         }
-       
+        this.healthSlider.value = HP;
+                if(this.manaSlider)
+                    this.manaSlider.text = Mana.ToString();
     }
     //Called for each character at end turn
     public void ResetV()
@@ -157,32 +171,33 @@ public class MouseDetect : MonoBehaviour
     public void DiminishMana(int ManaCost)
     {
         Mana -= ManaCost;
-        this.manaSlider.text = Mana.ToString();
     }
     public void IncrementMana(int ManaCost)
     {
         Mana += ManaCost;
-        this.manaSlider.text = Mana.ToString();
     }
     public void DamageHP(int DecHP)
     {
         HP -= DecHP;
-        this.healthSlider.value = HP;
     }
     public void HealHP(int IncHP)
     {
         HP += IncHP;
-        this.healthSlider.value = HP;
     }
     public void OnMouseOver()
     {
-        if (DDOL.instance.option == "attack" || DDOL.instance.option == "all")
+
+        for (int i = 0; i < DDOL.instance.x; i++)
         {
-            for (int i = 0; i < DDOL.instance.x; i++)
+            for (int j = 0; j < DDOL.instance.x; j++)
             {
-                for(int j = 0; j < DDOL.instance.x; j++)
+                if (DDOL.instance.Coords[i][j].ID == this.gameObject.GetInstanceID())
                 {
-                    if(DDOL.instance.Coords[i][j].ID == this.gameObject.GetInstanceID())
+                    if (DDOL.instance.option == "attack")
+                    {
+                        DDOL.instance.Coords[i][j].location.gameObject.GetComponent<Renderer>().material = DDOL.instance.R_Color;
+                    }
+                    else if (DDOL.instance.option == "all")
                     {
                         DDOL.instance.Coords[i][j].location.gameObject.GetComponent<Renderer>().material = DDOL.instance.G_Color;
                     }
@@ -243,7 +258,7 @@ public class MouseDetect : MonoBehaviour
                 DDOL.instance.ClearSpaces();
                 return;
             }
-        }else if (DDOL.instance.option == "all")
+        }else if (DDOL.instance.option == "all" || DDOL.instance.option == "AllE")
         {
             if (DDOL.instance.spell == "LifeDrain")
             {
@@ -268,6 +283,23 @@ public class MouseDetect : MonoBehaviour
                 DDOL.instance.option = "";
                 DDOL.instance.TempHP = 0;
                 DDOL.instance.ClearSpaces();
+            }
+            else if (DDOL.instance.spell == "HolyFire")
+            {
+                DDOL.instance.ClearSpaces();
+                DDOL.instance.option = "all";
+                for(int i = 0; i < DDOL.instance.x; i++)
+                {
+                    for(int j = 0; j < DDOL.instance.x; j++)
+                    {
+                        if (DDOL.instance.Coords[i][j].G == this.gameObject)
+                        {
+                            DDOL.instance.SpaceLocation(1, DDOL.instance.Coords[i][j].location);
+                            DDOL.instance.AOE();
+                            return;
+                        }
+                    }
+                }
             }
         }
     }

@@ -29,4 +29,28 @@ public class Quit : MonoBehaviour {
         //P1.SetActive(false);
         //P2.SetActive(false);
     }
+    public void PaladinWC()
+    {
+        HotseatWin.winVar = 0;
+        winPnl.SetActive(false);
+        SceneManager.LoadScene(3);
+        //P1.SetActive(false);
+        //P2.SetActive(false);
+    }
+
+    public void NecroWC()
+    {
+        HotseatWin.winVar = 0;
+        winPnl.SetActive(false);
+        SceneManager.LoadScene(4);
+        //P1.SetActive(false);
+        //P2.SetActive(false);
+    }
+    public void Restart2()
+    {
+        HotseatWin.winVar = 0;
+        winPnl.SetActive(false);
+        int sceneID = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(sceneID);
+    }
 }
